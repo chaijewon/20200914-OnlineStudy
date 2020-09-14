@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR" import="java.util.*,com.sist.dao.*"%>
+<%
+    // DAO를 연결해서 데이터를 가지고 온다 
+    EmpDAO dao=new EmpDAO();
+    ArrayList<EmpVO> list=dao.empListData();
+    // 오라클에서 데이터 를 읽어온다 
+    // 가지고 온 데이터를 화면에 출력 => HTML (약간의 화면 디자인 => CSS)
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +39,21 @@
        <th>입사일</th>
        <th>급여</th>
       </tr>
+      <%-- 출력 위치 --%>
+      <%
+         for(EmpVO vo:list)
+         {
+      %>
       <tr>
-        <td class="td1">1</td>
-        <td class="td1">1</td>
-        <td class="td1">1</td>
-        <td class="td1">1</td>
-        <td class="td1">1</td>
+        <td class="td1"><%=vo.getEmpno() %></td>
+        <td class="td1"><%= vo.getEname() %></td>
+        <td class="td1"><%=vo.getJob() %></td>
+        <td class="td1"><%=vo.getHiredate().toString() %></td>
+        <td class="td1"><%=vo.getSal() %></td>
       </tr>
+      <%
+         }
+      %>
     </table>
   </center>
 </body>
