@@ -12,21 +12,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<style type="text/css">
-#sawon_list {
-   color:orange;
-   background-color: blue;
-}
-#table_header{
-   background-color: green;
-}
-#sawon_table {
-  width: 600px;
-}
-.td1 {
-   text-align: center;
-}
-</style>
+<link rel="stylesheet" href="table.css">
 </head>
 <body>
   <center>
@@ -41,6 +27,11 @@
       </tr>
       <%-- 출력 위치 --%>
       <%
+         /*
+                        파일로 만들 수 있다 : 외부 CSS
+            <style> : 내부 CSS
+                        각 태그에서도 가능  : 인라인 CSS
+         */
          for(EmpVO vo:list)
          {
       %>
