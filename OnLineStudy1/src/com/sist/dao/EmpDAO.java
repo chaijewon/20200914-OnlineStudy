@@ -112,6 +112,42 @@ public class EmpDAO {
 	  }
 	  return list;
   }
+  
+  public ArrayList<MovieVO> movieListData()
+  {
+	  ArrayList<MovieVO> list=
+			  new ArrayList<MovieVO>();
+	  try
+	  {
+		  // ¿¬°á 
+		  getConnection();
+		  String sql="SELECT no,title,poster,director,actor,genre "
+				    +"FROM daum_movie ORDER BY no ASC";
+		  ps=conn.prepareStatement(sql);
+		  ResultSet rs=ps.executeQuery();
+		  while(rs.next())
+		  {
+			  MovieVO vo=new MovieVO();
+			  vo.setMno(rs.getInt(1));
+			  vo.setTitle(rs.getString(2));
+			  vo.setPoster(rs.getString(3));
+			  vo.setDirector(rs.getString(4));
+			  vo.setActor(rs.getString(5));
+			  vo.setGenre(rs.getString(6));
+			  
+			  list.add(vo);
+		  }
+		  rs.close();
+	  }catch(Exception ex)
+	  {
+		  System.out.println(ex.getMessage());
+	  }
+	  finally
+	  {
+		  disConnection();
+	  }
+	  return list;
+  }
 }
 
 
