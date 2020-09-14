@@ -69,4 +69,51 @@ public class EmpDAO {
 	  }
 	  return list;
   }
+  
+  // 영화목록 가지고 오기 
+  /*
+   *   DB 
+   *   ===
+   *     오라클 ==> JDBC ==> DBCP ==> XML , JSON => MyBatis(ORM) 
+   *     ==> MongoDB
+   *     
+   *     1) Spring 구동 ,  MyBatis(ORM) , VO, HTML
+   */
+  public ArrayList<String> movieGetPoster()
+  {
+	  ArrayList<String> list=
+			  new ArrayList<String>();
+	  try
+	  {
+		  // 연결 
+		  getConnection();
+		  // SQL문장 전송 
+		  String sql="SELECT poster,rownum FROM daum_movie "
+				    +"WHERE rownum<=10";
+		  // 오라클로 SQL문장을 보내주는 상태 
+		  
+		  ps=conn.prepareStatement(sql);
+		  
+		  // 실행 요청 => 데이터를 메모리에 저장 
+		  ResultSet rs=ps.executeQuery();
+		  
+		  while(rs.next())
+		  {
+			  list.add(rs.getString(1));
+		  }
+		  rs.close();
+	  }catch(Exception ex)
+	  {
+		  System.out.println(ex.getMessage());
+	  }
+	  finally
+	  {
+		  disConnection();
+	  }
+	  return list;
+  }
 }
+
+
+
+
