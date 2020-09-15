@@ -7,6 +7,7 @@
             =>HTML : 사용자 => 화면을 보여줄 내용 
               CSS  : HTML을 디자인 (변경할 정도)
             =>JavaScript : 브라우저 안에서 이벤트 발생 (마우스 클릭...)
+              ajax,reactjs,nodejs,vuejs
     */
     // 오라클 데이터를 읽어온다 
     EmpDAO dao=new EmpDAO();
