@@ -7,6 +7,8 @@ public class MovieVO {
   private String genre;
   private String director;
   private String actor;
+  private String story;
+  
 public int getMno() {
 	return mno;
 }
@@ -43,5 +45,5 @@ public String getActor() {
 public void setActor(String actor) {
 	this.actor = actor;
 }
-  
+
 }
