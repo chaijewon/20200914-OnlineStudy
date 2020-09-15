@@ -33,7 +33,7 @@ h1 {
 h1 {
    text-align:center;
 }
-img {
+.aaa {
   width:30px;
   height:30px;
   border-radius: 30px;
@@ -117,7 +117,7 @@ $(function(){
                   <tr class="dataTr" value="<%=vo.getMno()%>">
                     <td><%=vo.getMno() %></td>
                     <td>
-                      <img src="<%=vo.getPoster()%>">
+                      <img src="<%=vo.getPoster()%>" class="aaa">
                     </td>
                     <td><%=vo.getTitle() %></td>
                     <td><%=vo.getDirector() %></td>
