@@ -50,6 +50,45 @@ img {
    cursor: pointer;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+// Jquery => JavaScript 라이브러리
+/*
+ *  $(function(){  ==> jquery main ==> window.onload
+	 
+     )}
+ */
+$(function(){
+	// 자바스크립트 => 모든 태그를 클릭해서 처리가 가능 
+	// $(selector) => tag명 , id명 , class명
+	// $('h1') ==> $('#data') ==> $('div .dataTr')
+	$('.dataTr').click(function(){
+		// 클릭시마다 영화번호를 가지고 온다 
+		var no=$(this).attr("value");
+		//alert(no);
+		/*
+			$.ajax({
+				type:'post', = get/post
+				url:'detail.jsp', = 전송받을 주소
+				data:{"no":no}, = 보내주는 값
+				success:function(result) // 정상 수행시에 처리
+				{
+					$('#detail').html(result);
+				}
+			})
+		*/
+		$.ajax({
+			type:'post',
+			url:'detail.jsp',
+			data:{"no":no},
+			success:function(result)
+			{
+				$('#detail').html(result);
+			}
+		})
+	});
+});
+</script>
 </head>
 <body>
   <%--
@@ -75,7 +114,7 @@ img {
                for(MovieVO vo:list)
                {
             %>
-                  <tr class="dataTr">
+                  <tr class="dataTr" value="<%=vo.getMno()%>">
                     <td><%=vo.getMno() %></td>
                     <td>
                       <img src="<%=vo.getPoster()%>">
@@ -89,10 +128,8 @@ img {
             %>
           </table>
         </td>
-        <td><%--상세 보기 --%>
-          <table id="detail-table" width=40%>
-            
-          </table>
+        <td id="detail" valign="top"><%--상세 보기 --%>
+          
         </td>
        </tr>
      </table>
