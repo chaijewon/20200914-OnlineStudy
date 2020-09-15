@@ -33,7 +33,13 @@
      ***3)text-align:left,center,right
      4)text-shadow:none|(°¡·Î°Å¸®) ¼¼·Î°Å¸® ¹øÁüÁ¤µµ »ö»ó
      5)text-transform : ´ë¹®ÀÚ º¯È¯,¼Ò¹®ÀÚº¯È¯
-     ***6)white-space
+     ***6) white-space: ³»¿ëº¸±â , ´ñ±Û 
+     white-space : normal|nowrap|pre(ÁÙ¹Ù²ÞÀÌ ¾ø´Ù)|pre-line|pre-wrap(ÀÚµ¿ ÁÙ¹Ù²Þ)
+         ==================
+                  ¸ý¤±¿È¿È¿È¿À¹Ì¿ÑÀÌ¤Ç¤±ÀÌ
+                  ¤Ç¤±¤·¹Ì¿È¤·¹Ö¸ù¹¥¹¥
+         ==================
+     ===> fixed °íÁ¤ 
   => img °ü·Ã 
   
   => div °ü·Ã
@@ -92,6 +98,16 @@ h3 {
  <h1 id="h1">HTML&CSS</h1>
  <h1 id="h2">HTML&CSS</h1>
  <h1 id="h3">HTML&CSS</h1>
+ <table border=1 bordercolor=black width=100>
+   <tr>
+    <td>
+    <pre style="white-space: pre-wrap;">
+    fslafjkasjflasfjklasjfsaljfsakljfjasklfasjfjkalfhfhfhfhfhfhfhf
+    dgdsdgdgdgdgdgdgdgdgdgfhfhfhf
+    </pre>
+    </td>
+   </tr>
+ </table>
 </body>
 </html>
 
