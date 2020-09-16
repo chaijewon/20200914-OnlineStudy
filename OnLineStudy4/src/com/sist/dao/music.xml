@@ -2,13 +2,37 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- SQL문장 저장  -->
+<!-- SQL문장 저장  : MyBatis => 데이터베이스 연결만하는 라이브러리-->
 <!-- namespace : 자바 (package명) -->
 <mapper namespace="com.sist.dao.music">
   <!-- 데이터 읽기  -->
   <select id="musicAllData" resultType="MusicVO">
     SELECT * FROM genie_music
     ORDER BY mno ASC
+    <!-- 
+         String sql="SELECT * FROM genie_music
+                     ORDER BY mno ASC";
+         ps=conn.prepredStatement(sql);
+         
+         <select id="musicAllData" resultType="MusicVO">
+                ====               ==========
+                       중복이 없는 속성                   실행 결과를 받는 클래스를 등록 
+     -->  
   </select>
-  
+  <!-- 
+       1. ~VO만들기 (컬럼명=변수명)
+       2. config.xml ==> Connection
+          =========== 변경사항이 없다  (VO등록,Mapper등록)
+       3. music.xml  ==> PreparedStatement,ResultSet
+          ===========
+           table마다 1개씩 만든다
+               
+   -->
 </mapper>
+
+
+
+
+
+
+
