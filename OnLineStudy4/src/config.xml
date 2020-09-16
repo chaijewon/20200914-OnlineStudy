@@ -52,8 +52,12 @@
      -->
   </typeAliases>
   <!-- 오라클 연결하는 부분 => 오라클 정보 (driver,url,username,password) -->
+  <!-- 
+     (environment+) => 반드시 한번 이상을 사용
+   -->
   <environments default="development">
     <!-- 오라클 연결 : getConnection(),disConnection() -->
+    <!-- (transactionManager, dataSource) -->
     <environment id="development">
       <transactionManager type="JDBC"/><!-- Commit,Rollback(자바의 JDBC) -->
       <dataSource type="POOLED">

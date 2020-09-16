@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE member SYSTEM "member.dtd">
+<member>
+  <list>
+     <name>aaa</name>
+     <sex>aaa</sex>
+     <hp>aaa</hp>
+     <address>aaa</address>
+  </list>
+</member>

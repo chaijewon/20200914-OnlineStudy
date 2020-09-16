@@ -42,4 +42,5 @@ public class MusicDAO {
    {
 	   return ssf.openSession().selectList("musicAllData");//<select id="musicAllData">
    }
+   
 }

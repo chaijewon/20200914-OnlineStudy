@@ -65,6 +65,9 @@
                      라이브러리 
                      => lib
                      => mybatis-3.2.8.jar
+                     
+         ======= DTD , XML mybatis-3-mapper.dtd , Spring => 스키마
+                 JSP => View(HTML)
  -->
  <sawon> <!-- 테이블명 -->
    <list> <!-- ROW -->
