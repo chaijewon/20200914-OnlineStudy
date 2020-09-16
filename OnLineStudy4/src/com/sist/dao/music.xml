@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL문장 저장  -->
+<!-- namespace : 자바 (package명) -->
+<mapper namespace="com.sist.dao.music">
+  <!-- 데이터 읽기  -->
+  <select id="musicAllData" resultType="MusicVO">
+    SELECT * FROM genie_music
+    ORDER BY mno ASC
+  </select>
+  
+</mapper>

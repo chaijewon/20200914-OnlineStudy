@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <!-- 
+     (properties?,   ? => 사용할 수도 있고 ,사용하지 않을 수도 있다
+      settings?, 
+      typeAliases?, 
+      typeHandlers?, 
+      objectFactory?, 
+      objectWrapperFactory?, 
+      reflectorFactory?, 
+      plugins?, 
+      environments?, 
+      databaseIdProvider?, 
+      mappers?)
+  -->  
+  <!-- 
+     
+        1. 연결  getConnection() ==> 연결할 수 있게 오라클 정보 보내준다
+        2. sql => String sql="SELECT * FROM music";
+                  ps=conn.preparedStatement(sql);
+        3. ResultSet rs=ps.executeQuery();
+        4. while(rs.next())
+           {
+               MusicVO vo=new MusicVO();
+               vo.setTitle(rs.getString(1))
+              
+               list.add(vo);
+            }
+            
+            MyBatis에서 코딩 
+   -->
+<configuration>
+  <typeAliases>
+    <!-- VO를 등록하는 위치 -->
+    <typeAlias type="com.sist.dao.MusicVO" alias="MusicVO"/>
+    <!-- 
+       (typeAlias*, package*)   ORDER BY WHERE  , 순서
+     -->
+  </typeAliases>
+  <environments default="development">
+    <!-- 오라클 연결 : getConnection(),disConnection() -->
+    <environment id="development">
+      <transactionManager type="JDBC"/><!-- Commit,Rollback(자바의 JDBC) -->
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <!-- 
+              Class.forName("oracle.jdbc.driver.OracleDriver")
+         -->
+        <property name="url" value="jdbc:oracle:thin:@211.238.142.181:1521:XE"/>
+        <property name="username" value="hr"/>
+        <property name="password" value="happy"/>
+        <!-- 
+           public void getConnection()
+           {
+              conn=DriverManager.getConnection(url,username,password)
+           }
+         -->
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <!-- SQL문장을 저장  PrpparedStatement-->
+    <mapper resource="com/sist/dao/music.xml"/>
+  </mappers>
+  
+</configuration>
