@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="java.util.*,com.sist.xml.*"%>
 <%
     // 데이터 읽기 
+    // 한글 => 한글 변환(디코딩)
+    request.setCharacterEncoding("UTF-8");// 한글 전송을 받는 경우 => 디코딩을 반드시 한다 
     // 1. 사용자 보내준 검색어를 읽어온다 
     String fd=request.getParameter("fd");
     // 주의점 : 처음에는 검색어를 보내줄 수 없다 => default로 설정 
@@ -29,6 +31,10 @@
 h1 {
    text-align: center;/*문자열 가운데 정렬*/
 }
+.title {
+    font-size: 25px;
+    color:#FC6;
+}
 </style>
 </head>
 <body>
@@ -39,8 +45,10 @@ h1 {
       <table class="table">
         <tr>
           <td>
-          <input type=text name=fd size=15 class="input-sm">
-          <input type=submit value="검색" class="btn btn-sm btn-primary">
+           <form method="post" action="news.jsp">
+            <input type=text name=fd size=15 class="input-sm">
+            <input type=submit value="검색" class="btn btn-sm btn-primary">
+           </form>
           </td>
         </tr>
       </table>
@@ -54,10 +62,10 @@ h1 {
            %>
                  <table class="table table-hover">
                   <tr>
-                    <td class="text-center"><%=i.getTitle() %></td>
+                    <td class="text-center title"><%=i.getTitle() %></td>
                   </tr>
                   <tr>
-                    <td><%=i.getDescription() %></td>
+                    <td><a href="<%=i.getLink()%>"><%=i.getDescription() %></a></td>
                   </tr>
                   <tr>
                     <td class="text-right"><%=i.getAuthor() %></td>

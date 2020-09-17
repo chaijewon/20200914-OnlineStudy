@@ -4,7 +4,8 @@ import java.util.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-
+//<media:thumbnail url="https://imgnews.pstatic.net/image/thumb140/5268/2020/09/17/1357745.jpg"/>
+// @Element(name="media:thumbnail")
 import java.net.*;//웹 서버에 데이터 전송시에 인코딩해서 전송 URLEncoder
 public class NewsManager {
    public List<Item> newsAllData(String fd)
