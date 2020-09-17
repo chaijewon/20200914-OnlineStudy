@@ -19,7 +19,28 @@ import org.xml.sax.helpers.DefaultHandler;
 		  startElement()                           endElement()
 		</sawon_list> endElement()
 		endDocuement() ==> 문서 종료
+		
+		XML문서가 시작!!
+		sawon_list을 읽기 시작
+		sawon을 읽기 시작
+		sawon태그 읽기 종료
+		sawon을 읽기 시작
+		sawon태그 읽기 종료
+		sawon을 읽기 시작
+		sawon태그 읽기 종료
+		sawon을 읽기 시작
+		sawon태그 읽기 종료
+		sawon을 읽기 시작
+		sawon태그 읽기 종료
+		sawon_list태그 읽기 종료
+		XML 문서 읽기 종료!!
 
+
+ */
+// 클래스 등록 => 실무에서도 사용하지 않는다 
+/*
+ *  마이바티스 , 스프링 => XML => 툴 사용 
+ *  Rss , Channel , Item => 종종 사용이 된다 (JAXB)
  */
 public class XMLParser extends DefaultHandler{
 
@@ -27,7 +48,16 @@ public class XMLParser extends DefaultHandler{
 	public void startElement(String uri, String localName, 
 			String qName, 
 			Attributes attributes) throws SAXException {
-		System.out.println(qName+"을 읽기 시작"); // qName : 태그명
+		//System.out.println(qName+"을 읽기 시작"); // qName : 태그명
+		if(qName.equals("sawon"))
+		{
+			String sabun=attributes.getValue("sabun");
+			String name=attributes.getValue("name");
+			String dept=attributes.getValue("dept");
+			System.out.println(sabun +" "+name+" "+dept);
+		}
+		// XML => 태그명,속성명이 일치 
+	
 	}
 
 	@Override
