@@ -1,0 +1,9 @@
+// 일일
+searchMainDailyBoxOffice.do 
+// 실시간 예매율
+searchMainRealTicket.do
+// 좌석점유율
+searchMainDailySeatTicket.do
+//온라인상영관 일일 
+searchMainOnlineDailyBoxOffice.do
+http://www.kobis.or.kr/kobis/business/main/main.do
