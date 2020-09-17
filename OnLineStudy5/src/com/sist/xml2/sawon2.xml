@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    <태그>데이터 저장</태그>
+    <태그 속성="데이터저장"/>
+ -->
+<sawon_list>
+  <sawon sabun="1" name="홍길동" dept="개발부"/>
+  <sawon sabun="2" name="박문수" dept="총무부"/>
+  <sawon sabun="3" name="심청이" dept="기획부"/>
+  <sawon sabun="4" name="춘향이" dept="자재부"/>
+  <sawon sabun="5" name="이순신" dept="영업부"/>
+</sawon_list>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+     <sawon sabun="1" name="홍길동" dept="개발부" job="사원" sal="3000"/>
+     => spring => 클래스 등록 
+        <bean id="" class="">
+        
+        <select id="">
+          SELECT ~
+        </select>
+        <insert id="">
+          INSERT INTO
+        </insert>
+ -->
+<sawon> <!-- 테이블명 동일한 역할  -->
+  <list> <!-- Record , Row -->
+    <sabun>1</sabun> <!-- 컬럼명 -->
+    <name>홍길동</name>
+    <dept>개발부</dept>
+    <job>사원</job>
+    <sal>3000</sal>
+  </list>
+  <list>
+    <sabun>2</sabun>
+    <name>심청이</name>
+    <dept>개발부</dept>
+    <job>대리</job>
+    <sal>3800</sal>
+  </list>
+  <list>
+    <sabun>3</sabun>
+    <name>박문수</name>
+    <dept>총무부</dept>
+    <job>과장</job>
+    <sal>4000</sal>
+  </list>
+</sawon>
