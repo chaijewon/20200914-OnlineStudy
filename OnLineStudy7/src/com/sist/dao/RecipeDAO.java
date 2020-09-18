@@ -2,6 +2,12 @@ package com.sist.dao;
 import java.io.*;
 import java.util.*;
 /*
+ *    순서 (코딩)
+ *    1) SQL 문장   ============================> recipe-mapper.xml
+ *    2) SQL 문장을 읽어와서 실행 => 결과값을 얻어 온다 ==> RecipeDAO (메소드 만든다)
+ *    3) 데이터를 받아서 출력  ===> 메소드 호출 후에 출력  ==> recipe.jsp
+ */
+/*
  *   Collection 클래스  ==> 자료 구조 (데이터 저장하는 방법)
  *   ========== 데이터를 저장하고 쉽게 저장이 가능하게 만든 클래스의 집합 
  *     List ==============> 오라클
@@ -66,7 +72,8 @@ public class RecipeDAO {
 	   try
 	   {
 		   session=ssf.openSession();// Connection이 미리 만들어져 있다 (만들어진 Connection객체 주소를 가지고 온다)
-		   list=session.selectList("recipeListData",map);
+		   list=session.selectList("recipeListData",map); // SQL문장을 받아 온다 => 실행 =결과값 
+		   // list 모든 결과값을 담아준다 
 		   //                       id , #{}에 값을 채운다
 		   /*
 		    *   selectList(String id)
@@ -97,6 +104,7 @@ public class RecipeDAO {
 		   // 미리 생성해 둔 Connection 객체를 얻어 온다 
 		   session=ssf.openSession();
 		   total=session.selectOne("recipeTotalPage");
+		   // SELECT CEIL(COUNT(*)/12.0) FROM recipe
 		   // 데이터가 한개(row,record) => selectOne()
 		   /*
 		    *    id     name    sex
@@ -122,6 +130,34 @@ public class RecipeDAO {
 		   //                     ===== Connection을 관리는 영역
 	   }
 	   return total;
+   }
+   
+   // chef 목록 얻어 오기 
+   public List<ChefVO> chefListData(Map map)
+   {
+	   // map => 시작위치값 , 끝위치값  ==> 20개 => table제작 
+	   List<ChefVO> list=new ArrayList<ChefVO>();
+	   // 오라클 연결 => SQL문장을 실행한 후에 결과값을 받아 온다 
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결할 수 있는 객체 얻기 
+		   session=ssf.openSession();
+		   // SQL문장을 보내고 결과값을 받는다 
+		   list=session.selectList("chefListData",map);
+		   // 열기 , 닫기 => 자동화 (Annotation)
+		   // 데이터 얻기를 완료 ==> jsp에 출력 
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 닫기 ==> 반환 (재사용이 가능)
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
    }
 }
 

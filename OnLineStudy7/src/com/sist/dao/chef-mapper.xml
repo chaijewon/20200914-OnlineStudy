@@ -2,5 +2,44 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+ <!-- chef-mapper.xml
+    1. package 설정 => namespace(경로명을 지정)
+  -->
+<mapper namespace="com.sist.dao.chef-mapper">
+  <!-- SQL 문장을 저장 
+       <select> => SELECT문장 사용
+       <insert> => SELECT,INSERT
+       <update> => UPDATE
+       <delete> => DELETE 
+       =========================== 태그안에 SQL문장은 한개만 사용이 가능 
+                                   예외) insert만 두개의 문장을 사용할 때도 있다 (자동 증가번호 만들때=> INSERT)
+   -->
+   <select id="chefListData" resultType="ChefVO" parameterType="java.util.Map">
+     <!-- SQL문장이 들어가는 위치 -->
+     SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num
+     FROM (SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num 
+     FROM (SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2
+     FROM chef))
+     WHERE num BETWEEN #{start} AND #{end}
+     <!-- 
+        SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num
+        FROM (SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num 
+        FROM (SELECT poster,chef,mem_cont1,mem_cont3,mem_cont7,mem_cont2
+        FROM chef))
+        WHERE num BETWEEN ? AND ?
+        
+        ps.setInt(1,map.get("start"))
+        ps.setInt(2,map.get("end"))
+      -->
+      <!-- 
+                 마이바티스에서 실행할 수 있게 ==> 라이브러리 호출 ==> DAO(제어) => 자바에서 호출 
+       -->
+   </select>
 </mapper>
+
+
+
+
+
+
+
