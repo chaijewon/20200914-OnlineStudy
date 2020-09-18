@@ -87,6 +87,42 @@ public class RecipeDAO {
 	   }
 	   return list;
    }
+   // 총페이지를 구하는 메소드 : recipe-mapper.xml(SQL문장 저장) , RecipeDAO(사용요청시마다 처리)
+   public static int recipeTotalPage()
+   {
+	   int total=0;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 미리 생성해 둔 Connection 객체를 얻어 온다 
+		   session=ssf.openSession();
+		   total=session.selectOne("recipeTotalPage");
+		   // 데이터가 한개(row,record) => selectOne()
+		   /*
+		    *    id     name    sex
+		    *    ==================
+		    *    aaa    hong    man   ====> selectOne()  한줄 (상세보기)
+		    *    
+		    *    id     name    sex
+		    *    ==================
+		    *    aaa    hong    man   ====> selectList() 여러줄 (목록) 
+		    *    aaa    hong    man
+		    *    aaa    hong    man
+		    */
+	   }catch(Exception ex)
+	   {
+		   // 에러만 처리 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)// 오라클을 연결하고 있다면 
+			   session.close(); // 닫기 ============> DBCP(재사용이 가능하게 반환)
+		   // DataBase Connection Pool 
+		   //                     ===== Connection을 관리는 영역
+	   }
+	   return total;
+   }
 }
 
 

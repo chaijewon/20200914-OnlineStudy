@@ -134,6 +134,34 @@
                      ===================
                                                  라이브러리 
     -->
+    <!-- 총페이지 구하기  -->
+    <select id="recipeTotalPage" resultType="int">
+      <!-- 
+         resultType="int"
+         parameterType="" 
+         =필요시만 사용 
+         
+                 오라클 내장 함수
+            = 단일행 함수
+                            문자함수
+                  LENGTH 
+                  SUBSTR
+                  INSTR
+                  RPAD
+                            숫자함수
+                  ROUND , TRUNC , CEIL
+                            날짜함수
+                  SYSDATE , MONTHS_BETWEEN
+                            변환함수
+                  TO_CHAR
+                            기타함수
+                  NVL (CASE , DECODE)
+            = 집합 함수
+               COUNT , MAX  , RANK
+               
+       -->
+       SELECT CEIL(COUNT(*)/12.0) FROM recipe
+    </select>
 </mapper> 
 
 
