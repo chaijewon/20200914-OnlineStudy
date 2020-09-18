@@ -159,6 +159,29 @@ public class RecipeDAO {
 	   }
 	   return list;
    }
+   // chef의 총페이지 받기 
+   public static int chefTotalPage()
+   {
+	   int total=0;
+	   // 연결 객체 => SqlSession(오라클 연결)
+	   SqlSession session=null;
+	   try
+	   {
+		   //연결 
+		   session=ssf.openSession();
+		   // 결과값을 달라 
+		   total=session.selectOne("chefTotalPage");//매개변수 => id (대소문자 구분)
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)// 연결중이면 
+			   session.close();
+	   }
+	   return total;
+   }
 }
 
 

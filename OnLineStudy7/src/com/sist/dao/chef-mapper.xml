@@ -35,6 +35,11 @@
                  마이바티스에서 실행할 수 있게 ==> 라이브러리 호출 ==> DAO(제어) => 자바에서 호출 
        -->
    </select>
+   <!-- 총페이지 구하기 -->
+   <select id="chefTotalPage" resultType="int">
+     SELECT CEIL(COUNT(*)/20.0) FROM chef
+     <!-- 올림 함수 CEIL() : 결과값은 DAO-->
+   </select>
 </mapper>
 
 

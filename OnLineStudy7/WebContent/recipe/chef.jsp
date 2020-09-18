@@ -38,6 +38,7 @@
     // 전송 => 결과값을 받아 온다 
     List<ChefVO> list=RecipeDAO.chefListData(map);
     
+    int totalpage=RecipeDAO.chefTotalPage();
     // 받은 데이터를 출력 => <body>
 %>
 <!DOCTYPE html>
@@ -87,6 +88,20 @@ h1 {
           %>
         </td>
        </tr>
+      </table>
+      <%--
+           mapper.xml => SQL문장 제작 
+           DAO => 처리
+           jsp => 처리된 데이터 출력 
+       --%>
+      <table class="table">
+         <tr>
+           <td class="text-center">
+             <a href="chef.jsp?page=<%= curpage>1?curpage-1:curpage %>" class="btn btn-sm btn-success">이전</a>
+               <%=curpage %> page / <%=totalpage %> pages
+             <a href="chef.jsp?page=<%=curpage<totalpage?curpage+1:curpage %>" class="btn btn-sm btn-warning">다음</a>
+           </td>
+         </tr>
       </table>
     </div>
   </div>
