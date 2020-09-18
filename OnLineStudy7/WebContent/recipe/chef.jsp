@@ -74,7 +74,9 @@ h1 {
                    <td width=30% rowspan="2" class="text-center" bgcolor="white">
                      <img src="<%=vo.getPoster() %>" width=70 height=70 class="img-circle">
                    </td>
-                   <td colspan=4 width=70% bgcolor="white"><font color=orange><%=vo.getChef() %></font></td>
+                   <td colspan=4 width=70% bgcolor="white"><font color=orange>
+                     <a href="chef_list.jsp?chef=<%=vo.getChef()%>"><%=vo.getChef() %></a>
+                   </font></td>
                  </tr>
                  <tr>
                    <td><img src="1.png"><%=vo.getMem_cont1() %></td>

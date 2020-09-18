@@ -40,6 +40,15 @@
      SELECT CEIL(COUNT(*)/20.0) FROM chef
      <!-- 올림 함수 CEIL() : 결과값은 DAO-->
    </select>
+   <!-- chef의 작품을 얻어 온다  -->
+   <select id="chefMakeRecipeData" resultType="RecipeVO" parameterType="String">
+     SELECT  title, poster , chef , rownum FROM recipe
+     WHERE chef=#{chef} AND rownum&lt;=20
+     <!-- 
+          < => lt; 
+          > => gt;
+      -->
+   </select>
 </mapper>
 
 

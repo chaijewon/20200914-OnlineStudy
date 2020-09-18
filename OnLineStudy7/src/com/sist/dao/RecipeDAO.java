@@ -182,6 +182,34 @@ public class RecipeDAO {
 	   }
 	   return total;
    }
+   // chef의 작품을 20개만 가지고 온다 
+   public static List<RecipeVO> chefMakeRecipe(String chef)
+   {
+	   // 예외처리는 필수가 아니다 (컴파일 예외가 아니다)
+	   List<RecipeVO> list=new ArrayList<RecipeVO>();
+	   // List(interface) => ArrayList의 상위 클래스 
+	   // 연결 
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결 시작 
+		   session=ssf.openSession();
+		   // 데이터 값을 받는다 
+		   list=session.selectList("chefMakeRecipeData",chef);
+		   // id명을 전송하고 SQL문장을 받아서 실행 => 결과값을 넘겨준다 
+		   // VO=>selectOne(),List=>selectList()
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)//연결되었다면 
+			   session.close();// 반환(재사용이 가능하게 만든다)
+	   }
+	   return list;
+   }
 }
 
 
