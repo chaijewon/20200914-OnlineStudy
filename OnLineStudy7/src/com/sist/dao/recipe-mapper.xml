@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PreparedStatement,ResultSet 
+     1. 일반 JDBC (***)
+     2. JOIN 
+     3. PL/SQL
+     4. 동적 SQL
+-->
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL문장을 저장하는 위치
+     namespace : XML에서 package
+ -->
+<mapper namespace="com.sist.dao.recipe-mapper">
+<!-- 
+     (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+
+     * : 0번이상 사용이 가능  
+     | : 선택 (필요한 부분만 사용이 가능)
+     
+     resultMap : 컬럼명과 VO에 등록된 변수명 틀릴경우에 매칭한다 
+                 class AVO
+                 {
+                     private int no;
+                 }
+                 Database A테이블에 => mno
+                 ==> JOIN사용시 반드시 사용 
+                 SELECT empno,ename,job,emp.deptno,loc,dname
+                                        =========== emp.deptno = deptno
+                 FROM emp,dept
+                 WHERE emp.deptno=dept.deptno;
+     parameterMap : PL/SQL (PROCEDURE) 
+                    CREATE PROCEDURE por_name(no NUMBER....)
+     sql : 반복적으로 수행되는 부분을 모아서 재사용 
+     insert : 데이터를 추가 
+     update : 데이터를 수정 
+     delete : 데이터를 삭제 
+     select : 데이터를 검색 
+     ***** MyBatis의 단점은 태그한개에 여러개의 SQL문장을 사용할 수 없다 
+           태그 한개당 1개의 SQL문장을 작성한다 
+      <select>
+        SELECT * FROM emp
+        SELECT * FROM dept ==> 오류 ==> SQL문장뒤에 ';'을 사용하면 오류
+      </select>
+      String sql="SELECT * FROM emp"
+      
+           데이터값을 설정
+      SELECT * FROM emp WHERE empno=? 
+      => ?를 사용하지 않는다   #{empno},${empno}
+                        ======== ===========> 컬럼명 , 테이블명을 사용 
+                                            일반 데이터 값  => getEmpno()
+     ***** XML코드는 HTML가 다르게 대소문자를 구분 
+     
+         모든  태그는 필수적으로 사용해야 돼는 속성 : id (중복이 없어야 한다)
+         ==> id를 가지고 SQL문장을 찾는다 
+         <select id="aaa">
+           SELECT * FROM emp
+         </select>
+         <select id="aaa">
+           SELECT * FROM dept
+         </select>
+                 키      값  ======> Map : 키,값  (값은 중복이 가능,키는 중복을 할 수 없다)
+         =======================
+         aaa   SELECT * FROM emp
+         aaa   SELECT * FROM dept
+         =======================
+ -->
+   
+</mapper> 
+
+
+
+
+
+
+
+

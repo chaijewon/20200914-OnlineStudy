@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Connection : getConnection(),disConnection()
+      1개만 생성 
+      => src 폴더에 생성
+ -->
+ <!DOCTYPE configuration
+   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <!-- 
+     (properties?, ===> properties 파일을 만들어서 중요한 정보들을 저장 
+                        드라이버 이름 , URL, Username, Password(보안)
+      settings?,   ===> 이미 실행된 SQL문장을 저장 재사용 
+      typeAliases?, ==> VO을 저장(마이바티스 자체에서 값을 받아서 VO에 첨부)
+      typeHandlers?, => 오라클 데이터형 = 자바 데이터형을 매칭 
+      environments?, => 오라클 연결을 위한 정보를 셋팅 
+      mappers?)  => SQL문장을 저장한 파일 등록 
+      
+      XML => 태그를 사용하는 순서가 존재
+  -->
+ <configuration>
+   <typeAliases>
+     <!-- VO를 등록하는 위치 => 마이바티스 클래스를 메모리 할당하고 set메소드를 데이터를 저장-->
+     <!-- type에는 클래스명 등록  -->
+     <typeAlias type="com.sist.dao.RecipeVO" alias="RecipeVO"/>
+     <typeAlias type="com.sist.dao.ChefVO" alias="ChefVO"/>
+     <!-- 
+          while(rs.next())
+          {
+              RecipeVO vo=new RecipeVO();
+              vo.setNo(rs.getInt("no"))
+          }
+      -->
+   </typeAliases>
+   <!-- 오라클 연결 = 정보를 저장 -->
+   <environments default="development">
+     <!-- (environment)+ => (+) 반드시 한번이상을 코딩을 한다 
+          ? => 한번 사용한다 , 사용하지 않을 수 있다 
+     -->
+     <environment id="development">
+       <!-- 
+            (transactionManager,dataSource) => 기호가 존재하지 않을 경우 : default
+            default => 반드시 한번만 사용 사용이 가능 
+        -->
+        <transactionManager type="JDBC"/>
+        <!-- 
+                         일괄 처리 : COMMIT,ROLLBACK
+              COMMIT : 정상수행 => 저장 (INSERT,UPDATE,DELETE)
+              ROLLBACK : 비정상 수행을 했을 경우 => 이전 명령을 취소
+              JDBC => AutoCommit (자동으로 commit을 수행)
+              JDBC , MANAGED (프로그래머 직접 처리) : 사용하지 않는다 
+         -->
+        <dataSource type="POOLED">
+          <!-- dataSource : 데이터베이스의 정보를 저장하는 클래스 => Manager에게 전송 
+               UNPOOLED : 요청시마다 오라클 연결 ,종료를 반복(속도가 늦다)
+                          DAO(getConnection(),disConnection()) => 전에 만든 DAO
+               POOLED : 일반적으로 가장 많이 사용하는 방식
+                        Connection을 미리 연결해 놓고 요청시마다 연결된 주소를 넘겨주고 
+                                            사용이 종료되면 재사용을 하는 프로그램  => DBCP
+                         1) Connection의 객체가 제한을 할 수 있고 
+                         2) 속도가 빠르다
+                         3) 여러명이 동시접속시에 종료하지 않는다 
+               JNDI : POOLED => 셋팅부분이 많이 존재 (고정된 데이터베이스 연결시 사용)
+           -->
+           <!-- 미리 Connection을 만들기 위해서는 오라클 정보를 넘겨준다 
+                             디폴트 : 8개  
+            -->
+            <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="url" value="jdbc:oracle:thin:@211.238.142.181:1521:XE"/>
+            <property name="username" value="hr"/>
+            <property name="password" value="happy"/>
+            <!-- Connection을 많이 설정 : 프로젝트를 시작 -->
+        </dataSource>
+     </environment>
+   </environments>
+   <!-- SQL문장의 위치를 등록  -->
+   <mappers>
+      <!-- 
+               자체 폴더에 존재 : resource => 경로명 
+               원격 : url
+               마이바티스 ,스프링 => 경로명 (자동 인식 : src)
+       -->
+      <mapper resource="com/sist/dao/recipe-mapper.xml"/>
+      <mapper resource="com/sist/dao/chef-mapper.xml"/>
+   </mappers>
+ </configuration>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
