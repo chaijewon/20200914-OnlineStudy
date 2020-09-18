@@ -9,6 +9,8 @@ import org.jsoup.nodes.Element;
 
 // http://www.kobis.or.kr/kobis/business/main/searchMainDailyBoxOffice.do 
 /*
+ *  ==> 오라클 (X) , JSON(파싱) , XML(JAXB) , CSV , txt 
+ *                ============
  *  오브젝트 (클래스 표현법)
  *  [ ==> JSONArray
  *      { ==> JSONObject
@@ -18,7 +20,7 @@ import org.jsoup.nodes.Element;
  *          "endDate":"2020년 09월 16일(수)",
  *          "movieCd":"20201122",
  *          "showDt":"20200916",
- *          "thumbUrl":"/common/mast/movie/2020/08/thumb/thn_a529042d7d004a6daf64a3f8a687dd69.jpg",
+ *          "thumbUrl":"http://www.kobis.or.kr/common/mast/movie/2020/08/thumb/thn_a529042d7d004a6daf64a3f8a687dd69.jpg",
  *          "movieNm":"테넷",
  *          "movieNmEn":"Tenet",
  *          "synop":"당신에게 줄 건 한 단어 ‘테넷’\r\n“이해하지 말고 느껴라!”\r\n\r\n시간의 흐름을 뒤집는 인버전을 통해 현재와 미래를 오가며 세상을 파괴하려는 사토르(케네스 브래너)를 막기 위해 투입된 작전의 주도자(존 데이비드 워싱턴). 인버전에 대한 정보를 가진 닐(로버트 패틴슨)과 미술품 감정사이자 사토르에 대한 복수심이 가득한 그의 아내 캣(엘리자베스 데비키)과 협력해 미래의 공격에 맞서 제3차 세계대전을 막아야 한다!\r\n\r\n[KEY POINT]\r\n인버전: 사물의 엔트로피를 반전시켜 시간을 거스를 수 있는 미래 기술. 미래에서 인버전된 무기를 현재로 보내 과거를 파괴할 수 있다.",
@@ -85,7 +87,7 @@ public class JSONManager {
 			// [] => JSONArray
 			// {} => JSONObject
 			JSONArray arr=(JSONArray)jp.parse(json.text());
-			System.out.println(arr.toJSONString());
+			//System.out.println(arr.toJSONString());
 			
 			
 			for(int i=0;i<arr.size();i++)
@@ -93,7 +95,7 @@ public class JSONManager {
 				//{} => JSONObject
 				JSONObject obj=(JSONObject)arr.get(i);
 				// {} => 10개 출력
-				System.out.println(obj.toJSONString());
+				//System.out.println(obj.toJSONString());
 				// 데이터를 VO에 저장 
 				MovieVO vo=new MovieVO();
 				vo.setMovieCd((String)obj.get("movieCd"));
@@ -105,10 +107,12 @@ public class JSONManager {
 				vo.setGenre((String)obj.get("genre"));
 				vo.setSynop((String)obj.get("synop"));
 				vo.setThumbUrl((String)obj.get("thumbUrl"));
+				// 디버깅 
 				System.out.println("영화번호:"+vo.getMovieCd());
 				System.out.println("영화명:"+vo.getMovieNm());
 				System.out.println("영화명(영문):"+vo.getMovieNmEn());
-				
+				System.out.println("감독:"+vo.getDirector());
+				System.out.println("포스터:"+vo.getThumbUrl());
 				list.add(vo);
 			}
 		}catch(Exception ex){}
@@ -118,7 +122,7 @@ public class JSONManager {
 		// TODO Auto-generated method stub
 		
 		JSONManager m=new JSONManager();
-		m.movieListData(1);
+		m.movieListData(2);
 		/*
 		 * try { String
 		 * url="http://www.kobis.or.kr/kobis/business/main/searchMainDailyBoxOffice.do";
