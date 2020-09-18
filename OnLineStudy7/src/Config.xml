@@ -80,7 +80,7 @@
                마이바티스 ,스프링 => 경로명 (자동 인식 : src)
        -->
       <mapper resource="com/sist/dao/recipe-mapper.xml"/>
-      <mapper resource="com/sist/dao/chef-mapper.xml"/>
+      <!-- <mapper resource="com/sist/dao/chef-mapper.xml"/> -->
    </mappers>
  </configuration>
  
