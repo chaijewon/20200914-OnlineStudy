@@ -133,7 +133,7 @@ public class RecipeDAO {
    }
    
    // chef 목록 얻어 오기 
-   public List<ChefVO> chefListData(Map map)
+   public static List<ChefVO> chefListData(Map map)
    {
 	   // map => 시작위치값 , 끝위치값  ==> 20개 => table제작 
 	   List<ChefVO> list=new ArrayList<ChefVO>();
