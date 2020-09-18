@@ -64,7 +64,76 @@
          aaa   SELECT * FROM dept
          =======================
  -->
-   
+   <!--  데이터를 가지고 오는 SQL (recipe)  -->
+   <!-- 
+        id  ========> 식별자 (sql문장을 찾아서 수행요청할때 사용되는 데이터)
+        resultType ===> SQL문장을 실행시에 결과값을 받는 클래스 등록 
+        
+        <select id="aaa" resultType="RecipeVO">
+          SELECT * FROM recipe => 실행한 결과 => RecipeVO => ArrayList
+                                             =========를 받아서 ArrayList에 첨부
+                                             selectList => VO를 받아서 add()
+                                             selectOne  => VO 1개만 받는다 
+        </select>
+        <select id="aaa" resultType="int">
+          SELECT COUNT(*) FROM recipe => 실행한 결과 => int
+        </select>
+        <select id="aaa" resultType="String">
+          SELECT pwd FROM recipe => 실행한 결과 => String
+        </select>
+        
+        paramterType : ?에 값을 첨부
+        <select id="aaa" resultType="EmpVO" parameterType="int">
+         SELECT * FROM emp
+         WHERE empno=#{empno}
+        </select>
+        
+        <select id="aaa" resultType="EmpVO" parameterType="EmpVO">
+         SELECT * FROM emp
+         WHERE empno=#{empno} AND ename=#{ename}
+                     ========           =========
+                     #{empno} => vo.getEmpno()  vo.getEname()
+        </select>
+        
+              만약에 VO에 없는 데이터값(여러개 있는 경우)이 들어 갈때  ==> java.util.Map
+        WHERE num BETWEEN #{start} AND #{end}
+        
+               요청에 들어가는 데이터가 여러개 있는 경우 : ~VO , Map
+               
+               resultType=""  값을 받을 경우
+               parameterType="" ?에 값을 채워주는 변수를 설정(일반변수,~VO,Map)
+    -->
+   <select id="recipeListData" resultType="RecipeVO" parameterType="java.util.Map">
+      SELECT no,title,poster,chef,num 
+      FROM (SELECT no,title,poster,chef,rownum as num 
+      FROM (SELECT no,title,poster,chef 
+      FROM recipe ORDER BY no DESC))
+      WHERE num BETWEEN #{start} AND #{end}
+      <!-- 
+            Map map=new HashMap()
+            map.put("start",1)
+            map.put("end",10)
+            <select id="recipeListData" resultType="RecipeVO" parameterType="java.util.Map">
+            DAO에서 메소드 제작 
+            public RecipeVO recipeListData(Map map)
+                   ========               =========
+                   resultType             parameterType
+            public ArrayList<RecipeVO> recipeListData(Map map)
+                   ========               =========
+                   resultType             parameterType
+                   
+            ? 사용하지 않고  #{} , ${}
+       -->
+   </select>
+   <!-- 
+       1. 사용법 
+          1) XML을 이용해서 필요한 데이터 전송 
+          2) Annotation을 이용해서 필요한 데이터 전송 
+             ==========
+       2. 속도,쉽게 코딩(마이바티스,스프링:표준화)=분석이 쉽다
+                     ===================
+                                                 라이브러리 
+    -->
 </mapper> 
 
 
