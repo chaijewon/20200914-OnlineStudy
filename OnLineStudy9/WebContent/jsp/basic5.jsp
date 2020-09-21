@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <center>
-     <h1>시스템 에러 발생하였습니다(500)</h1>
-   </center>
+  <%
+      int a=10/0;
+  %>
 </body>
 </html>
