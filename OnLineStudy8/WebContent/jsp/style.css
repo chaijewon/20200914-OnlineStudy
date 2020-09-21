@@ -1,0 +1,20 @@
+#topMenu {
+	height:30px; /*메뉴 높이*/
+	width:880px; 
+}
+#topMenu ul{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;/*간격없이 사용*/
+}
+#topMenu ul li{
+	color:white;
+	background-color: #800080;
+	float: left;/*왼쪽으로 나열이 가능하게 설정*/
+	line-height: 30px;/* 텍스트 한줄의 높이를 30px로 설정*/
+	vertical-align: middle;/*가운데 정렬*/
+	position: relative;
+}
+.menuLink , .submenuLink {
+	text-decoration: none; /*<a> underline을 삭제*/
+}
