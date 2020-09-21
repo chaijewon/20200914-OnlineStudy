@@ -70,6 +70,10 @@
      <div class="content">
        <div class="gallery">
          <!-- 이미지 출력  -->
+         <%
+             // include는 파일이 없는 경우에 오류를 발생 
+             pageContext.include("board/list.jsp");
+         %>
        </div>
      </div>
     </div>
