@@ -70,6 +70,7 @@
     </div>
     <div class="col-sm-9">
       <!-- 레시피 : 메뉴를 클릭시마다 변경 -->
+      <jsp:include page="content.jsp"></jsp:include>
     </div>
   </div>
 </div>

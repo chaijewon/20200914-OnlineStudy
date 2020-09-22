@@ -58,7 +58,49 @@ public class MovieDAO {
     	 }
     	 finally
     	 {
-    		 disConnection();//반환
+    		 disConnection();//반환(재사용)
+    	 }
+    	 return list;
+     }
+     public List<MovieVO> movieListData(int page)
+     {
+    	 List<MovieVO> list=new ArrayList<MovieVO>();
+    	 try
+    	 {
+    		 // 미리 만들어진 Connection주소를 얻어온다 (주소)
+    		 getConnection();
+    		 // SQL문장을 전송 
+    		 int rowSize=20;
+    		 int start=(rowSize*page)-(rowSize-1);//rownum = 1
+    		 int end=rowSize*page;
+    		 
+    		 String sql="SELECT no,title,poster,num "
+    				   +"FROM (SELECT no,title,poster,rownum as num "
+    				   +"FROM (SELECT no,title,poster "
+    				   +"FROM daum_movie ORDER BY no ASC)) "
+    				   +"WHERE num BETWEEN "+start+" AND "+end;
+    		 // 전송
+    		 ps=conn.prepareStatement(sql);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 MovieVO vo=new MovieVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setTitle(rs.getString(2));
+    			 vo.setPoster(rs.getString(3));
+    			 
+    			 // list추가
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 System.out.println(ex.getMessage());
+    	 }
+    	 finally
+    	 {
+    		 // 반환 
+    		 disConnection();
     	 }
     	 return list;
      }
