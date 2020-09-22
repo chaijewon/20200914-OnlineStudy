@@ -50,6 +50,24 @@
              : 변수가 동일하면 오류(에러 발생) => static
           =============== Spring에서 사용
  --%>
+<%
+    // 사용자 요청 정보를 받는다 
+    String mode=request.getParameter("mode");
+    if(mode==null)
+    	mode="1";
+    int index=Integer.parseInt(mode);
+    
+    String jsp="";
+    switch(index)
+    {
+    case 1:
+    	jsp="content.jsp";
+    	break;
+    case 2:
+    	jsp="detail.jsp";
+    	break;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,8 +87,8 @@
       <jsp:include page="login.jsp"></jsp:include>
     </div>
     <div class="col-sm-9">
-      <!-- 레시피 : 메뉴를 클릭시마다 변경 -->
-      <jsp:include page="content.jsp"></jsp:include>
+      <!-- 레시피 : 메뉴를 클릭시마다 변경 : 변수를 잡아서 => jsp파일명을 변경 -->
+      <jsp:include page="<%=jsp %>"></jsp:include>
     </div>
   </div>
 </div>

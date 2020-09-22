@@ -37,7 +37,9 @@
 		      <div class="panel-heading"><%=vo.getTitle() %></div>
 		      <div class="panel-body">
 		        <div class="thumbnail">
+		            <a href="basic1.jsp?mode=2">
 			        <img src="<%=vo.getPoster() %>" alt="Lights" style="width:100%">
+			        </a>
 			    </div>
 		      </div>
 		    </div>

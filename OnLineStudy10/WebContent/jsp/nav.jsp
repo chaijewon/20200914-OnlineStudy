@@ -14,7 +14,7 @@
       <a class="navbar-brand" href="#">SIST Recipe</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="basic1.jsp?mode=1">Home</a></li>
       <li><a href="#">예매하기</a></li>
       <li><a href="#">게시판</a></li>
       <li><a href="#">자료실</a></li>
