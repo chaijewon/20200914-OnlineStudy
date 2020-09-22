@@ -62,7 +62,7 @@
 </head>
 <body>
 <jsp:include page="nav.jsp"></jsp:include>
-<div class="container">
+<div class="container-fluid"><!-- full 화면 -->
   <div class="row">
     <div class="col-sm-3">
       <!-- 로그인 -->
