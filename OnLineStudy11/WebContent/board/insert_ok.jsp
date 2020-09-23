@@ -48,7 +48,12 @@
      }
      
      // DAO를 호출한 다음에 INSERT요청 => 저장하는 SQL (databoard-mapper.xml)
-     response.sendRedirect("../main/main.jsp?mode=1");
+     DataBoardDAO.boardInsert(vo); // 추가 
+     /*
+         사용자 요청 ==> databoard-mapper.xml있는 SQL문장을 읽어 온다 (DAO => 읽어온 SQL문장을 실행 => JSP에 실행 결과출력 )
+       insert.jsp      SQL           DAO => 실행 boardInsert()       insert_ok.jsp 호출 처리
+     */
+     response.sendRedirect("../main/main.jsp?mode=1");// list.jsp로 이동을 한다 
  %>
  
  

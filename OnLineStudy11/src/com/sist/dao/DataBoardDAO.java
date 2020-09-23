@@ -115,6 +115,35 @@ public class DataBoardDAO {
 	   }
 	   return total;
    }
+   // 데이터 추가 
+   //          resultType        parameterType
+   public static void boardInsert(DataBoardVO vo)
+   {
+	   SqlSession session=null;
+	   try
+	   {
+		   // 미리 만들어 둔 Connection
+		   /*
+		    *   autoCommit설정 
+		    *   ssf.openSession(); // commit이 없는 경우
+		    *   ssf.openSession(true);..autoCommit설정 
+		    */
+		   session=ssf.openSession(true);// commit을 실행한다 
+		   // INSERT,UPDATE,DELETE => 데이터베이스 변경 => 반드시 COMMIT
+		   session.insert("boardInsert",vo);
+		   // 여러개의 SQL문장을 실행하면 
+		   //session.commit();
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null) // 오라클에 연결되어 있다면 
+			   session.close();
+	   }
+   }
 }
 
 
