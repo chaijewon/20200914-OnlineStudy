@@ -49,6 +49,14 @@ public class DataBoardVO {
     private int hit;
     private String filename;
     private int filesize;
+    private String dbday;// 데이터베이스 컬럼이 없는 경우
+    
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getNo() {
 		return no;
 	}

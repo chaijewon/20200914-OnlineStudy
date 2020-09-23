@@ -3,6 +3,30 @@
 <%--
      템플릿 : 메뉴..footer..
  --%>
+<%-- 화면 변경 
+     1. 사용자가 화면 변경 요청 (숫자)
+     
+--%>
+<%
+     String mode=request.getParameter("mode"); // mode => 화면 변경 => 번호 보내준다 
+     if(mode==null)
+    	 mode="1";
+     int index=Integer.parseInt(mode);
+     String jsp=""; // 1=>a.jsp , 2.b.jsp...
+    /*
+          main  ===> board에 접근  ../board/jsp파일명
+            main.jsp
+            login.jsp  
+          board
+            list.jsp
+    */
+     switch(index)
+     {
+     case 1:
+    	 jsp="../board/list.jsp";
+    	 break;
+     }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +47,7 @@
     </div>
     <div class="col-sm-9">
       <!-- 레시피 : 메뉴를 클릭시마다 변경 : 변수를 잡아서 => jsp파일명을 변경 -->
-      <%-- <jsp:include page="<%=jsp %>"></jsp:include> --%>
+      <jsp:include page="<%=jsp %>"></jsp:include>
     </div>
   </div>
 </div>

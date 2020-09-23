@@ -47,7 +47,7 @@
        hashmap => java.util.Map
     -->
   <select id="boardListData" resultType="DataBoardVO" parameterType="hashmap">
-     SELECT no,subject,name,regdate,hit,num 
+     SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num 
      FROM (SELECT no,subject,name,regdate,hit,rownum as num 
      FROM (SELECT no,subject,name,regdate,hit 
      FROM databoard ORDER BY no DESC))
