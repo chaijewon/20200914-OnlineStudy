@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mybatis plugin => 자동으로 기본 셋팅 -->
+<!-- 
+       mapper : SQL문장을 저장 
+                PreparedStatement => 전송
+                => 데이터 첨부 (?에 값을 채워주는 설정)
+                   =================
+                    parameterType
+                ResultSet => 결과값을 받는다 
+                => 어떤 클래스,변수로 받을지를 설정 
+                   ============ resultType
+                 
+ -->
+<mapper namespace="com.sist.dao.databoard-mapper">
+  <!-- 값을 읽어오는 부분 : SELECT -->
+  <!-- 삭제 : delete , 수정 : update , 추가 : insert : 태그는 반드시 한개의 SQL문장만 설정 :CURD(Create(Insert) Update Read(Select) Delete)  -->
+  <!-- 데이터 읽기 : 페이지를 나눠서 처리 : 인라인뷰  -->
+  <!-- 
+         id => 식별자 (중복이 되면 안된다) => 문자를 앞에서 시작 (숫자는 뒤에 올 수 있다)
+         
+         ? ==> 일반 데이터형 
+               WHERE empno=?  => int
+               WHERE ename=?  => String
+         ? ? ? ? ? 
+         ========= => Map , DataBoardVO
+         
+         예)
+          <select id="a" resultType="int">
+            SELECT empno FROM emp ==> 정수한개 
+          </select>
+          
+          <select id="b" resultType="String">
+            SELECT ename FROM emp
+          </select>
+          
+          <select id="c" resultType="EmpVO"> ==> java.util.Map(VO에 존재하지 않는 변수가 있는 경우)
+             SELECT * FROM emp   ==> 데이터 8개
+          </select>
+          
+          <select id="d" resultType="java.util.Map">
+            SELECT SUM(sal),AVG(sal),COUNT(*),MAX(sal),MIN(sal)
+            FROM emp
+          </select>
+   -->
+   <!-- 
+       hashmap => java.util.Map
+    -->
+  <select id="boardListData" resultType="DataBoardVO" parameterType="hashmap">
+     SELECT no,subject,name,regdate,hit,num 
+     FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+     FROM (SELECT no,subject,name,regdate,hit 
+     FROM databoard ORDER BY no DESC))
+     WHERE num BETWEEN #{start} AND #{end}
+     <!-- start , end => Map에 설정한 key이름 
+     
+         String sql= "SELECT no,subject,name,regdate,hit,num 
+				     FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+				     FROM (SELECT no,subject,name,regdate,hit 
+				     FROM databoard ORDER BY no DESC))
+				     WHERE num BETWEEN ? AND ?"
+	     
+	     ps=conn.preparedStatement(sql);
+	     // 실행하지 전에  ?에 값을 채운다 
+	     ps.setInt(1,map.get("start")); ==> parameterType
+	     ps.setInt(2,map.get("end"))
+	     ==> Map
+	     map.put("end",10);
+	     map.put("start",1);
+	     
+	     ResultSet rs=ps.executeQuery();
+	     while(rs.next())
+	     {
+	         DataBoardVO vo=new DataBoardVO(); => resultType
+	     }
+     -->
+  </select>
+  <select id="boardTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/10.0) FROM databoard
+  </select>
+  <!-- 내용보기 -->
+  <!-- 추가  -->
+  <!-- 수정하기 -->
+  <!-- 삭제하기 -->
+</mapper>
+
+
+
+
+
+
+
+
