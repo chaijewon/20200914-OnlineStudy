@@ -80,6 +80,13 @@
   </select>
   <!-- 내용보기 -->
   <!-- 추가  -->
+  <!-- DataBoardVO  #{name} vo.getName() , #{pwd} vo.getPwd()-->
+  <insert id="boardInsert" parameterType="DataBoardVO">
+    INSERT INTO databoard VALUES(
+      (SELECT NVL(MAX(no)+1,1) FROM databoard),#{name},#{subject},
+      #{content},#{pwd},SYSDATE,0,#{filename},#{filesize}
+    )
+  </insert>
   <!-- 수정하기 -->
   <!-- 삭제하기 -->
 </mapper>

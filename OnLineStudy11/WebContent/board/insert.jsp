@@ -9,7 +9,16 @@
 <body>
   <div class="row">
    <h1 class="text-center">글쓰기</h1>
-   <form method="post" action="../board/insert_ok.jsp">
+   <%-- 파일 업로드 : 프로토콜 (post)
+        enctype="multipart/form-data" => 업로드시만 사용 
+               프로토콜
+          http : 80
+          ftp  : 21
+          smtp : 25
+          multipart/form-data : 파일을 업로드 
+                  범용적으로 사용되는 약속 
+    --%>
+   <form method="post" action="../board/insert_ok.jsp" enctype="multipart/form-data">
    <table class="table table-hover">
      <tr>
        <th class="danger text-right" width=15%>이름</th>
