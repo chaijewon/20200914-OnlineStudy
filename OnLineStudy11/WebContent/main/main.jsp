@@ -23,7 +23,10 @@
      switch(index)
      {
      case 1:
-    	 jsp="../board/list.jsp";
+    	 jsp="../board/list.jsp"; // list.jsp => main
+    	 break;
+     case 2:
+    	 jsp="../board/insert.jsp";
     	 break;
      }
 %>

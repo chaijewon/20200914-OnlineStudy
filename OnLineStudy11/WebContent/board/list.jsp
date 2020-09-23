@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.sist.dao.*"%>
-<%-- 목록 출력 : list.jsp --%>
+<%-- 목록 출력 : list.jsp : board폴더 --%>
 <!-- 데이터를 읽어 온다 (1page)있는 게시물  -->
 <%
      // DAO를 생성 => DAO를 통해서 데이터를 얻어온다 
@@ -34,6 +34,14 @@
 <body>
    <div class="row">
      <h1 class="text-center">자료실</h1>
+     <table class="table">
+       <tr>
+         <td>
+           <a href="main.jsp?mode=2" class="btn btn-sm btn-success">새글</a>
+           <%-- 메뉴 , 로그인 , footer 고정 => main.jsp --%>
+         </td>
+       </tr>
+     </table>
      <table class="table table-striped">
        <tr class="warning">
          <th class="text-center" width=10%>번호</th>
@@ -64,7 +72,18 @@
      </table>
      <table class="table">
        <tr>
-         <td class="text-left"></td>
+         <td class="text-left">
+          Search:
+          <select name="fd" class="input-sm">
+            <option value="name">이름</option>
+            <option value="subject">제목</option>
+            <option value="content">내용</option>
+          </select>
+          <%-- 검색어 입력 --%>
+          <input type=text name=ss class="input-sm">
+          <%-- 검색버튼 --%>
+          <input type=submit value=검색 class="btn btn-sm btn-danger">
+         </td>
          <td class="text-right">
           <a href="#" class="btn btn-sm btn-primary">이전</a>
            <%=curpage %> page / <%=totalpage %> pages
