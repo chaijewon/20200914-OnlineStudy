@@ -264,7 +264,18 @@ public class DataBoardDAO {
 	   }
 	   return list;
    }
-   
+   // 삭제 하기 
+   // JSP(요청) ==> databoard-mapper.xml ==> DAO 처리 ==> JSP에서 받아서 화면 출력
+   public static boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   return bCheck;
+   }
+   public static DataBoardVO boardGetInfoData(int no)
+   {
+	   DataBoardVO vo=new DataBoardVO();
+	   return vo;
+   }
 }
 
 

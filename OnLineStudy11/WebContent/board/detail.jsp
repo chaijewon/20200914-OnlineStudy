@@ -66,7 +66,7 @@
        <tr>
          <td colspan="4" class="text-right">
            <a href="#" class="btn btn-xs btn-primary">수정</a>
-           <a href="../main/main.jsp?mode=5" class="btn btn-xs btn-success">삭제</a>
+           <a href="../main/main.jsp?mode=5&no=<%=vo.getNo() %>" class="btn btn-xs btn-success">삭제</a>
            <a href="../main/main.jsp?mode=1" class="btn btn-xs btn-danger">목록</a>
          </td>
        </tr>

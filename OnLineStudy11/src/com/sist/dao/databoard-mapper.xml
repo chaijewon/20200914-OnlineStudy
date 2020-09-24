@@ -157,6 +157,21 @@
    -->
   <!-- 수정하기 -->
   <!-- 삭제하기 -->
+  <!-- 비밀번호 확인 -->
+  <select id="boardGetPassword" resultType="String" parameterType="int">
+    SELECT pwd FROM databoard
+    <include refid="where-no"/>
+  </select>
+  <!-- 게시물이 삭제가 되면 업로드된 파일을 삭제 -->
+  <select id="boardGetInfoData" resultType="DataBoardVO" parameterType="int">
+    SELECT filename,filesize FROM databoard
+    <include refid="where-no"/>
+  </select>
+  <!-- 본인일 경우에는 게시물을 삭제 -->
+  <delete id="boardDelete" parameterType="int">
+    DELETE FROM databoard
+    <include refid="where-no"/>
+  </delete>
   <!-- 찾기 -->
   <!-- 
           ${fd} => 컬럼명,테이블명  (name LIKE , subject LIKE, content LIKE)
