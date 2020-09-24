@@ -30,6 +30,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function send()
+{
+	// 자바스크립트는 변수 종류가 없다 (var:자동 지정 변수)
+	/*
+	    var a=10 ; var=int
+	    var b=10.0; var=double
+	    var c='a'; char
+	    var d="aaa"; String
+	    var e=[]; Array
+	    var k={}; Object
+	*/
+	var f=document.frm;
+	// 반드시 입력을 할 수 있게 만든다 
+	if(f.ss.value=="")
+	{
+		f.ss.focus();
+		return;
+	}
+	f.submit();// submit버튼과 동일한 역할  ==> Jquery => NodeJS => reactjs => vuejs => typescript
+}
+</script>
 </head>
 <body>
    <div class="row">
@@ -87,16 +109,30 @@
      <table class="table">
        <tr>
          <td class="text-left">
-          Search:
-          <select name="fd" class="input-sm">
-            <option value="name">이름</option>
-            <option value="subject">제목</option>
-            <option value="content">내용</option>
-          </select>
-          <%-- 검색어 입력 --%>
-          <input type=text name=ss class="input-sm">
-          <%-- 검색버튼 --%>
-          <input type=submit value=검색 class="btn btn-sm btn-danger">
+         <!-- 
+                          데이터 전송하는 방식 
+                  = GET => URL뒤에 노출
+                                데이터를 받을 파일명?변수명=값
+                                                            변수명=값&변수명=값&변수명=값
+                                                            구분문자는 &
+                  = POST => 내부 네트워크를 이용한 전송 (보안 ,URL주소 길어진면 숨겨서 전송)
+                                                    변수명=값&변수명=값&변수명=값
+          -->
+          <form method="post" action="../main/main.jsp" name=frm>
+	          Search:
+	          <select name="fd" class="input-sm">
+	            <option value="name">이름</option>
+	            <option value="subject">제목</option>
+	            <option value="content">내용</option>
+	          </select>
+	          <%-- 검색어 입력 --%>
+	          <input type=text name=ss class="input-sm">
+	          <input type=hidden name=mode value=4>
+	          <%-- 검색버튼 --%>
+	          <input type=button value=검색 class="btn btn-sm btn-danger"
+	            onclick="send()"
+	          >
+          </form>
          </td>
          <td class="text-right">
           <a href="#" class="btn btn-sm btn-primary">이전</a>

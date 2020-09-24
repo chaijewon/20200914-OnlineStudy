@@ -35,6 +35,9 @@
      case 3:
     	 jsp="../board/detail.jsp";
     	 break;
+     case 4:
+    	 jsp="../board/find.jsp";
+    	 break;
      }
 %>
 <!DOCTYPE html>

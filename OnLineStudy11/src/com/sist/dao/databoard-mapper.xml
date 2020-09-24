@@ -157,6 +157,21 @@
    -->
   <!-- 수정하기 -->
   <!-- 삭제하기 -->
+  <!-- 찾기 -->
+  <!-- 
+          ${fd} => 컬럼명,테이블명  (name LIKE , subject LIKE, content LIKE)
+          #{ss} => 일반 데이터 
+   -->
+  <select id="boardFindData" resultType="DataBoardVO" parameterType="hashmap">
+    SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+    FROM databoard 
+    WHERE ${fd} LIKE '%'||#{ss}||'%'
+  </select>
+  <select id="boardFindCount" resultType="int" parameterType="hashmap">
+    SELECT COUNT(*)
+    FROM databoard 
+    WHERE ${fd} LIKE '%'||#{ss}||'%'
+  </select>
 </mapper>
 
 
