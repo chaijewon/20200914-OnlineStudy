@@ -19,6 +19,10 @@
             login.jsp  
           board
             list.jsp
+            
+            
+          ==> 경로 (폴더가 다르다) 
+              .. 상위 디렉토리 
     */
      switch(index)
      {
@@ -27,6 +31,9 @@
     	 break;
      case 2:
     	 jsp="../board/insert.jsp";
+    	 break;
+     case 3:
+    	 jsp="../board/detail.jsp";
     	 break;
      }
 %>

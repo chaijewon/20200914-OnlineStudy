@@ -58,10 +58,24 @@
            */
            for(DataBoardVO vo:list)
            {
+        	   /*
+        	        ../main/main.jsp?mode=3&no=1
+        	                         ====== ==== detail.jsp에서 사용
+        	                                          화면변경시 사용(main.jsp)
+        	         include가 되면 ==> 모든 JSP에서 사용자가 보내준 데이터를 사용이 가능 
+        	         ============
+        	           request가 공유 
+        	   */
        %>
                <tr>
 		         <td class="text-center" width=10%><%=vo.getNo() %></td>
-		         <td width=45%><%=vo.getSubject() %></td>
+		         <td width=45%>
+		          <a href="../main/main.jsp?mode=3&no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
+		          <%-- include된 모든 JSP는 main.jsp로 보낸 모든 데이터값을 사용할 수 있다 
+		               main.jsp => mode=3 => 화면 변경
+		               detail.jsp => no=1 => 해당되는 데이터를 받아서 출력 
+		          --%>
+		         </td>
 		         <td class="text-center" width=15%><%=vo.getName() %></td>
 		         <td class="text-center" width=20%><%=vo.getDbday() %></td>
 		         <td class="text-center" width=10%><%=vo.getHit() %></td>

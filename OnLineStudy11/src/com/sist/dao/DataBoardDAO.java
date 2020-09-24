@@ -144,6 +144,75 @@ public class DataBoardDAO {
 			   session.close();
 	   }
    }
+   // 상세보기 
+   /*
+    *   상세보기 => VO (VO:게시물 한개에 전체 정보)
+    *   목록,찾기 => VO가 여러개 => ArrayList
+    *   no => Primary Key (중복이 없는 데이터)
+    *   =================================================================
+    *   오라클 : 데이터 저장 (영구적) => 모든 유저가 공통으로 볼 수 있는 내용 저장 => 저장용도 
+    *          => 필요한 데이터를 가지고 오려면 SQL문장  
+    *   자바 : 오라클 ,웹 연결해서 사용자가 요청한 데이터 가지고 오는 역할 => 데이터 관리 
+    *   JSP : 사용자 요청한 데이터를 출력 
+    *   =================================================================
+    *   웹안에서 처리 (자바로 사용할 수 없다 , 자바스크립트) : Modal(팝업창), 입력이 안된 경우 처리 , 실시간
+    */
+   public static DataBoardVO boardDetailData(int no)
+   {
+	   // 데이터를 받을 변수 설정 
+	   DataBoardVO vo=new DataBoardVO();
+	   // 오라클 연결 
+	   SqlSession session=null;// Connection => SqlSession안에 Connection기능을 가지고 있다 
+	   // 데이터를 가지고 오는 과정 에러가 발생할 수 있다 => 사전에 에러방지 프로그램 => 예외처리 
+	   /*
+	    *    예외처리 
+	    *     = 직접 처리 (에러가 발생하면 바로 처리해서 사용) try~catch
+	    *     = 간접처리 (시스템 에러발생여부만 확인하고 에러 회피) throws 
+	    */
+	   try
+	   {
+		   // 정상적으로 실행 => 에러 => catch를 수행하고 점프 
+		   // 연결 
+		   session=ssf.openSession(); // Commit을 포함하지 않는다 
+		   // 작업 수행 
+		   // 1. 조회수 증가 
+		   // <update id="hitIncrement" parameterType="int">
+		   session.update("hitIncrement",no);
+		   session.commit();// 포함이 안되면 조회수가 증가를 하지 않는다 
+		   // 2. 증가된 조회수를 포함해서 데이터 가지고 오기
+		   // <select id="boardDetailData" resultType="DataBoardVO" parameterType="int">
+		   vo=session.selectOne("boardDetailData", no);
+		   /*
+		    *   COMMIT => 저장된 데이터가 변경,추가 ,삭제  => 다시 저장 
+		    *             SELECT : 검색 
+		    */
+		   /*
+		    *   <select> 
+		    *      = 목록(여러개) => selectList("id명")
+		    *      = 한개 => selectOne("id명")
+		    *   =================================
+		    *   <insert>
+		    *      = insert("id명")
+		    *   <update>
+		    *      = update("id명")
+		    *   <delete>
+		    *      = delete("id명")
+		    *   ================================= 반드시 COMMIT처리를 해야된다 
+		    */
+	   }catch(Exception ex)
+	   {
+		   // 에러가 났을 경우에 처리 (복구) 
+		   ex.printStackTrace();//어떤 에러가 났는지 확인 
+	   }
+	   finally
+	   {
+		   // 정상수행 ,비정상 수행 상관없이 => 무조건 수행 (서버연결 해제,데이터베이스 연결 해제)
+		   if(session!=null) // 연결되어 있다면
+			   session.close();  // ps.close(), conn.close() => disConnection()
+	   }
+	   
+	   return vo;// 사용자가 요청한 데이터를 받아 볼 수 있다
+   }
 }
 
 
