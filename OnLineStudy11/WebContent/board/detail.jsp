@@ -46,7 +46,12 @@
              <tr>
                <th class="text-center danger" width=20%>첨부파일</th>
                <td colspan="3">
-                 <%=vo.getFilename() %>(<%=vo.getFilesize() %>Bytes)
+                 <%-- 다운로드 
+                      board와 관련 => board폴더 => download.jsp
+                                        현재 상태
+                        => detail.jsp => board(X),main(O)
+                 --%>
+                 <a href="../board/download.jsp?fn=<%=vo.getFilename()%>"><%=vo.getFilename() %></a>(<%=vo.getFilesize() %>Bytes)
                </td>
              </tr>
        <%
