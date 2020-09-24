@@ -65,8 +65,12 @@
        </tr>
        <tr>
          <td colspan="4" class="text-right">
-           <a href="#" class="btn btn-xs btn-primary">수정</a>
+           <%-- ../main/main.jsp?mode=6 --%>
+           <%-- ../board/update.jsp --%>
+           <a href="../main/main.jsp?mode=6&no=<%=vo.getNo() %>" class="btn btn-xs btn-primary">수정</a>
+           <%-- ../board/delete.jsp --%>
            <a href="../main/main.jsp?mode=5&no=<%=vo.getNo() %>" class="btn btn-xs btn-success">삭제</a>
+           <%-- ../board/list.jsp --%>
            <a href="../main/main.jsp?mode=1" class="btn btn-xs btn-danger">목록</a>
          </td>
        </tr>

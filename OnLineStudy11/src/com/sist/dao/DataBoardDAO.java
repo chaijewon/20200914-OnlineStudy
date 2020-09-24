@@ -327,6 +327,29 @@ public class DataBoardDAO {
 	   }
 	   return vo;
    }
+   // 수정하기 위한 데이터 읽기 시작
+   // <select id="boardDetailData" resultType="DataBoardVO" parameterType="int">
+   // MyBatis ==> 저장되어 있는 SQL문장을 여러번 사용이 가능 
+   public static DataBoardVO boardUpdateData(int no)
+   {
+	   DataBoardVO vo=new DataBoardVO();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();// 연결
+		   vo=session.selectOne("boardDetailData",no);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();// 오류 처리
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close(); // 반환(다음에 다시 사용이 가능)
+	   }
+	   return vo;
+   }
 }
 
 

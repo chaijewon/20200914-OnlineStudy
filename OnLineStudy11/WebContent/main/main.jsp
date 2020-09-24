@@ -50,6 +50,9 @@
      case 5:
     	 jsp="../board/delete.jsp";
     	 break;
+     case 6:
+    	 jsp="../board/update.jsp";
+    	 break;
      }
 %>
 <!DOCTYPE html>
