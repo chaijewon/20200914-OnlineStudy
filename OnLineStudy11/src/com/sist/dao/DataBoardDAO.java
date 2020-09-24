@@ -269,11 +269,62 @@ public class DataBoardDAO {
    public static boolean boardDelete(int no,String pwd)
    {
 	   boolean bCheck=false;
+	   SqlSession session=null;
+	   try
+	   {
+		   // Conection
+		   session=ssf.openSession();
+		   // 비밀번호 가지고 오기
+		   // <select id="boardGetPassword" resultType="String" parameterType="int">
+		   String db_pwd=session.selectOne("boardGetPassword",no);
+		   
+		   if(pwd.equals(db_pwd))
+		   {
+			   bCheck=true;
+			   // 실제 삭제
+			   // <delete id="boardDelete" parameterType="int">
+			   session.delete("boardDelete",no);
+			   // 반드시 commit
+			   session.commit();
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // session을 닫는다 (connection,preparedstatement 포함)
+		   if(session!=null)
+			   session.close();
+	   }
 	   return bCheck;
    }
+   // <select id="boardGetInfoData" resultType="DataBoardVO" parameterType="int">
    public static DataBoardVO boardGetInfoData(int no)
    {
 	   DataBoardVO vo=new DataBoardVO();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결 
+		   session=ssf.openSession();
+		   vo=session.selectOne("boardGetInfoData",no);
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 닫기
+		   if(session!=null)
+			   session.close();
+	   }
 	   return vo;
    }
 }
