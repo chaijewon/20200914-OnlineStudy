@@ -156,6 +156,13 @@
            ================
    -->
   <!-- 수정하기 -->
+  <update id="boardUpdate" parameterType="DataBoardVO">
+    UPDATE databoard SET
+    name=#{name},
+    subject=#{subject},
+    content=#{content}
+    <include refid="where-no"/><!-- WHERE no=#{no} -->
+  </update>
   <!-- 삭제하기 -->
   <!-- 비밀번호 확인 -->
   <select id="boardGetPassword" resultType="String" parameterType="int">

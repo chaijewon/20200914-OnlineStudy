@@ -350,6 +350,42 @@ public class DataBoardDAO {
 	   }
 	   return vo;
    }
+   // 수정하기
+   public static boolean boardUpdate(DataBoardVO vo)
+   {
+	   boolean bCheck=false;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 오라클 연결 
+		   session=ssf.openSession();
+		   // 비밀번호 검색 
+		   // <select id="boardGetPassword" resultType="String" parameterType="int">
+		   String db_pwd=session.selectOne("boardGetPassword",vo.getNo());
+		   if(db_pwd.equals(vo.getPwd()))// 본인이면 
+		   {
+			   bCheck=true;
+			   // 실제 수정한다
+			   session.update("boardUpdate",vo);
+			   // 저장한다
+			   session.commit();
+		   }
+		   else //본인이 아니면 
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close(); // 연결 종료 => 다시 사용하기 위한 반환
+	   }
+	   return bCheck;
+   }
 }
 
 
