@@ -8,6 +8,7 @@
      
 --%>
 <%
+     request.setCharacterEncoding("UTF-8");
      String mode=request.getParameter("mode"); // mode => 화면 변경 => 번호 보내준다 
      if(mode==null)
     	 mode="1";
@@ -26,6 +27,14 @@
     */
      switch(index)
      {
+     // 화면에 출력하는 JSP만 설정 
+     // insert_ok.jsp,download.jsp => 화면 출력하는 JSP아니라  처리만 담당 
+     /*
+          JSP 
+           => 데이터 읽어와서 화면 출력 
+           => 데이터 읽어와서 처리 담당 
+              ==================    _ok.jsp => 다른 화면으로 이동 
+     */
      case 1:
     	 jsp="../board/list.jsp"; // list.jsp => main
     	 break;

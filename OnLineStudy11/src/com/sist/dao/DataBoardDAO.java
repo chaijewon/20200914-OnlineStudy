@@ -213,6 +213,58 @@ public class DataBoardDAO {
 	   
 	   return vo;// 사용자가 요청한 데이터를 받아 볼 수 있다
    }
+   
+   // 찾기 관련 내용 
+   // 찾은 갯수 
+   // <select id="boardFindCount" resultType="int" parameterType="hashmap">
+   public static int boardFindCount(Map map)
+   {
+	   int count=0;
+	   // 연결(오라클) => 객체
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결 객체주소 가지고 오기  : DBCP (미리 오라클을 연결한 Connection을 생성 => 생성된 주소)
+		   // default => connection (8개)
+		   session=ssf.openSession();// commit이 필요가 없다 (select)
+		   // commit이 필요한곳은 데이터베이스 변경 (insert,update,delete)
+		   count=session.selectOne("boardFindCount",map);
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close(); // conn.close() => DBCP (반환=>재사용)
+	   }
+	   return count;
+   }
+   // <select id="boardFindData" resultType="DataBoardVO" parameterType="hashmap">
+   // 실제 찾은 데이터 읽기
+   public static List<DataBoardVO> boardFindData(Map map)
+   {
+	   List<DataBoardVO> list=new ArrayList<DataBoardVO>();
+	   // 연결 객체
+	   SqlSession session=null;
+	   try
+	   {
+		   // 객체주소 얻기
+		   session=ssf.openSession(); // COMMIT(X)
+		   list=session.selectList("boardFindData",map);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
+   }
+   
 }
 
 
