@@ -47,6 +47,9 @@
      case 4:
     	 jsp="../board/find.jsp";
     	 break;
+     case 5:
+    	 jsp="../board/delete.jsp";
+    	 break;
      }
 %>
 <!DOCTYPE html>
