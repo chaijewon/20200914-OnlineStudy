@@ -89,6 +89,8 @@
   <!-- XML만 가지고 코딩하는 프레임워크 : XML이 길어진다=>속도의 문제 (스트럿츠) : 스프링 -->
   <mappers>
     <mapper resource="com/sist/dao/databoard-mapper.xml"/><!-- 분산 여러개를 등록이 가능 -->
+    <mapper resource="com/sist/dao/movie-mapper.xml"/>
+    <!-- MovieVO , MovieDAO  -->
   </mappers>
 </configuration>
 
