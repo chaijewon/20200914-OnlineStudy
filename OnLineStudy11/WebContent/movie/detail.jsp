@@ -20,7 +20,45 @@
     <table class="table">
       <tr>
         <td>
-          <iframe src="http://youtube.com/embed/<%=vo.getKey()%>" width=750 height=450></iframe>
+          <%-- <embed> <iframe> : youtube보안 --%>
+          <iframe src="http://youtube.com/embed/<%=vo.getKey()%>" width=850 height=450></iframe>
+        </td>
+      </tr>
+    </table>
+    <table class="table">
+      <tr>
+        <td width=30% class="text-center" rowspan="7">
+          <img src="<%=vo.getPoster() %>" width=100%>
+        </td>
+        <td colspan="2"><font color=orange><%=vo.getTitle() %></font></td>
+      </tr>
+      <tr>
+        <td width=10%>감독</td>
+        <td width=60%><%=vo.getDirector() %></td>
+      </tr>
+      <tr>
+        <td width=10%>출연</td>
+        <td width=60%><%=vo.getActor() %></td>
+      </tr>
+      <tr>
+        <td width=10%>장르</td>
+        <td width=60%><%=vo.getGenre() %></td>
+      </tr>
+      <tr>
+        <td width=10%>등급</td>
+        <td width=60%><%=vo.getGrade() %></td>
+      </tr>
+      <tr>
+        <td width=10%>개봉일</td>
+        <td width=60%><%=vo.getRegdate() %></td>
+      </tr>
+      <tr>
+        <td width=10%>평점</td>
+        <td width=60%><%=vo.getScore() %></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <pre style="white-space: pre-wrap;background-color:white;border:none"><%=vo.getStory() %></pre>
         </td>
       </tr>
     </table>

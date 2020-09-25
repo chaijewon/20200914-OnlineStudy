@@ -21,7 +21,8 @@
   </select>
   <!-- 영화 상세보기  : SQL문장만 저장 = 처리는 MovieDAO에 처리-->
   <select id="movieDetailData" resultType="com.sist.dao.MovieVO" parameterType="int">
-    SELECT * FROM daum_movie
+    SELECT no,title,poster,grade,genre,director,actor,score,story,NVL(regdate,' ') as regdate
+    FROM daum_movie
     WHERE no=#{no}
   </select>
 </mapper>
