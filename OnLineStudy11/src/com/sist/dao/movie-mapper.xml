@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.dao.movie-mapper">
   <!-- SQL문장 -->
+  <!-- Config.xml에 VO를 등록 -->
+  <select id="movieListData" resultType="com.sist.dao.MovieVO" parameterType="hashmap">
+    SELECT no,poster,title,num
+    FROM (SELECT no,poster,title,rownum as num 
+    FROM (SELECT no,poster,title 
+    FROM daum_movie ORDER BY no ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="movieTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/12.0) FROM daum_movie
+  </select>
+  <!-- Category별 영화 목록 출력  -->
+  <select id="movieCategoryData" resultType="com.sist.dao.MovieVO" parameterType="int">
+    SELECT no,poster,title
+    FROM daum_movie
+    WHERE cateno=#{cateno}
+  </select>
 </mapper>
+
+
+
+
+
+
+
