@@ -25,6 +25,14 @@ public class BoardVO {
     private String pwd;
     private Date regdate;
     private int hit;
+    private String dbday;
+    
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getNo() {
 		return no;
 	}

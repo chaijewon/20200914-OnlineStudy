@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.dao.board-mapper">
   <!--  SQL문장이 저장된다  -->
+  <!-- 
+        목록 : page
+        추가  ======>  getParameter() (X) : vo에 값을 채워주는 방법(JSP)
+        상세보기 : no
+        수정  ======> 
+        삭제
+   -->
+   <select id="freeboardListData" resultType="com.sist.dao.BoardVO" parameterType="hashmap">
+     SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num 
+     FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+     FROM (SELECT no,subject,name,regdate,hit 
+     FROM movie_board ORDER BY no DESC))
+     WHERE num BETWEEN #{start} AND #{end}
+    </select>
 </mapper>

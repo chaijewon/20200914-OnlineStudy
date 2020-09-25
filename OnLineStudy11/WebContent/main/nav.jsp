@@ -52,7 +52,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="../main/main.jsp">Home</a></li>
       <li><a href="#">예매하기</a></li>
-      <li><a href="#">게시판</a></li>
+      <li><a href="../main/main.jsp?mode=9">게시판</a></li>
       <li><a href="../main/main.jsp?mode=1">자료실</a></li>
       <li><a href="#">마이페이지</a></li>
     </ul>

@@ -90,6 +90,7 @@
   <mappers>
     <mapper resource="com/sist/dao/databoard-mapper.xml"/><!-- 분산 여러개를 등록이 가능 -->
     <mapper resource="com/sist/dao/movie-mapper.xml"/>
+    <mapper resource="com/sist/dao/board-mapper.xml"/>
     <!-- MovieVO , MovieDAO  -->
   </mappers>
 </configuration>
