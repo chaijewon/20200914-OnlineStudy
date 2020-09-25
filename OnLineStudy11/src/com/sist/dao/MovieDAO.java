@@ -129,6 +129,35 @@ public class MovieDAO {
     	}
     	return list;
     }
+    // 상세보기 : XML에 코딩 => Mybatis에 처리 요청
+    // <select id="movieDetailData" resultType="com.sist.dao.MovieVO" parameterType="int">
+    // 처리는 DAO(자바) ==> 처리된 결과 브라우저에 전송 ==> JSP가 받아서 화면에 출력
+    // JSP(링크) ==> movie-mapper.xml(SQL) ==> MovieDAO에서 SQL문장 실행 결과 ==> JSP
+    // home                                                                detail
+    public static MovieVO movieDetailData(int no)
+    {
+    	MovieVO vo=new MovieVO();
+    	// 연결
+    	SqlSession session=null;
+    	try
+    	{
+    		// 연결 시도
+    		session=ssf.openSession();
+    		// SQL문장을 실행 => 결과값을 저장 
+    		vo=session.selectOne("movieDetailData", no);
+    	}catch(Exception ex)
+    	{
+    		// 에러 처리
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		// 닫기 ==> 재사용이 가능하게 반환
+    		if(session!=null)
+    			session.close();
+    	}
+    	return vo;
+    }
 }
 
 

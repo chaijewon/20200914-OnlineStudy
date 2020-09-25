@@ -43,19 +43,19 @@
     	 jsp="../board/list.jsp"; // list.jsp => main
     	 break;
      case 2:
-    	 jsp="../board/insert.jsp";
+    	 jsp="../board/insert.jsp";// insert_ok.jsp
     	 break;
      case 3:
-    	 jsp="../board/detail.jsp";
+    	 jsp="../board/detail.jsp";// download.jsp
     	 break;
      case 4:
     	 jsp="../board/find.jsp";
     	 break;
      case 5:
-    	 jsp="../board/delete.jsp";
+    	 jsp="../board/delete.jsp"; // delete_ok.jsp
     	 break;
      case 6:
-    	 jsp="../board/update.jsp";
+    	 jsp="../board/update.jsp"; // update_ok.jsp
     	 break;
      case 7:
     	 jsp="../movie/home.jsp";

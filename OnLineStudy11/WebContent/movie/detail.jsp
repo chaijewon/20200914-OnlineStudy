@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.sist.dao.*"%>
+<%
+    // 사용자 요청한 영화번호 받는다 
+    String no=request.getParameter("no");
+    // 영화번호(no)에 해당되는 영화정보 가지고 와서 출력
+    // DAO를 이용해서 처리 
+    MovieVO vo=MovieDAO.movieDetailData(Integer.parseInt(no));
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +15,15 @@
 </head>
 <body>
   <div class="row">
-    <h1 class="text-center">영화상세보기</h1>
+    <h1 class="text-center">&lt;<%=vo.getTitle() %>&gt;상세보기</h1>
     <%-- 영화 상세보기 출력 --%>
+    <table class="table">
+      <tr>
+        <td>
+          <iframe src="http://youtube.com/embed/<%=vo.getKey()%>" width=750 height=450></iframe>
+        </td>
+      </tr>
+    </table>
   </div>
   <div class="row">
     <div class="text-right">

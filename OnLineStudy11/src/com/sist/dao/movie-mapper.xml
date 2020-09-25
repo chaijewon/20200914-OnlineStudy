@@ -19,6 +19,11 @@
     FROM daum_movie
     WHERE cateno=#{cateno}
   </select>
+  <!-- 영화 상세보기  : SQL문장만 저장 = 처리는 MovieDAO에 처리-->
+  <select id="movieDetailData" resultType="com.sist.dao.MovieVO" parameterType="int">
+    SELECT * FROM daum_movie
+    WHERE no=#{no}
+  </select>
 </mapper>
 
 

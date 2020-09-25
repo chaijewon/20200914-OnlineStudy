@@ -64,7 +64,7 @@
      %>
              <div class="col-md-4">
 			    <div class="thumbnail">
-			      <a href="../main/main.jsp?mode=8">
+			      <a href="../main/main.jsp?mode=8&no=<%=vo.getNo()%>">
 			        <img src="<%=vo.getPoster() %>" alt="Lights" style="width:100%">
 			        <div class="caption">
 			          <p style="font-size:8pt"><%=vo.getTitle() %></p>
