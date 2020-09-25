@@ -60,7 +60,12 @@
      case 7:
     	 jsp="../movie/home.jsp";
     	 break;
+     case 8:
+    	 jsp="../movie/detail.jsp";
+    	 break;
      }
+          // 새로운 화면을 만들때 반드시 등록 => 링크가 걸리면 해당 화면을 보여 주는 역할 
+          // 화면 변경 ==> Controller => java
 %>
 <!DOCTYPE html>
 <html>

@@ -25,7 +25,15 @@
     // map에 저장 
     map.put("start",start);
     map.put("end",end);
-    List<MovieVO> list=MovieDAO.movieListData(map);
+    List<MovieVO> list=new ArrayList<MovieVO>();
+    if(index==0)
+    {
+    		list=MovieDAO.movieListData(map);// 전체 영화 => 페이지 
+    }
+    else
+    {
+    	    list=MovieDAO.movieCategoryData(index);// 전체 출력 
+    }
     // 총페이지 읽기 
     int totalpage=MovieDAO.movieTotalPage();
 %>
@@ -42,12 +50,12 @@
          btn-xs  : 작은 버튼
     --%>
    <div class="row">
-     <a href="#" class="btn btn-lg btn-active">전체 영화</a>
-     <a href="#" class="btn btn-lg btn-primary">현재 상영 영화</a>
-     <a href="#" class="btn btn-lg btn-success">개봉 예정 영화</a>
-     <a href="#" class="btn btn-lg btn-info">박스오피스(주간)</a>
-     <a href="#" class="btn btn-lg btn-danger">박스오피스(월간)</a>
-     <a href="#" class="btn btn-lg btn-warning">박스오피스(연간)</a>
+     <a href="../main/main.jsp" class="btn btn-lg btn-active">전체 영화</a>
+     <a href="../main/main.jsp?mno=1" class="btn btn-lg btn-primary">현재 상영 영화</a>
+     <a href="../main/main.jsp?mno=2" class="btn btn-lg btn-success">개봉 예정 영화</a>
+     <a href="../main/main.jsp?mno=3" class="btn btn-lg btn-info">박스오피스(주간)</a>
+     <a href="../main/main.jsp?mno=4" class="btn btn-lg btn-danger">박스오피스(월간)</a>
+     <a href="../main/main.jsp?mno=5" class="btn btn-lg btn-warning">박스오피스(연간)</a>
    </div>
    <div class="row">
      <%
@@ -56,10 +64,10 @@
      %>
              <div class="col-md-4">
 			    <div class="thumbnail">
-			      <a href="#">
+			      <a href="../main/main.jsp?mode=8">
 			        <img src="<%=vo.getPoster() %>" alt="Lights" style="width:100%">
 			        <div class="caption">
-			          <p><%=vo.getTitle() %></p>
+			          <p style="font-size:8pt"><%=vo.getTitle() %></p>
 			        </div>
 			      </a>
 			    </div>
