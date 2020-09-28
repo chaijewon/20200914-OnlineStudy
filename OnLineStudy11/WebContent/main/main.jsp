@@ -74,9 +74,14 @@
      case 11:
     	 jsp="../freeboard/detail.jsp";
     	 break;
+     case 12:
+    	 jsp="../freeboard/update.jsp";
+    	 break;
      }
           // 새로운 화면을 만들때 반드시 등록 => 링크가 걸리면 해당 화면을 보여 주는 역할 
           // 화면 변경 ==> Controller => java
+          // include => 기존파일에 다른 파일의 내용을 붙여놓기 하는 것이다 
+          // 덮어쓰기 
 %>
 <!DOCTYPE html>
 <html>

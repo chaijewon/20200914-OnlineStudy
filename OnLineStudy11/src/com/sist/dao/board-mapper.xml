@@ -55,6 +55,30 @@
     FROM movie_board
     WHERE no=#{no}
   </select>
+  <!--  수정 -->
+  <select id="freeBoardGetPassword" resultType="String" parameterType="int">
+    <!-- 
+        resultType="String"
+        parameterType="int"   ==> 변수명 (데이터형)
+     -->
+     SELECT pwd FROM movie_board
+     WHERE no=#{no}
+     <!-- 본인 여부 확인 -->
+  </select>
+  <!-- 
+       <insert>
+       <update>
+       <delete>
+       =================  resultType은 없다 (결과값)
+       <select> == resultType
+   -->
+  <update id="freeBoardUpdate" parameterType="com.sist.dao.BoardVO">
+     UPDATE movie_board SET
+     name=#{name},
+     subject=#{subject},
+     content=#{content}
+     WHERE no=#{no}
+  </update>
 </mapper>
 
 
