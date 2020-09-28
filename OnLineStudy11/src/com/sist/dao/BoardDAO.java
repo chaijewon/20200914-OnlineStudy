@@ -154,6 +154,41 @@ public class BoardDAO{
 				session.close(); //connection닫기(반환)
 		}
 	}
+	// 상세보기 
+	// <update id="freeBoardHitIncrement" parameterType="int">
+	// <select id="freeBoardDetailData" resultType="com.sist.dao.BoardVO" parameterType="int">
+	public static BoardVO freeBoardDetailData(int no)
+	{
+		BoardVO vo=new BoardVO();
+		SqlSession session=null;
+		// 연결 => 처리 
+		try
+		{
+			// 연결 객체 얻기 (session=>Connection,PreparedStatement)
+			session=ssf.openSession();
+			session.update("freeBoardHitIncrement", no);
+			// commit을 전송
+			session.commit();
+			/*
+			 *   단위 줄수 
+			 *     여러줄 => selectList
+			 *     한줄 => selectOne
+			 */
+			vo=session.selectOne("freeBoardDetailData", no);
+			// 화면 출력 
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			// 닫기
+			if(session!=null)
+				session.close();
+		}
+		
+		return vo;
+	}
 }
 
 

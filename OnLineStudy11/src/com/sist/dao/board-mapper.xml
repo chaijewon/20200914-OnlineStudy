@@ -35,6 +35,26 @@
       SYSDATE,0
     )
   </insert>
+  <!--  상세보기  -->
+  <!-- 조회수 증가 -->
+  <update id="freeBoardHitIncrement" parameterType="int">
+    <!--  parameterType="int" : 게시물의 번호를 대입-->
+    UPDATE movie_board SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <!-- 
+         JSP => <a> button ==> 요청 
+         board-mapper.xml파일에 SQL문장 
+         BoardDAO => SQL문장을 읽어서 처리
+         JSP에 읽어온 데이터 출력 
+   -->
+  <!-- 실제 데이터 읽기 (내용보기) => 처리는 BoardDAO-->
+  <select id="freeBoardDetailData" resultType="com.sist.dao.BoardVO" parameterType="int">
+    SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
+    FROM movie_board
+    WHERE no=#{no}
+  </select>
 </mapper>
 
 

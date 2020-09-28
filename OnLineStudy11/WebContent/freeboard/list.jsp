@@ -106,7 +106,10 @@
        %>
                <tr>
                  <th class="text-center" width=10%><%=vo.getNo() %></th>
-		         <th class="text-left" width=45%><%=vo.getSubject() %></th>
+		         <th class="text-left" width=45%>
+		          <a href="../main/main.jsp?mode=11&no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
+		          <%-- ? 앞에 있는 파일 처리  --%>
+		         </th>
 		         <th class="text-center" width=15%><%=vo.getName() %></th>
 		         <th class="text-center" width=20%><%=vo.getDbday() %></th>
 		         <th class="text-center" width=10%><%=vo.getHit() %></th>
