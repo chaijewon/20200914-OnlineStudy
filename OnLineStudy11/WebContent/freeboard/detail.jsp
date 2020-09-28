@@ -9,6 +9,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- JQUERY : 라이브러리  (라이브러리 로드 :import)-->
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var i=0;
+$(function(){ // main
+	$('#delBtn').click(function(){
+		if(i==0)
+		{
+			$('#del').show();
+			$('#delBtn').val("취소");
+			i=1;
+		}
+		else
+		{
+			$('#del').hide();
+			$('#delBtn').val("삭제");
+			i=0;
+		}
+	});
+});
+</script>
 </head>
 <body>
    <%-- DAO에서 값을 가지고 온다 : board-mapper.xml에서 SQL문장을 작성  --%>
@@ -43,10 +64,16 @@
            <%-- ../board/update.jsp --%>
            <a href="../main/main.jsp?mode=12&no=<%=vo.getNo() %>" class="btn btn-xs btn-primary">수정</a>
            <%-- ../board/delete.jsp --%>
-           <a href="../main/main.jsp?mode=13&no=<%=vo.getNo() %>" class="btn btn-xs btn-success">삭제</a>
+           <input type="button" class="btn btn-xs btn-success" id="delBtn" value="삭제">
            <%-- ../board/list.jsp --%>
            <a href="../main/main.jsp?mode=9" class="btn btn-xs btn-danger">목록</a>
          </td>
+       </tr>
+       <tr id="del" style="display:none">
+          <td colspan="4" class="text-right">
+                    비밀번호:<input type=password class="input-sm" size=10 id="pwd">
+                  <input type=submit value="삭제하기" class="btn btn-sm btn-danger">
+          </td>
        </tr>
      </table>
    </div>

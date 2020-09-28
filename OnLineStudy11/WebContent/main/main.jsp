@@ -77,6 +77,9 @@
      case 12:
     	 jsp="../freeboard/update.jsp";
     	 break;
+     case 13:
+    	 jsp="../freeboard/delete.jsp";
+    	 break;
      }
           // 새로운 화면을 만들때 반드시 등록 => 링크가 걸리면 해당 화면을 보여 주는 역할 
           // 화면 변경 ==> Controller => java
