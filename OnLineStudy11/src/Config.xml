@@ -87,6 +87,10 @@
   <!-- SQL문장을 전송 : SQL문장 어디 있는지 확인 : mapper를 등록  -->
   <!-- XML은 문서 저장 : 저장내용이 많아지면 파싱(XML저장되어 있는 데이터를 읽어 간다) 속도가 저하된다:분산  -->
   <!-- XML만 가지고 코딩하는 프레임워크 : XML이 길어진다=>속도의 문제 (스트럿츠) : 스프링 -->
+  <!-- 
+      MyBatis => XML없이도 사용이 가능 
+                ===== Annotation  @
+   -->
   <mappers>
     <mapper resource="com/sist/dao/databoard-mapper.xml"/><!-- 분산 여러개를 등록이 가능 -->
     <mapper resource="com/sist/dao/movie-mapper.xml"/>

@@ -18,6 +18,8 @@
     	 mode="7"; // home에 출력 
      int index=Integer.parseInt(mode);
      String jsp=""; // 1=>a.jsp , 2.b.jsp...
+    		 
+    		 
     /*
           main  ===> board에 접근  ../board/jsp파일명
             main.jsp

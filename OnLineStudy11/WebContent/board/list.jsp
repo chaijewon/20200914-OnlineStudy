@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,com.sist.dao.*"%>
+    pageEncoding="UTF-8" import="java.util.*,com.sist.dao.*,java.text.*"%>
 <%-- 목록 출력 : list.jsp : board폴더 --%>
 <!-- 데이터를 읽어 온다 (1page)있는 게시물  -->
 <%
@@ -99,7 +99,7 @@ function send()
 		          --%>
 		         </td>
 		         <td class="text-center" width=15%><%=vo.getName() %></td>
-		         <td class="text-center" width=20%><%=vo.getDbday() %></td>
+		         <td class="text-center" width=20%><%=vo.getDbday()%></td>
 		         <td class="text-center" width=10%><%=vo.getHit() %></td>
 		       </tr>
        <%

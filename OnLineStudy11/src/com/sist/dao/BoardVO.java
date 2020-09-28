@@ -23,9 +23,11 @@ public class BoardVO {
     private String subject;
     private String content;
     private String pwd;
-    private Date regdate;
+    private Date regdate;// 오라클에 저장 
     private int hit;
-    private String dbday;
+    // 오라클에서 날자를 변경해서 가지고 온다 (TO_CHAR())
+    private String dbday; // 출력 
+    // new SimpleDateFormat("yyyy-MM-dd").format(vo.getRegdate())
     
 	public String getDbday() {
 		return dbday;

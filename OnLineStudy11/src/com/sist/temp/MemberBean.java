@@ -1,5 +1,8 @@
 package com.sist.temp;
 // 읽기/쓰기 => 변수는 은닉화(private)
+/*
+ *   irum=홍길동&sex=남자&
+ */
 public class MemberBean {
     private String name;
     private String sex;

@@ -1,146 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,com.sist.dao.*"%>
-<%-- 목록 출력 : list.jsp : board폴더 --%>
-<!-- 데이터를 읽어 온다 (1page)있는 게시물  -->
+<%--
+      자바 : 데이터를 가지고 온다 
+      데이터 => 출력 (JSP)
+ --%>
+<%--
+     게시판 목록 출력 
+     영화 (home.jsp) : cookie
+     로그인 (login.jsp) : session
+     freeboard : <jsp:~>
+     databoard : 다운로드 , 업로드
+     예매 : javascript => Ajax
+ --%>
 <%
-     // DAO를 생성 => DAO를 통해서 데이터를 얻어온다 
-     // static으로 메소드=> 이미 메모리에 저장 
-     // 사용자로부터 페이지를 받아 본다 
      String strPage=request.getParameter("page");
-     if(strPage==null) // 페이지를 보내지 않을 경우 (맨처음에는 페이지를 보낼 수 없다)
-    	 strPage="1";// 시작페이지를 설정해 준다 
-     int curpage=Integer.parseInt(strPage);
-     // start:1 , end:10
-     Map map=new HashMap();
+     // 사용자가 전송(요청) => 요청한 데이터를 톰캣이 모든 데이터를 묶어서 request에 첨부)
+     // 모든 데이터는 request를 통해서 들어온다 
+     /*
+           list.jsp?page=1  =>  request.getParameter("page");  => 1
+           list.jsp         =>  request.getParameter("page");  => null
+                            if(strPage==null)
+           list.jsp?page=   =>  request.getParameter("page");  => ""
+                            if(strPage.equals(""))
+          ===========================================================
+            <input type=text name=name> : 입력값이 없는 경우 (null이 아니고 "")
+     */
+     if(strPage==null) // 처음에 한번은 사용자가 페이지번호를 보낼 수 없다 (list.jsp)
+     {
+    	 strPage="1"; // default => 반드시 첨부한다
+    			 // 페이지나누기 => 모든 JSP에 적용
+    			 // 게시물  ==> 15개 ~ 20개
+    			 // 그림출력 ==> 12개~15개 
+     }
+           
+     int curpage=Integer.parseInt(strPage);// 현재 보고 있는 페이지
+     // 현재 출력할 내용 가지고 오기 ==> 마이바이티에서 start , end 요청 
+     // 데이터를 보내줄 때 여러개를 설정 (여러개의 값이 있는 경우 : Map,~VO) => 값을 모아서 마이바티스로 전송 
+     /*
+         ~VO => VO에 존재하는 변수가 있는 경우 
+         start,end => name,subject
+         Map => VO에 없는 변수가 있는 경우
+     */
+     Map map=new HashMap(); // 키,값을 동시에 저장하는 공간 
+     // HashMap map=new HashMap();
+     // Map map=new HashMap();
+     // Map ==> interface => Map 인터페이스를 구현한 클래스 => HashMap()
+     // Map ==> HashMap() , Hashtable()
+     // List => ArrayList,Vector,LinkedList
+     /*
+         List => 인터페이스 
+         List list=new ArrayList() => 비동기화 (이미 저장되어 있는 데이터:오라클)
+         List list=new Vector() => 동기화 (내트워크)
+         List list=new LinkedList() => C언어 호환 
+     */
      int rowSize=10;
-     int start=(curpage*rowSize)-(rowSize-1);
-     int end=curpage*rowSize;
-     // map에 저장 => map 저장하는 공간 => 키,값을 설정 할 수 있다 
+     int start=(rowSize*curpage)-(rowSize-1);// rownum (오라클에서 지원하는 데이터컬럼 => 1)
+     int end=rowSize*curpage;
+     
      map.put("start",start);
      map.put("end",end);
-     List<BoardVO> list=BoardDAO.boardListData(map);// 1page 1~10
-     // 총페이지읽기
-     int totalpage=0;
-     // 화면에 출력 
-     // 데이터 읽기 : 파일,XML,JSON,database(오라클),웹크롤링(날씨,인기검색어)
-     // database(오라클):일반 JDBC,DBCP,***ORM(Mybatis:실무)
+     List<BoardVO> list=BoardDAO.freeBoardListData(map);
+     // 저장되어 있는 list의 값을 출력 => JSP가 하는 역할 (JSP:View) => 실무는 90%=> MVC(Spring:MVC외에는 없다)
+    		 
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-function send()
-{
-	// 자바스크립트는 변수 종류가 없다 (var:자동 지정 변수)
-	/*
-	    var a=10 ; var=int
-	    var b=10.0; var=double
-	    var c='a'; char
-	    var d="aaa"; String
-	    var e=[]; Array
-	    var k={}; Object
-	*/
-	var f=document.frm;
-	// 반드시 입력을 할 수 있게 만든다 
-	if(f.ss.value=="")
-	{
-		f.ss.focus();
-		return;
-	}
-	f.submit();// submit버튼과 동일한 역할  ==> Jquery => NodeJS => reactjs => vuejs => typescript
-}
-</script>
 </head>
 <body>
    <div class="row">
-     <h1 class="text-center">자료실</h1>
-     <table class="table">
-       <tr>
-         <td>
-           <a href="main.jsp?mode=2" class="btn btn-sm btn-success">새글</a>
-           <%-- 메뉴 , 로그인 , footer 고정 => main.jsp --%>
-         </td>
-       </tr>
-     </table>
+     <h1 class="text-center">자유게시판</h1>
      <table class="table table-striped">
-       <tr class="warning">
+       <%--
+              danger : 빨간색
+              success :  녹색
+              info : 하늘색
+              warning :주황색
+              active : 회색
+       --%>
+       <tr class="danger">
+         <%--
+                     정렬 : text-left(default)
+                 text-center,text-right
+          --%>
          <th class="text-center" width=10%>번호</th>
          <th class="text-center" width=45%>제목</th>
          <th class="text-center" width=15%>이름</th>
          <th class="text-center" width=20%>작성일</th>
          <th class="text-center" width=10%>조회수</th>
        </tr>
+       <%-- 데이터 출력 --%>
        <%
-           /*
-                           컬럼이 없는 값을 받는 경우 => VO에서 변수 설정 
-               private String dbday; =>dbday값을 채운다 
-               name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday => mapper 
-           */
            for(BoardVO vo:list)
            {
-        	   /*
-        	        ../main/main.jsp?mode=3&no=1
-        	                         ====== ==== detail.jsp에서 사용
-        	                                          화면변경시 사용(main.jsp)
-        	         include가 되면 ==> 모든 JSP에서 사용자가 보내준 데이터를 사용이 가능 
-        	         ============
-        	           request가 공유 
-        	   */
        %>
                <tr>
-		         <td class="text-center" width=10%><%=vo.getNo() %></td>
-		         <td width=45%>
-		          <a href="../main/main.jsp?mode=3&no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>
-		          <%-- include된 모든 JSP는 main.jsp로 보낸 모든 데이터값을 사용할 수 있다 
-		               main.jsp => mode=3 => 화면 변경
-		               detail.jsp => no=1 => 해당되는 데이터를 받아서 출력 
-		          --%>
-		         </td>
-		         <td class="text-center" width=15%><%=vo.getName() %></td>
-		         <td class="text-center" width=20%><%=vo.getDbday() %></td>
-		         <td class="text-center" width=10%><%=vo.getHit() %></td>
-		       </tr>
+                 <th class="text-center" width=10%><%=vo.getNo() %></th>
+		         <th class="text-left" width=45%><%=vo.getSubject() %></th>
+		         <th class="text-center" width=15%><%=vo.getName() %></th>
+		         <th class="text-center" width=20%><%=vo.getDbday() %></th>
+		         <th class="text-center" width=10%><%=vo.getHit() %></th>
+               </tr>
        <%
            }
        %>
      </table>
-     <table class="table">
-       <tr>
-         <td class="text-left">
-         <!-- 
-                          데이터 전송하는 방식 
-                  = GET => URL뒤에 노출
-                                데이터를 받을 파일명?변수명=값
-                                                            변수명=값&변수명=값&변수명=값
-                                                            구분문자는 &
-                  = POST => 내부 네트워크를 이용한 전송 (보안 ,URL주소 길어진면 숨겨서 전송)
-                                                    변수명=값&변수명=값&변수명=값
-          -->
-          <form method="post" action="../main/main.jsp" name=frm>
-	          Search:
-	          <select name="fd" class="input-sm">
-	            <option value="name">이름</option>
-	            <option value="subject">제목</option>
-	            <option value="content">내용</option>
-	          </select>
-	          <%-- 검색어 입력 --%>
-	          <input type=text name=ss class="input-sm">
-	          <input type=hidden name=mode value=4>
-	          <%-- 검색버튼 --%>
-	          <input type=button value=검색 class="btn btn-sm btn-danger"
-	            onclick="send()"
-	          >
-          </form>
-         </td>
-         <td class="text-right">
-          <a href="#" class="btn btn-sm btn-primary">이전</a>
-           <%=curpage %> page / <%=totalpage %> pages
-          <a href="#" class="btn btn-sm btn-primary">다음</a>
-         </td>
-       </tr>
-     </table>
    </div>
 </body>
 </html>
+
+
+
+
+
+

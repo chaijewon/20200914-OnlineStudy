@@ -44,6 +44,10 @@
               ============= page,no => request를 이용해서 받는 것이 좋다
                            사용자가 보내주는 데이터가 많은 경우에 사용 
                             글쓰기 , 회원가입 , 공지사항 
+                            
+                            
+           Spring 
+           public String memberInsert(MemberVO vo)
    --%>
 </jsp:useBean>
 <!DOCTYPE html>

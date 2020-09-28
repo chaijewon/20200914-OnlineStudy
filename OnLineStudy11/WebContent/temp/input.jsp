@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%--
+    http://localhost/OnLineStudy11/temp/output2.jsp?name=&sex=%EB%82%A8%EC%9E%90&age=&addr=&tel=
+--%>
 </head>
 <body>
   <h1>회원정보</h1>
-  <form method=post action="output2.jsp">
+  <form method=get action="output2.jsp">
     이름:<input type=text name=name size=15><br>
     성별:<input type=radio name=sex value="남자" checked>남자
       <input type=radio name=sex value="여자">여자<br>

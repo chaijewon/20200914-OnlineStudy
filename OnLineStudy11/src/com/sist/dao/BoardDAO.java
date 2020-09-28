@@ -1,91 +1,140 @@
 package com.sist.dao;
-//XML파싱후에 => 실행된 결과를 받는 위치=>DAO에서 메소드 호출 
-import java.io.*;//XML파일 읽기 => Reader (한글파일)
-import java.util.*;//List => 구현 (ArrayList)
-/*
-*    IO (Input,Output) : 데이터 입출력 
-*    ==============================
-*      1. 메모리 입출력 
-*      2. 파일 입출력 
-*      3. 네트워크 입출력 
-*    ==============================
-*    IO의 종류 (1byte,2byte)
-*    1byte=> 바이트 스트림(파일 업로드,다운로드) => ~InputStream,~OutputStream
-*    2byte=> 문자 스트림 (한글포함된 데이터 읽기) => ~Reader , ~Writer
-*/
+import java.util.*;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-public class BoardDAO {
-// XML을 파싱(데이터 읽기) => 읽은 데이터 저장 ==> SqlSesionFactory
-private static SqlSessionFactory ssf;
-// 초기화 => XML을 읽기(자동으로 셋팅)
-static 
-{
-	   try
-	   {
-		   // 1. XML파일 읽기
-		   Reader reader=Resources.getResourceAsReader("Config.xml");
-		   // Config에 등록되어 있는 모든 XML파일 읽는다 
-		   // 파일명에 대소문자를 구분한다
-		   // 2. XML을 파싱 : 필요한 데이터 읽어 간다 (마이바티스 라이브러리가 읽어 간다) => 저장을 하고 사용한다
-		   ssf=new SqlSessionFactoryBuilder().build(reader);
-		   // 파싱 => SAX(읽기전용) => 태그를 한개씩 읽어와서 필요데이터를 저장하는 방식
-		   /*
-		    *    JAXP 
-		    *      DOM :수정,읽기,삭제,추가 (메모리에서 저장)
-		    *           => 속도가 늦다 
-		    *      SAX : 읽기 => 일반적으로 모든 라이브러리는 SAX방식을 사용한다
-		    *                   MyBatis,Spring...
-		    *           => 속도가 빠르다 
-		    *    JAXB : 빅데이터 (데이터 자바에 값을 채워준다)
-		    *      binding
-		    */
-	   }catch(Exception ex)
-	   {
-		   // 에러처리 
-		   System.out.println(ex.getMessage());
-	   }   
+
+import java.io.*;
+/*
+ *    public class CreateSqlSessionFactory
+ *    {
+ *          private static SqlSessionFactory ssf;
+			static 
+			{
+				try
+				{
+					Reader reader=Resources.getResourceAsReader("Config.xml");
+					ssf=new SqlSessionFactoryBuilder().build(reader);
+				}catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+			} 
+			public static SqlSessionFactory getSsf()
+			{
+			    return ssf;
+			}
+ *    }
+ *    
+ *    
+ *    오늘 ==> 액션 태그 : 자바문법을 태그형으로 제작 
+ *    3가지 기억
+ *    1) <jsp:include page="첨부할 JSP파일명">
+ *    2) <jsp:useBean id="dao" class="MemberDAO">
+ *       ============================ 메모리 할당
+ *         => 자바코드 
+ *            MemberDAO dao=new MemberDAO()
+ *                     ====
+ *                       id  ==> id가 객체명이 된다
+ *    3) <jsp:setProperty name="객체명" property="">
+ *                        =========== ============
+ *                        name: => id명칭 
+ *                        property : 변수명  ==> setXxx()에 값을 채워준다
+ *        예)
+ *           JSP => Bean , MyBatis => DTO , Spring => VO
+ *           Bean = DTO = VO는 동일한 개념 
+ *             => 영화 한개의 전체정보 => 브라우저에 넘겨줄 목적 
+ *             => 기능이 두가지 
+ *                읽기 / 쓰기 
+ *                getter / setter
+ *           public class MemberVO
+ *           {
+ *               private int no;
+ *               private String name;
+ *               // 쓰기 => 메모리에 저장
+ *               public void setNo(int no)
+ *               {
+ *                  this.no=no;
+ *               }
+ *               // 읽기 => 저장된 값 읽기
+ *               public int getNo()
+ *               {
+ *                   return no;
+ *               }
+ *               public void setName(String name)
+ *               {
+ *                   this.name=name;
+ *               }
+ *               public void getName()
+ *               {
+ *                  return name;
+ *               }
+ *           }
+ *           
+ *           VO => 메모리에 클래스를 저장 
+ *           MemberVO vo=new MemberVO();
+ *           => <jsp:useBean id="vo" class="MemberVO">
+ *              useBean : 메모리 할당 
+ *           => 싱클턴 
+ *           => HTML과 자바코딩을 분리 
+ *              <c:forEach> <c:if> <c:forTokenes> : JSTL
+ *              <% %> => 제거 
+ *           vo.setName("홍길동"),vo.setNo(1)
+ *           => <jsp:setProperty name="vo" property="no" value="1">
+ *              vo.setNo(1)
+ *                             ==========
+ *              <jsp:setProperty name="vo" property="name" value="홍길동">
+ *              vo.setName("홍길동")
+ *              
+ *              setProperty => setXxx()에 값을 채워준다
+ *              
+ *           => <jsp:setProperty name="vo" property="*">
+ *              모든 setXxx()에 전송된 값을 채워라
+ */
+public class BoardDAO{
+	private static SqlSessionFactory ssf;
+	/*
+	 *   마이바티스 , 스프링 : 먼저 XML을 읽기 때문에 XML이 틀릴경우에는 
+	 *   구동이 안된다
+	 *   => id가 같은 경우에는 오류가 없게 
+	 *   => id => 앞에 테이블명 
+	 *   databoardTotalPage
+	 *   freeboardTotalPage
+	 */
+	static 
+	{
+		try
+		{
+			Reader reader=Resources.getResourceAsReader("Config.xml");
+			ssf=new SqlSessionFactoryBuilder().build(reader);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	// <select id="freeBoardListData" resultType="com.sist.dao.BoardVO" parameterType="hashmap">
+	public static List<BoardVO> freeBoardListData(Map map)
+	{
+		List<BoardVO> list=new ArrayList<BoardVO>();
+		SqlSession session=null;
+		try
+		{
+			session=ssf.openSession();
+			list=session.selectList("freeBoardListData",map);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
 }
-// 목록 출력 ==> id="boardListData"
-//            리턴형 : resultType            //매개변수 : parameterType
-// select ==> selectList() : row가 여러개 일때 ,  selectOne() : row가 한개일때 
-// 오라클==> 한줄 => row(record)
-// <select id="boardListData" resultType="DataBoardVO" parameterType="hashmap">
-public static List<BoardVO> boardListData(Map map)
-{
-	   List<BoardVO> list=new ArrayList<BoardVO>();
-	   // Connection을 사용한 다음에 반드시 반환 ==> SqlSession
-	   SqlSession session=null;
-	   // SqlSession => Connection과 동일한 역할 수행 
-	   // 컴파일 예외처리는 없다 => 초반에 에러처리하기 위해서 => 예외처리를 하는 것이 좋다 => null
-	   try
-	   {
-		   // 실행 : 정상수행 : try수행 => finally수행
-		   //      비정상  : 중간에 catch수행 => finally수행
-		   // 1. 미리 만든 Connection객체를 얻어 온다 
-		   session=ssf.openSession();
-		   // 2. XML에 있는 SQL문장을 실행후에 결과값을 달라
-		   list=session.selectList("freeboardListData",map);
-	   }catch(Exception ex)
-	   {
-		   ex.printStackTrace();//실행하는 과정을 보여준다 
-	   }
-	   finally
-	   {
-		   // 반환 => Connection=>close()
-		   if(session!=null)
-			   session.close(); 
-		   /*
-		    *   close()
-		    *   {
-		    *     if(ps!=null) ps.close();
-		    *     if(conn!=null) conn.close(); ==> disConnection()
-		    *   }
-		    */
-	   }
-	   return list;
-  }
-}
+
+
+
