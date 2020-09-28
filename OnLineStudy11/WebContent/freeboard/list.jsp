@@ -72,6 +72,14 @@
 <body>
    <div class="row">
      <h1 class="text-center">자유게시판</h1>
+     <table class="table">
+       <tr>
+         <td>
+           <a href="../main/main.jsp?mode=10" class="btn btn-sm btn-primary">새글</a>
+           <%-- mode=10 이면 어떤 화면을 출력 할지 결정 : main.jsp --%>
+         </td>
+       </tr>
+     </table>
      <table class="table table-striped">
        <%--
               danger : 빨간색

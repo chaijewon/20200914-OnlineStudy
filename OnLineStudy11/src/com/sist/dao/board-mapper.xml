@@ -25,6 +25,16 @@
      FROM movie_board ORDER BY no DESC))
      WHERE num BETWEEN #{start} AND #{end}
   </select>
+  <insert id="freeBoardInsert" parameterType="com.sist.dao.BoardVO">
+    INSERT INTO movie_board VALUES(
+      mb_no_seq.nextval,
+      #{name},
+      #{subject},
+      #{content},
+      #{pwd},
+      SYSDATE,0
+    )
+  </insert>
 </mapper>
 
 

@@ -134,7 +134,35 @@ public class BoardDAO{
 		}
 		return list;
 	}
+	// <insert id="freeBoardInsert" parameterType="com.sist.dao.BoardVO">
+	public static void freeBoardInsert(BoardVO vo)
+	{
+		SqlSession session=null;
+		try
+		{
+			// 연결 객체 (Connection)=> SqlSession => getConnection
+			// 스프링 => 분리 , 중복없이 => annotation
+			session=ssf.openSession(true);//insert => commit (autoCommit)
+			session.insert("freeBoardInsert", vo);
+		}catch(Exception ex)
+		{
+			 ex.printStackTrace();
+		}
+		finally
+		{
+			if(session!=null)
+				session.close(); //connection닫기(반환)
+		}
+	}
 }
+
+
+
+
+
+
+
+
 
 
 
