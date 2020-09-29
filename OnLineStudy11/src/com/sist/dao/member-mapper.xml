@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.member-mapper">
+   <!-- Login -->
+   <!-- 
+        1. id가 존재 확인
+        2. password 확인 
+    -->
+    <!--  id 체크 -->
+    <select id="memberIdCheck" resultType="int" parameterType="String">
+      SELECT COUNT(*) FROM member
+      WHERE id=#{id}
+      <!-- 
+             0 => id가 없다
+             1 => id 존재 
+       -->
+    </select>
+    <!-- 비밀번호 확인 -->
+    <select id="memberGetInfoData" resultType="com.sist.dao.MemberVO" parameterType="String">
+      SELECT pwd,id,name,admin FROM member
+      WHERE id=#{id}
+    </select>
+   <!-- 회원가입 , 아이디중복체크 , 우편번호-->
+   <!-- 회원수정 -->
+   <!-- 회원탈퇴 -->
+   <!-- 아이디찾기 -->
+   <!-- 비밀번호찾기 -->
+   <!-- 비밀번호 변경 -->
+   <!-- Admin 회원관리 -->
+</mapper>
