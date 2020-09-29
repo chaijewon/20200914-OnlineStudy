@@ -37,24 +37,80 @@
                     2. PreparedStatement,ResultSet ==> table명-mapper.xml  
                                         PreparedStatement,ResultSet => SQL
  --%>
+<%
+   // 메뉴 조절 
+   // 회원 , 마이페이지 
+   // 로그인 => 회원 => 회원수정 회원탈퇴
+   String id=(String)session.getAttribute("id");
+   // id=null => 로그인 (X)
+   String admin=(String)session.getAttribute("admin");// y/n
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../main/main.jsp">SIST Recipe</a>
+      <a class="navbar-brand" href="../main/main.jsp">SIST Movie</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="../main/main.jsp">Home</a></li>
-      <li><a href="#">예매하기</a></li>
-      <li><a href="../main/main.jsp?mode=9">게시판</a></li>
-      <li><a href="../main/main.jsp?mode=1">자료실</a></li>
-      <li><a href="#">마이페이지</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">회원<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+         <%
+            if(id==null) // 로그인이 안된 상태
+            {
+         %>
+		          <li><a href="#">회원가입</a></li>
+		          <li><a href="#">아이디찾기</a></li>
+		          <li><a href="#">비밀번호찾기</a></li>
+          <%
+            }
+            else   // 로그인이 된 상태
+            {
+          %>
+                  <li><a href="#">회원수정</a></li>
+		          <li><a href="#">회원탈퇴</a></li>
+          <%
+            }
+          %>
+        </ul>
+      </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="../main/main.jsp?mode=9">자유게시판</a></li>
+          <li><a href="../main/main.jsp?mode=1">자료실</a></li>
+        </ul>
+      </li>
+      <%
+       if(id!=null)
+        {
+      %>
+         <li><a href="#">영화예매</a></li>
+         <li><a href="#">영화추천</a></li>
+         <%
+           if(admin.equals("n"))
+           {
+         %>
+              <li><a href="#">마이페이지</a></li>
+          <%
+           }
+           else
+           {
+          %>
+               <li><a href="#">예매 현황</a></li>
+          <%
+           }
+          %>
+      <%
+        }
+      %>
     </ul>
   </div>
 </nav>
