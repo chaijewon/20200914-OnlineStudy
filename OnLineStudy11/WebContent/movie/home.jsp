@@ -112,7 +112,7 @@
        }
    %>
    <div class="row">
-    <h3>최근 방문한 영화</h3>
+    <h3>최근 방문한 영화 &nbsp;<a href="../movie/delete.jsp" class="btn btn-sm btn-primary">쿠키삭제</a></h3>
      <%
          if(cList==null || cList.size()<1)
          {

@@ -6,7 +6,7 @@
     // 영화번호(no)에 해당되는 영화정보 가지고 와서 출력
     // DAO를 이용해서 처리 
     MovieVO vo=MovieDAO.movieDetailData(Integer.parseInt(no));
-    
+    // response => HTML만 전송받는 역할 
     
 %>
 <!DOCTYPE html>
