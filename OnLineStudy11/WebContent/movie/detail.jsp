@@ -6,6 +6,16 @@
     // 영화번호(no)에 해당되는 영화정보 가지고 와서 출력
     // DAO를 이용해서 처리 
     MovieVO vo=MovieDAO.movieDetailData(Integer.parseInt(no));
+    System.out.println(no+":"+vo.getPoster());
+    // Cookie => 키(중복없다,문자시작),값(문자열만 저장이 가능)
+    Cookie cookie=new Cookie("m"+no,no);
+    cookie.setPath("/");
+    // 저장 
+    // 기간 
+    cookie.setMaxAge(60*60); // 하루 저장  (초단위)
+    // 클라이언트 컴퓨터로 전송 
+    // http://211.238.142.181
+    response.addCookie(cookie);
 %>
 <!DOCTYPE html>
 <html>
