@@ -32,7 +32,7 @@
           <th>근무지</th>
           <th>급여</th>
         </tr>
-        <%
+        <%-- <%
            for(EmpVO vo:list)
            {
         %>
@@ -47,7 +47,28 @@
               </tr>
         <% 
            }
-        %>
+        %> --%>
+        <c:forEach var="vo" items="${list }">
+        <%-- var="vo" vo객체 생성 items="실제 데이터를 가지고 온다"--%>
+          <tr>
+            <%-- <td>${vo.getEmpno() }</td>
+            <td>${vo.getEname() }</td>
+            <td>${vo.getJob() }</td>
+            <td>${vo.getDbday() }</td>
+            <td>${vo.getDname() }</td>
+            <td>${vo.getLoc() }</td>
+            <td>${vo.getSal() }</td> --%>
+            <%-- 일반적으로 사용하는 방식 --%>
+            <td>${vo.empno }</td><%-- vo.getEmpno() : getXxx()가 없는 경우에는 오류--%>
+            <%-- VO제작시에는 반드시 getter/setter를 만든다  --%>
+            <td>${vo.ename }</td>
+            <td>${vo.job }</td>
+            <td>${vo.dbday }</td>
+            <td>${vo.dname }</td>
+            <td>${vo.loc }</td>
+            <td>${vo.sal }</td>
+          </tr>
+        </c:forEach>
       </table>
    </center>
 </body>
