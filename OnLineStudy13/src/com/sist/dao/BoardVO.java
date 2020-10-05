@@ -14,10 +14,18 @@ public class BoardVO {
     private int no;
     private String name;
     private String email;
+    private String subject;
     private String content;
     private String pwd;
     private Date regdate;
     private int hit;
+    
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public int getNo() {
 		return no;
 	}
