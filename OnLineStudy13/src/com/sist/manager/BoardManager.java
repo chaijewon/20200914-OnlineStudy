@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.sist.dao.*;
 public class BoardManager {
@@ -45,6 +46,10 @@ public class BoardManager {
 	    *   request.setAttribute() => JSP출력할 내용을 request에 담아서 전송 
 	    *   => 1번만 사용하는 것이 아니라 => 필요한 모든 데이터를 담을 수 있다 
 	    */
+	   int totalpage=BoardDAO.boardTotalPage();
+	   
+	   request.setAttribute("curpage", curpage);
+	   request.setAttribute("totalpage", totalpage);
    }
    // JSP에서 보낸 사용자 요청정보를 받아서 처리 => 결과값을 (request에 첨부해서 전송)
    public void boardDetailData(HttpServletRequest request)
@@ -58,6 +63,30 @@ public class BoardManager {
 	   // 결과값을 request에 담아서 => JSP로 전송 
 	   request.setAttribute("vo", vo);
 	   
+   }
+   // 게시물 추가 
+   public void boardInsert(HttpServletRequest request,HttpServletResponse response)
+   {
+	   try
+	   {
+		   // 한글 처리 
+		   request.setCharacterEncoding("UTF-8");
+		   // 사용자 요청값 받기 
+		   String name=request.getParameter("name");
+		   String subject=request.getParameter("subject");
+		   String content=request.getParameter("content");
+		   String pwd=request.getParameter("pwd");
+		   
+		   BoardVO vo=new BoardVO();
+		   vo.setName(name);
+		   vo.setSubject(subject);
+		   vo.setContent(content);
+		   vo.setPwd(pwd);
+		   // BoardDAO ==> 처리 (오라클 insert) => insert (SQL)
+		   BoardDAO.boardInsert(vo);
+		   // 이동 => list.jsp
+		   response.sendRedirect("list.jsp");
+	   }catch(Exception ex){}
    }
 }
 

@@ -34,7 +34,7 @@
      <table class="table">
        <tr>
          <td>
-           <a href="#" class="btn btn-sm btn-primary">새글</a>
+           <a href="insert.jsp" class="btn btn-sm btn-primary">새글</a>
          </td>
        </tr>
      </table>
@@ -123,7 +123,18 @@
         </tr>
        </c:forEach>
       </table>
+      <table class="table table-striped">
+        <tr>
+          <td class="text-right">
+            <a href="list.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
+              ${curpage } page / ${totalpage } pages
+            <a href="list.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
+          </td>
+        </tr>
+      </table>
      </div>
     </div>
 </body>
 </html>
+
+

@@ -115,6 +115,67 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
+   // 총페이지 구하기 
+   /*
+    *     <select id="boardTotalPage" resultType="int">
+		    SELECT CEIL(COUNT(*)/10.0) FROM freeboard
+		  </select>
+    */
+   public static int boardTotalPage()
+   {
+	   int total=0;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   // 데이터 읽어 오기 
+		   total=session.selectOne("boardTotalPage");// 대소문자 구분 
+	   }catch(Exception ex)
+	   {
+		   // 에러 처리
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 => 재사용
+		   if(session!=null)
+			   session.close();
+	   }
+	   
+	   return total;
+   }
+   // 데이터 추가
+   /*
+    *   <insert id="boardInsert" parameterType="BoardVO">
+		   INSERT INTO freeboard(no,name,email,subject,content,pwd)
+		   VALUES(
+		     (SELECT NVL(MAX(no)+1,1) FROM freeboard),
+		     #{name},
+		     ' ',
+		     #{subject},
+		     #{content},
+		     #{pwd}
+		   )
+		  </insert>
+    */
+   public static void boardInsert(BoardVO vo)
+   {
+	   SqlSession session=null;
+	   try
+	   {
+		   session=ssf.openSession(true);
+		   session.insert("boardInsert",vo);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+   }
 }
 
 
