@@ -244,6 +244,46 @@ public class BoardDAO {
 	   }
 	   return bCheck;
    }
+   
+   // 삭제하기 
+   /*
+    *     <delete id="boardDelete" parameterType="int">
+		    DELETE FROM freeboard
+		    WHERE no=#{no}
+		  </delete>
+    */
+   public static boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결 
+		   session=ssf.openSession();
+		   // 비밀번호 검사
+		   String db_pwd=session.selectOne("boardGetPassword", no);
+		   if(db_pwd.equals(pwd))// 삭제
+		   {
+			   bCheck=true;
+			   // 실제 데이터 삭제
+			   session.delete("boardDelete",no);
+			   session.commit();
+		   }
+		   else // 비밀번호가 틀리다
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return bCheck;
+   }
 }
 
 

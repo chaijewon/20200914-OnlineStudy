@@ -20,6 +20,20 @@
      // Call By Reference (주소 => 주소에 값을 채워주는 방식)
      // request => 각 JSP마다 가지고 있다 
 %>
+
+<%--
+                 page                         Map
+    list.jsp  ==============> BoardManager  =========> BoardDAO ========> 오라클
+                request                    List<BoardVO> 
+                
+                   request
+    JSP(Servlet)  <========> Java
+                   request
+                   
+                                   메소드 호출(매개변수)
+    Java          <========> Java
+                                     리턴형
+ --%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -137,7 +137,29 @@ public class BoardManager {
 	   }catch(Exception ex) {}
    }
    
-   
+   // 삭제 하기 
+   public void boardDelete(HttpServletRequest request)
+   {
+	   // no,pwd을 받는다 
+	   String no=request.getParameter("no");
+	   String pwd=request.getParameter("pwd");
+	   // no,pwd => BoardDAO 전송 => 데이터베이스 처리  (board-mapper.xml(SQL) ==> BoardDAO에서 읽어서 처리)
+	   boolean bCheck=BoardDAO.boardDelete(Integer.parseInt(no), pwd);
+	   // BoardDAO에서 결과값을 받아서 
+	   // delete_ok.jsp로 전송 ==> 화면이동 
+	   request.setAttribute("bCheck", bCheck);// 자바코딩 안에서는 JavaScript를 코딩 할 수 없다 
+	   /*
+	    *   JavaScript => JSP,Servlet
+	    *   
+	    *   JSP ==> 데이터 전송 (자바는 받을 수 없다) => 메소드 (request)
+	    *   
+	    *   JSP <======> Java
+	    *       메소드 호출 
+	    *   =============================================웹 URL을 이용해서 데이터 전송
+	    *   JSP <=======> Servlet
+	    *        GET/POST  ==> URL Aaa?no=10
+	    */
+   }
 }
 
 

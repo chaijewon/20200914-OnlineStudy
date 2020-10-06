@@ -45,6 +45,9 @@
    )
   </insert>
   <!-- 수정하기 -->
+  <!-- 
+         resultType ==> String , string (대소문자 구분이 없다)
+   -->
   <select id="boardGetPassword" resultType="string" parameterType="int">
     SELECT pwd FROM freeboard
     WHERE no=#{no}
@@ -56,6 +59,12 @@
     content=#{content}
     WHERE no=#{no}
   </update>
+  
+  <!-- 삭제하기  -->
+  <delete id="boardDelete" parameterType="int">
+    DELETE FROM freeboard
+    WHERE no=#{no}
+  </delete>
 </mapper>
 
 
