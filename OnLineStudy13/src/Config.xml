@@ -58,6 +58,7 @@
            <property name="url" value="${url}"/>
            <property name="username" value="${username}"/>
            <property name="password" value="${password}"/>
+           <!-- Connection : 8개 -->
            <!-- 
                  public class PooledDataSource
                  {

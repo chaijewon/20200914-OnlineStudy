@@ -51,9 +51,51 @@
           <td class="text-center" width=10%>${vo.no }</td>
           <%--
                ${vo.no } => <%= vo.getNo()%>
+               EL / JSTL
+               
+               EL 
+               1) Scope => 어디에 저장된 데이터  254page
+                  = requestScope.키명
+                  = sessionScope.키명
+                  
+                  request.setAttribute("id","admin");
+                  => ${requestScope.id} ==> 생략 ${id}
+                       ============ 생략 
+                  sessionS.setAttribute("id","admin");
+                  => ${sessionScope.id}
+                      ============= request에 없는 키명이 있는 경우에는 생략 
+               2) 연산자 
+                                  산술연산자 ( + , - , * , /(div) , %(mod))
+                         => null+1 => null은 자동으로 0으로 변경된다
+                         => "10"+10 => 20
+                         => / => 실수
+		                   비교연산자 (문자열 비교가 가능하다)
+		                   ==(eq) : 문자열 비교시 
+		                   !=(ne) 
+		                   < (lt)
+		                   > (gt)
+		                   <= (le)
+		                   >= (ge)
+		                   논리연산자
+		                   && (and)
+		                   || (or)
+		                   !  (not)
+		                   문자열 결합 
+		                   += 
+		                   삼항연산자 
+		                           조건 ? 값:값
+		                           
+		       JSTL
+		         <c:set>
+		         <c:if>
+		         <c:forEach>
+		         <c:choose> <c:when> <c:otherwise>
+		         <c:redirect>
+		         <fmt:formatDate>
+		         <fmt:formatNumber>
            --%>
           <td class="text-left" width=45%>
-           ${vo.subject }
+           <a href="detail.jsp?no=${vo.no }">${vo.subject }</a>
            <c:if test="${today == vo.dbday}">
              <font color=red><sup>new</sup></font>    
            </c:if>

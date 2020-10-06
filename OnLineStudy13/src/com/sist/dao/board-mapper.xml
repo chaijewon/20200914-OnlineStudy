@@ -9,4 +9,29 @@
     FROM freeboard ORDER BY no DESC))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
+  <!-- 
+       JSP => 링크(요청) 
+       list.jsp   =====> BoardManager  <=====> DAO
+                                       SQL ==> DAO
+                                    =======   ====== BoardDAO  ==> detail.jsp
+                                    board-mapper.xml
+   -->
+  <!-- 상세보기 SQL문장을 받아서 처리 => DAO-->
+  <update id="hitIncrement" parameterType="int">
+    UPDATE freeboard SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+    SELECT no,name,subject,content,regdate,hit 
+    FROM freeboard
+    WHERE no=#{no}
+  </select>
 </mapper>
+
+
+
+
+
+
+

@@ -46,6 +46,19 @@ public class BoardManager {
 	    *   => 1번만 사용하는 것이 아니라 => 필요한 모든 데이터를 담을 수 있다 
 	    */
    }
+   // JSP에서 보낸 사용자 요청정보를 받아서 처리 => 결과값을 (request에 첨부해서 전송)
+   public void boardDetailData(HttpServletRequest request)
+   {
+	   // request => JSP에서 전송
+	   // 요청한 게시물을 찾는다  ==> no값
+	   // detail.jsp?no=10
+	   String no=request.getParameter("no");
+	   // 데이터 읽기 시작  (데이터베이스)
+	   BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no));
+	   // 결과값을 request에 담아서 => JSP로 전송 
+	   request.setAttribute("vo", vo);
+	   
+   }
 }
 
 
