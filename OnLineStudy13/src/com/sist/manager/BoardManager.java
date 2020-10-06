@@ -99,6 +99,43 @@ public class BoardManager {
 	   // vo ==> update.jsp로 전송 
 	   request.setAttribute("vo", vo);
    }
+   // 실제 수정하기 
+   public void boardUpdate(HttpServletRequest request)
+   {
+	   try
+	   {
+		   // 한글 변환 => 컴파일예외처리 
+		   request.setCharacterEncoding("UTF-8");
+		   // 사용자가 보내준 데이터 받기 
+		   String no=request.getParameter("no");
+		   String name=request.getParameter("name");
+		   String subject=request.getParameter("subject");
+		   String content=request.getParameter("content");
+		   String pwd=request.getParameter("pwd");
+		   // BoardVO에 묶어서 => BoardDAO로 전송 ==> 오라클에서 수정
+		   /*
+		    *    BoardManager : 사용자 요청을 받아서 처리 
+		    *    BoardDAO : 오라클 연결 => 오라클에서 기능 수행이 가능 
+		    *    BoardVO : 데이터를 묶어서 전송하는 역할
+		    *    ~.jsp : 결과값 출력만 하는 역할 
+		    */
+		   BoardVO vo=new BoardVO();
+		   vo.setName(name);
+		   vo.setSubject(subject);
+		   vo.setContent(content);
+		   vo.setPwd(pwd);
+		   vo.setNo(Integer.parseInt(no));
+		   // vo=>DAO로 전송 
+		   
+		   boolean bCheck=BoardDAO.boardUpdate(vo);
+		   
+		   // 결과값 => update_ok.jsp로 전송 
+		   request.setAttribute("bCheck", bCheck);// 처리(X) => javascript를 전송할 수 없다 
+		   // request를 통해서 보낼 수 있는 데이터 => Object 
+		   // Spring : RestController
+		   request.setAttribute("no", vo.getNo());
+	   }catch(Exception ex) {}
+   }
    
    
 }

@@ -198,6 +198,52 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
+   //수정 
+   /*
+    *   <select id="boardGetPassword" resultType="string" parameterType="int">
+		    SELECT pwd FROM freeboard
+		    WHERE no=#{no}
+		  </select>
+		  <update id="boardupdate" parameterType="BoardVO">
+		    UPDATE freeboard SET
+		    name=#{name},
+		    subject=#{subject},
+		    content=#{content}
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   // 비밀번호 검색 
+		   String db_pwd=session.selectOne("boardGetPassword", vo.getNo());
+		   if(db_pwd.equals(vo.getPwd()))// 본인여부 확인 => 수정
+		   {
+			   bCheck=true;
+			   // 실제 수정을 한다 
+			   session.update("boardupdate", vo);
+			   session.commit();
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return bCheck;
+   }
 }
 
 

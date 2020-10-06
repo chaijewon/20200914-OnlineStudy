@@ -44,6 +44,18 @@
      #{pwd}
    )
   </insert>
+  <!-- 수정하기 -->
+  <select id="boardGetPassword" resultType="string" parameterType="int">
+    SELECT pwd FROM freeboard
+    WHERE no=#{no}
+  </select>
+  <update id="boardupdate" parameterType="BoardVO">
+    UPDATE freeboard SET
+    name=#{name},
+    subject=#{subject},
+    content=#{content}
+    WHERE no=#{no}
+  </update>
 </mapper>
 
 
