@@ -88,6 +88,19 @@ public class BoardManager {
 		   response.sendRedirect("list.jsp");
 	   }catch(Exception ex){}
    }
+   // 모든 JSP에서 요청한 내용 ==> 처리해주는 장소
+   // 객체지향 프로그램 : 재사용 (기능별 분리 ===> 조립)
+   // 필수 (사이트) : 게시판 (CURD), 회원 , 공지사항 
+   public void boardUpdateData(HttpServletRequest request)
+   {
+	   // detail.jsp :  update.jsp?no=${vo.no }
+	   String no=request.getParameter("no");
+	   BoardVO vo=BoardDAO.boardUpdateData(Integer.parseInt(no));
+	   // vo ==> update.jsp로 전송 
+	   request.setAttribute("vo", vo);
+   }
+   
+   
 }
 
 

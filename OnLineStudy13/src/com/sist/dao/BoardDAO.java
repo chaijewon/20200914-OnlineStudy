@@ -176,6 +176,28 @@ public class BoardDAO {
 			   session.close();
 	   }
    }
+   // 수정할 데이터 읽기 
+   public static BoardVO boardUpdateData(int no)
+   {
+	   BoardVO vo=new BoardVO();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   vo=session.selectOne("boardDetailData", no);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();// 에러 
+	   }
+	   finally
+	   {
+		   // 반환 
+		   if(session!=null)
+			   session.close();
+	   }
+	   return vo;
+   }
 }
 
 
