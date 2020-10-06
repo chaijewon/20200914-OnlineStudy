@@ -3,7 +3,7 @@
 <mapper namespace="com.sist.dao.board-mapper">
   <!-- SQL문장 전송 : SQL문장을 저장  -->
   <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
-    SELECT no,subject,name,regdate,hit,num 
+    SELECT no,subject,name,regdate,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num 
     FROM (SELECT no,subject,name,regdate,hit,rownum as num 
     FROM (SELECT no,subject,name,regdate,hit 
     FROM freeboard ORDER BY no DESC))

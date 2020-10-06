@@ -1,4 +1,5 @@
 package com.sist.manager;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,14 @@ public class BoardManager {
 	   // 데이터 공유 => session에 저장 
 	   // 한개의 JSP에서만 사용 => request에 저장 
 	   // Front-End (React=>Redux, Vue => Vuex) => Flux
+	   Date date=new Date();
+	   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	   String today=sdf.format(date);
+	   request.setAttribute("today", today);
+	   /*
+	    *   request.setAttribute() => JSP출력할 내용을 request에 담아서 전송 
+	    *   => 1번만 사용하는 것이 아니라 => 필요한 모든 데이터를 담을 수 있다 
+	    */
    }
 }
 
