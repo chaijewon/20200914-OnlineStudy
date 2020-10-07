@@ -14,5 +14,26 @@
   </select>
   <!-- 검색 -->
   <!-- chef목록 출력 -->
+  <select id="chefListData" resultType="ChefVO" parameterType="hashmap">
+    SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7,num
+    FROM (SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7,rownum as num 
+    FROM (SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7 
+    FROM chef ORDER BY chef DESC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- chef 총페이지 -->
+  <select id="chefTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/50.0) FROM chef
+  </select>
+  
   <!-- chef => 레시피찾기 -->
 </mapper>
+
+
+
+
+
+
+
+
+

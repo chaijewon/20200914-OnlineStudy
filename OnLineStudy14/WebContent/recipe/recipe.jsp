@@ -42,6 +42,13 @@ h1 {
 		   </div>
 		 </c:forEach>
     </div>
+    <div class="row">
+      <div class="text-right">
+        <a href="recipe.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-info">이전</a>
+          ${curpage } page / ${totalpage } pages
+        <a href="recipe.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-success">다음</a>
+      </div>
+    </div>
    </div>
 </body>
 </html>

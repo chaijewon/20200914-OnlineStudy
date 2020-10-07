@@ -66,6 +66,48 @@ public class RecipeDAO {
 	   return total;
    }
    // 2. chef 목록
+   public static List<ChefVO> chefListData(Map map)
+   {
+	   List<ChefVO> list=new ArrayList<ChefVO>();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   // 데이터 처리
+		   list=session.selectList("chefListData",map);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
+   }
+   // 총페이지 구하기 
+   public static int chefTotalPage()
+   {
+	   int total=0;
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   total=session.selectOne("chefTotalPage");
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return total;
+   }
    // 3. chef => 레시피 
    // 4. 검색
 }
