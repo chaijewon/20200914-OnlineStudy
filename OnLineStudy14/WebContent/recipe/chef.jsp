@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.sist.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="model" class="com.sist.model.RecipeModel"/>
 <%
     model.chefListData(request);
@@ -35,7 +36,9 @@ h1 {
                   <td width=35% rowspan="2" class="text-center">
                     <img src="${vo.poster }" class="img-circle" width=60 height=60>
                   </td>
-                  <td colspan="4" style="font-size:13pt;color:#FC6"><b>${vo.chef }</b></td>
+                  <td colspan="4" style="font-size:13pt;color:#FC6"><b>
+                   <a href="chef_detail.jsp?chef_name=${vo.chef }">${vo.chef }</a>
+                  </b></td>
                 </tr>
                 <tr>
                   <td class="text-center">${vo.mem_cont1 }</td>
@@ -48,6 +51,13 @@ h1 {
            </td>
          </tr>
        </table>
+     </div>
+     <div class="row">
+       <div class="text-center">
+         <a href="chef.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-primary">이전</a>
+           ${curpage } page / ${totalpage } pages
+         <a href="chef.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-danger">다음</a>
+       </div>
      </div>
    </div>
 </body>

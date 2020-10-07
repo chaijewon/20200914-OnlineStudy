@@ -18,7 +18,7 @@
     SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7,num
     FROM (SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7,rownum as num 
     FROM (SELECT chef,poster,mem_cont1,mem_cont2,mem_cont3,mem_cont7 
-    FROM chef ORDER BY chef DESC))
+    FROM chef))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
   <!-- chef 총페이지 -->
@@ -26,7 +26,12 @@
    SELECT CEIL(COUNT(*)/50.0) FROM chef
   </select>
   
-  <!-- chef => 레시피찾기 -->
+  <!-- chef => 레시피찾기 --> 
+  <select id="chefRecipeData" resultType="RecipeVO" parameterType="string">
+    SELECT no,title,poster,chef,rownum
+    FROM recipe
+    WHERE chef=#{chef} AND rownum&lt;=32
+  </select>
 </mapper>
 
 

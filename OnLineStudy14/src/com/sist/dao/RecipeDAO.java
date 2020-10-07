@@ -109,6 +109,34 @@ public class RecipeDAO {
 	   return total;
    }
    // 3. chef => 레시피 
+   /*
+    *   <select id="chefRecipeData" resultType="RecipeVO" parameterType="string">
+		    SELECT no,title,poster,chef 
+		    FROM recipe
+		    WHERE chef=#{chef}
+		  </select>
+    */
+   public static List<RecipeVO> chefRecipeData(String chef)
+   {
+	   List<RecipeVO> list=new ArrayList<RecipeVO>();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   // 데이터 처리
+		   list=session.selectList("chefRecipeData",chef);
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
+   }
    // 4. 검색
 }
 

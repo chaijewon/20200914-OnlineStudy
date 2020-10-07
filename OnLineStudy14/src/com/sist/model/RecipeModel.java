@@ -70,6 +70,15 @@ public class RecipeModel {
     	request.setAttribute("totalpage", totalpage);// 총페이지
     	
     }
+    // chef => 레시피 목록 출력 
+    public void chefRecipeData(HttpServletRequest request)
+    {
+    	// 사용자 요청한 => chef명을 읽어 온다 
+    	String chef_name=request.getParameter("chef_name");
+    	List<RecipeVO> list=RecipeDAO.chefRecipeData(chef_name);
+    	// JSP로 전송 => list에 있는 내용만 출력 
+    	request.setAttribute("list", list);
+    }
 }
 
 
