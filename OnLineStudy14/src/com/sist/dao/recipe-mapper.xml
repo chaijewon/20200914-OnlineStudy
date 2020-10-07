@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.recipe-mapper">
+  <!-- 레시피 페이지를 나눠서 처리 : 인라인뷰 -->
+  <select id="recipeListData" resultType="RecipeVO" parameterType="hashmap">
+    SELECT no,title,chef,poster,num
+    FROM (SELECT no,title,chef,poster,rownum as num 
+    FROM (SELECT no,title,chef,poster 
+    FROM recipe ORDER BY no ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="recipeTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/20.0) FROM recipe
+  </select>
+  <!-- 검색 -->
+  <!-- chef목록 출력 -->
+  <!-- chef => 레시피찾기 -->
+</mapper>
