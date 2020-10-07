@@ -21,6 +21,15 @@ public class ChefVO {
     private String mem_cont2;
     private String mem_cont3;
     private String mem_cont7;
+    private int recipeCount;
+    
+    
+	public int getRecipeCount() {
+		return recipeCount;
+	}
+	public void setRecipeCount(int recipeCount) {
+		this.recipeCount = recipeCount;
+	}
 	public String getPoster() {
 		return poster;
 	}

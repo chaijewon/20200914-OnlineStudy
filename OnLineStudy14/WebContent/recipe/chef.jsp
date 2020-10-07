@@ -21,9 +21,33 @@ h1 {
      text-align: center;
 }
 </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['쉐프명', '레시피'],
+          <c:forEach var="vo" items="${cList}">
+            ['<c:out value="${vo.chef}"/>',    <c:out value="${vo.recipeCount}"/>],
+          </c:forEach>
+        ]);
+
+        var options = {
+          title: '쉐프 순위',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body>
    <div class="container">
+     <div class="row">
+       <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+     </div>
      <div class="row">
        <h1>Chef 목록</h1>
        <%-- 목록 출력 --%>

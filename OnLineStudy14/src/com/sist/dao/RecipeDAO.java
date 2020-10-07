@@ -137,6 +137,39 @@ public class RecipeDAO {
 	   }
 	   return list;
    }
+   /*
+    *   <select id="chefRecipeCount" resultType="ChefVO">
+		    SELECT chef,mem_cont1,rownum
+		    FROM chef
+		    WHERE rownum&lt;=10
+		  </select>
+    */
+   public static List<ChefVO> chefRecipeCount()
+   {
+	   List<ChefVO> list=new ArrayList<ChefVO>();
+	   SqlSession session=null;
+	   try
+	   {
+		   // 연결
+		   session=ssf.openSession();
+		   // 데이터 처리
+		   list=session.selectList("chefRecipeCount");
+		   for(ChefVO vo:list)
+		   {
+			   String s=vo.getMem_cont1().replace(",", "");
+			   vo.setRecipeCount(Integer.parseInt(s));
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   if(session!=null)
+			   session.close();
+	   }
+	   return list;
+   }
    // 4. 검색
 }
 

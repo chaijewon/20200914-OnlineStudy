@@ -32,6 +32,12 @@
     FROM recipe
     WHERE chef=#{chef} AND rownum&lt;=32
   </select>
+  
+  <select id="chefRecipeCount" resultType="ChefVO">
+    SELECT chef,mem_cont1,rownum
+    FROM chef
+    WHERE rownum&lt;=10
+  </select>
 </mapper>
 
 

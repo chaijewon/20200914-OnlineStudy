@@ -69,6 +69,10 @@ public class RecipeModel {
     	request.setAttribute("curpage", curpage);// 현재 페이지
     	request.setAttribute("totalpage", totalpage);// 총페이지
     	
+    	List<ChefVO> cList=RecipeDAO.chefRecipeCount();
+    	request.setAttribute("cList", cList);
+    	
+    	
     }
     // chef => 레시피 목록 출력 
     public void chefRecipeData(HttpServletRequest request)

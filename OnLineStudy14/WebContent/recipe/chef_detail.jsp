@@ -32,6 +32,9 @@ h1 {
 		        <div class="caption">
 		          <p>${fn:length(vo.title)>20?fn:substring(vo.title,0,20)+="...":vo.title }</p>
 		          <p>${vo.chef }</p>
+		          <%--
+		               ${fn:메소드() fn:메소드}
+		           --%>
 		        </div>
 		    </div>
 		   </div>
