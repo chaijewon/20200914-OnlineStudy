@@ -89,7 +89,7 @@
         </ul>
       </li>
       <%
-       if(id!=null)
+       if(id!=null) // ${id!=null and admin=='n'}
         {
       %>
          <li><a href="#">영화예매</a></li>

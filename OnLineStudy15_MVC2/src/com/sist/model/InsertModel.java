@@ -7,7 +7,8 @@ public class InsertModel implements Model {
 	@Override
 	public String execute(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		return null;
+		request.setAttribute("msg", "글쓰기");
+		return "board/insert.jsp";
 	}
 
 }
