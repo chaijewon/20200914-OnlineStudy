@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>OnLineStudy15_MVC</display-name>
+  <!-- 
+        톰캣 
+         1. 서블릿 구동 
+         2. 에러처리 
+         
+         
+         URL 
+         1) 사용자 요청 
+         2) Controller가 사용자 요청을 받는다
+         3) Controller가 요청을 처리하기 위해서 Model을 찾는다 
+                                        ====== 요청처리 기능 
+         4) Model에서 요청처리 결과값을 Controller가 받아서 
+         5) Controller 결과값을 request/session에 담아준다 
+         6) request => 해당 JSP로 전송 
+         7) JSP가 구동과 동시에 실행된 HTML을 JSP로 전송 
+         
+         MVC에서 Controller 찾기  ==> .do
+         MVC구조에서는 URL주소가 반드시 .do로 끝난다
+         ==> list.jsp ==> list.do
+             find.jsp ==> find.do
+             detail.jsp ==> detail.do
+   -->
+  <servlet>
+    <servlet-name>mvc</servlet-name>
+    <servlet-class>com.sist.controller.Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>mvc</servlet-name>
+     <url-pattern>/Controller</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
