@@ -2,6 +2,7 @@ package com.sist.contoller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +45,18 @@ public class Controller extends HttpServlet {
 		String cmd=request.getRequestURI();///OnLineStudy15_MVC/(list).do 
 		// URI ==> /OnLineStudy15_MVC/list.do(?page=2)=> request에 따로 설정
 		System.out.println(cmd);
+		cmd=cmd.substring(request.getContextPath().length()+1,cmd.lastIndexOf("."));
+		// request.getContextPath()+1:/OnLineStudy15_MVC/
+		// 사용자가 요청한 요청내용 확인
+		
+		// 클래스를 찾기 시작 
+		Model model=(Model)clsMap.get(cmd);
+		// 요청처리 ==> 메소드
+		String jsp=model.handlerRequest(request);
+		// 결과값을 받은 request ==> jsp로 전송 
+		RequestDispatcher rd=request.getRequestDispatcher(jsp);
+		rd.forward(request, response);
+		// 18장에 나오는 코드 
 	}
 	@Override
 	public void init(ServletConfig config) throws ServletException {
