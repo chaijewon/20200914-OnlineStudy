@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.board-mapper">
+  <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,subject,name,regdate,hit,num
+   FROM (SELECT no,subject,name,regdate,hit,rownum as num
+   FROM (SELECT no,subject,name,regdate,hit 
+   FROM freeboard ORDER BY no DESC))
+   WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="boardTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/10.0) FROM freeboard
+  </select>
+</mapper>
