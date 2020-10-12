@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- applicationContext.xml
+     사용자 요청 => list.do 
+           => ListModel클래스를 찾을 수 있게 만든다 (매칭)
+           
+   Model클래스 등록 => Controller가 찾아서 요청 처리가 가능하게 만드는 파일
+ -->
+<beans><!-- 스프링 Bean(Model클래스) -->
+  <bean id="list.do" class="com.sist.model.ListModel"/>
+  <bean id="detail.do" class="com.sist.model.DetailModel"/>
+  <bean id="insert.do" class="com.sist.model.InsertModel"/>
+  <!-- 
+         map.put("list",new ListModel())
+   -->
+</beans>
