@@ -26,7 +26,7 @@
      <table class="table">
        <tr>
          <td>
-           <a href="insert.jsp" class="btn btn-sm btn-primary">새글</a>
+           <a href="insert.do" class="btn btn-sm btn-primary">새글</a>
          </td>
        </tr>
      </table>
@@ -87,7 +87,7 @@
 		         <fmt:formatNumber>
            --%>
           <td class="text-left" width=45%>
-           <a href="detail.jsp?no=${vo.no }">${vo.subject }</a>
+           <a href="detail.do?no=${vo.no }">${vo.subject }</a>
            <%-- <c:if test="${today == vo.dbday}">
              <font color=red><sup>new</sup></font>    
            </c:if> --%>
@@ -118,9 +118,9 @@
       <table class="table table-striped">
         <tr>
           <td class="text-right">
-            <a href="list.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
+            <a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
               ${curpage } page / ${totalpage } pages
-            <a href="list.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
+            <a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
           </td>
         </tr>
       </table>

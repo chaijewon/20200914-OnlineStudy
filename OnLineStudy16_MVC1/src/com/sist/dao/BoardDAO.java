@@ -56,6 +56,46 @@ public class BoardDAO {
 		session.close();
 		return total;
 	}
+	/*
+	 *   <update id="hitIncrement" parameterType="int">
+		     UPDATE freeboard SET
+		     hit=hit+1
+		     WHERE no=#{no}
+		   </update>
+		   <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+		     <!-- public BoardVO boardDetailData(int no) -->
+		     SELECT no,name,subject,content,regdate,hit
+		     FROM freeboard
+		     WHERE no=#{no}
+		   </select>
+	 */
+	/*
+	 *   CURD 
+	 *     <select>
+	 *       SQL => 1개만 사용 (select문장)
+	 *     </select>
+	 *     <insert>
+	 *       1개 (insert)
+	 *     </insert>
+	 *     <update>
+	 *     </update>
+	 *     <delete>
+	 *     </delete>
+	 *     
+	 *     단 => 구현한 메소드는 여러개를 동시에 읽어서 처리 
+	 */
+	public static BoardVO boardDetailData(int no)
+	{
+		SqlSession session=ssf.openSession();
+		// 조회수 증가
+		session.update("hitIncrement", no);
+		session.commit();// 정상적으로 저장 
+		// 데이터 읽기
+		BoardVO vo=session.selectOne("boardDetailData", no);
+		// 반환
+		session.close();
+		return vo;
+	}
 }
 
 

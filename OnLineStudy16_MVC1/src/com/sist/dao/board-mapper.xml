@@ -11,4 +11,30 @@
   <select id="boardTotalPage" resultType="int">
    SELECT CEIL(COUNT(*)/10.0) FROM freeboard
   </select>
+  <!-- 상세보기 : 조회수 증가 , 게시물 1개를 읽어 온다(VO)
+       mybatis에서 태그에 SQL문장은 1번만 사용이 가능 
+    -->
+   <!-- 조회수 증가 -->
+   <!-- 
+         resultType (X) ==> void
+         parameterType(매개변수) ==> (int no)
+    -->
+   <update id="hitIncrement" parameterType="int">
+     UPDATE freeboard SET
+     hit=hit+1
+     WHERE no=#{no}
+   </update>
+   <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+     <!-- public BoardVO boardDetailData(int no) -->
+     SELECT no,name,subject,content,regdate,hit
+     FROM freeboard
+     WHERE no=#{no}
+   </select>
 </mapper>
+
+
+
+
+
+
+
