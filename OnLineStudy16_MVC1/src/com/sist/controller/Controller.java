@@ -116,8 +116,27 @@ public class Controller extends HttpServlet {
 		// 4. JSP를 찾는다 
 		// 5. JSP로 request를 전송한다
 		// request를 해당 JSP로 전송하는 클래스 => RequestDispatcher
-		RequestDispatcher rd=request.getRequestDispatcher(jsp);
-		rd.forward(request, response);
+		/*
+		 *      Model 
+		 *      
+		 *      ==> return "board/list.jsp"
+		 *      ==> return "redirect:list.do" => Spring
+		 *      
+		 *      insert_ok.jsp ==> list.jsp
+		 *      update_ok.jsp
+		 */
+		if(jsp.startsWith("redirect"))
+		{
+			response.sendRedirect(jsp.substring(jsp.indexOf(":")+1));
+			// 화면 이동 ==> sendRedirect() => request가 초기화 
+		}
+		else
+		{
+			RequestDispatcher rd=request.getRequestDispatcher(jsp);
+			rd.forward(request, response);
+			// 화면 이동 ==> forward  ===> request를 전송 => jsp에서 request에 담은 데이터를 받아서 출력 
+		}
+		
 	}
     
 }

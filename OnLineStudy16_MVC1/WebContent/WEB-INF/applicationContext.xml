@@ -9,6 +9,7 @@
   <bean id="list.do" class="com.sist.model.ListModel"/>
   <bean id="detail.do" class="com.sist.model.DetailModel"/>
   <bean id="insert.do" class="com.sist.model.InsertModel"/>
+  <bean id="insert_ok.do" class="com.sist.model.InsertOkModel"/>
   <!-- 
          map.put("list",new ListModel())
    -->

@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%
        response.sendRedirect("list.do");
-       // JavaScript : location.href="list.do"
+       // JavaScript : location.href="list.do"   
 %>
