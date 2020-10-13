@@ -19,13 +19,15 @@ public class ReserveModel {
      {
     	 // 값전송(jsp) ==> request에 담아준다 
     	 request.setAttribute("msg", "예매=>영화정보");
-    	 return "../reserve/movie.jsp";
+    	 request.setAttribute("main_jsp", "../reserve/movie.jsp");
+   	     return "../main/main.jsp";// request를 전송할 jsp파일명 
      }
 	 @RequestMapping("reserve/theater.do")
      public String theaterList(HttpServletRequest request)
      {
     	 request.setAttribute("msg", "예매=>극장정보");
-    	 return "../reserve/theater.jsp";
+    	 request.setAttribute("main_jsp", "../reserve/theater.jsp");
+   	     return "../main/main.jsp";// request를 전송할 jsp파일명 
      }
 }
 
