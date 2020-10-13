@@ -8,6 +8,7 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>
         <!-- 설정된 XML파일의 경로 -->
+        C:\Users\채제분\git\online\OnLineStudy17_MVC2\WebContent\WEB-INF\application-context.xml
       </param-value>
     </init-param>
   </servlet>

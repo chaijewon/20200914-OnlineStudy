@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  application-context.xml
+      1. 프로그래머가 만든 클래스를 등록 파일 
+      2. 클래스 => 패키지 등록 
+ -->
+ <beans>
+   <bean class="com.sist.model.MainModel"/>
+   <bean class="com.sist.model.MovieModel"/>
+ </beans>
