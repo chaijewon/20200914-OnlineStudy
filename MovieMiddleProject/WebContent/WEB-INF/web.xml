@@ -6,11 +6,11 @@
     <servlet-class>com.sist.controller.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>C:\webDev\webStudy\MovieMiddleProject\WebContent\WEB-INF\app.xml</param-value>
+      <param-value>C:\Users\채제분\git\online\MovieMiddleProject\WebContent\WEB-INF\app.xml</param-value>
     </init-param>
     <init-param>
       <param-name>path</param-name>
-      <param-value>C:\webDev\webStudy\MovieMiddleProject\src</param-value>
+      <param-value>C:\Users\채제분\git\online\MovieMiddleProject\src</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
