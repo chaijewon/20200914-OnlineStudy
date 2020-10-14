@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 오라클을 연결하기 위한 환경설정 : 한개만 사용  -->
+  <!-- properties 파일 읽기 -->
+  <!-- MyBatis,Spring : 기본 디폴트 폴더가 src -->
+  <properties resource="db.properties"/>
+  <typeAliases>
+    <!-- VO를 등록 -->
+    <typeAlias type="com.sist.vo.MovieVO" alias="MovieVO"/>
+    <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
+    <!-- 
+                      오라클에서 가지고 오는 데이터를 받아서 저장 
+            while(rs.next())
+            {
+                DataBoardVO vo=new DataBoardVO(); // 셋팅
+                vo.setNo(rs.getInt(1));
+                ==
+                ==
+                ==
+            }
+     -->
+  </typeAliases>
+  <!-- 오라클 연결하는 부분 : getConnection() -->
+  <environments default="development"><!-- 개발 환경을 만든다 -->
+    <environment id="development">
+      <!-- Commit,Rollback => Transection -->
+      <!-- 
+                    트랜잭션 처리 방법
+                    자동처리 : 일반적으로 많이 사용 => JDBC
+                    수동처리 : 프로그래머가 처리 => MANAGED
+                    
+           COMMIT : 정상처리 => 저장을 요청
+           ROLLABCK : SQL문장이 틀렸다 => 실행하지 않는다 : UNDO (ctrl+z)
+       -->
+       <transactionManager type="JDBC"/>
+      <!-- 오라클 정보를 모아서 MyBatis 라이브러리에 전송 : DataSource -->
+       <dataSource type="POOLED">
+          <!-- 
+               UNPOOLED : 요청(SQL문장 실행)할때 오라클 연결 , 결과값을 가지고 오면 오라클 연결 해제
+                          => 연결하는 시간이 많이 소모(연결이 지연될 수 도 있다)
+               POOLED : DBCP (미리 Connection을 연결하고 요청시마다 연결된 Connection을 넘겨준다
+                              사용후에는 반환=> 다시 재사용이 가능)
+                          => 연결하는 소모되지 않는다 
+                          => Connection의 생성 갯수를 제어 할 수 있다
+                          => 일반적으로 웹프로그램에서는 기본으로 사용
+           -->
+           <!-- 오라클 연결을 위한 기본정보를 마이바티스로 전송 -->
+           <!-- 
+                    db.properties
+                    driver=oracle.jdbc.driver.OracleDriver
+					url=jdbc:oracle:thin:@211.238.142.181:1521:XE
+					username=hr
+					password=happy
+            -->
+           <property name="driver" value="${driver}"/>
+           <property name="url" value="${url}"/>
+           <property name="username" value="${username}"/>
+           <property name="password" value="${password}"/>
+           <!-- Connection : 8개 -->
+           <!-- 
+                 public class PooledDataSource
+                 {
+                     private String driver;
+                     private String url;
+                     private String username;
+                     private String password;
+                 }
+                 
+                 public class MyBatisDAO
+                 {
+                      private DataSource dataSource;
+                      public MyBatisDAO()
+                      {
+                          Class.forName(dataSource.getDriver()); ==> 필요한 데이터 => XML로 설정 
+                      }
+                      public void getConnection()
+                      {
+                         conn=DriverManager.getConnection(dataSource.getUrl(),
+                             dataSource.getUsername(),dataSource.getPassword())
+                      }
+                 }
+            -->
+       </dataSource>
+    </environment>
+  </environments>
+  <!-- SQL문장을 전송 : SQL문장 어디 있는지 확인 : mapper를 등록  -->
+  <!-- XML은 문서 저장 : 저장내용이 많아지면 파싱(XML저장되어 있는 데이터를 읽어 간다) 속도가 저하된다:분산  -->
+  <!-- XML만 가지고 코딩하는 프레임워크 : XML이 길어진다=>속도의 문제 (스트럿츠) : 스프링 -->
+  <!-- 
+      MyBatis => XML없이도 사용이 가능 
+                ===== Annotation  @
+   -->
+  <mappers>
+    <mapper resource="com/sist/mapper/movie-mapper.xml"/>
+    <mapper resource="com/sist/mapper/emp-mapper.xml"/>
+  </mappers>
+</configuration>
+
+
+
+
+

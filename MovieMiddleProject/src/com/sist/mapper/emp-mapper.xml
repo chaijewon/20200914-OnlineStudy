@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.emp-mapper">
+  <!-- 
+        property="empno"  ==> 무조건 setEmpno()
+        {} => get메소드  {empno} => getEmpno()
+   -->
+  <resultMap type="EmpVO" id="empList">
+    <result property="empno" column="empno"/>
+    <!-- 
+          vo.setEmpno(rs.getInt("empno"))
+     -->
+    <result property="ename" column="ename"/>
+    <result property="job" column="job"/>
+    <result property="hiredate" column="hiredate"/>
+    <result property="sal" column="sal"/>
+    <result property="dvo.dname" column="dname"/>
+    <!-- getDvo().setDname(rs.getString("dname")) -->
+    <result property="dvo.loc" column="loc"/>
+  </resultMap>
+  <select id="empDetpJoinData" resultMap="empList">
+   <!-- 
+        SELECT empno,ename,job,hiredate,sal,dname,loc
+              =======
+              setEmpno("empno")
+              setJob...
+              setDname(rs.getString("dname")) ==> EmpVO vo.getDvo().setDname()
+    -->
+   SELECT empno,ename,job,hiredate,sal,dname,loc
+   FROM emp,dept
+   WHERE emp.deptno=dept.deptno
+  </select>
+</mapper>

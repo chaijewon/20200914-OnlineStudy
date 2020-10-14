@@ -1,0 +1,11 @@
+package com.sist.vo;
+/*
+ * TITLE   NOT NULL VARCHAR2(1000) 
+	POSTER  NOT NULL VARCHAR2(1000) 
+	LINK    NOT NULL VARCHAR2(1000) 
+	CONTENT NOT NULL CLOB           
+	AUTHOR  NOT NULL VARCHAR2(1000)
+ */
+public class NewsVO {
+
+}
