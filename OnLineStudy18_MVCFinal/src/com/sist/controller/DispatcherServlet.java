@@ -40,11 +40,48 @@ import javax.servlet.http.HttpServletResponse;
  *                 ====================
  *                 조건문 , Annotataion (자유롭다:메소드명을 통일하지 않는다) 
  */
+import java.util.*;
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
+// C:\\Users\\채제분\\git\\online\\OnLineStudy18_MVCFinal\\src
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     // Model를 저장 => 사용자 요청 => 찾아주는 역할 
+	// Model class를 모아서 메모리 할당 => 찾기 
+	List<String> clsList=new ArrayList<String>();
 	public void init(ServletConfig config) throws ServletException {
-		
+		String xmlPath=config.getInitParameter("contextConfigLocation");
+		String path=config.getInitParameter("path");
+		System.out.println("xml-path:"+xmlPath);
+		System.out.println("path:"+path);
+		try
+		{
+			DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+			DocumentBuilder db=dbf.newDocumentBuilder();// 파서기 생성
+			Document doc=db.parse(new File(xmlPath));
+			// 루트 태그
+			Element root=doc.getDocumentElement();
+			// 회원가입 , 로그인(세션) => 상세 => 쿠키 => 찜하기 , 예매처리 
+			NodeList list=root.getElementsByTagName("component-scan");
+			ComponentScan com=new ComponentScan();
+			for(int i=0;i<list.getLength();i++)
+			{
+				Element cs=(Element)list.item(i);
+				String pack=cs.getAttribute("base-package");
+				List<String> cList=com.fileConfig(pack, path);
+				for(String s:cList)
+				{
+					System.out.println(s);
+					clsList.add(s);
+				}
+			}
+			
+		}catch(Exception ex) {}
+		System.out.println("DispatcherServlet");
+		for(String s:clsList)
+		{
+			System.out.println(s);
+		}
 	}
     // 요청 결과값 ==> 해당 JSP로 전송 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
