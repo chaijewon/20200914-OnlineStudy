@@ -21,6 +21,8 @@ public class ComponentScan {
     			{
     				String s=pack+"."+name.substring(0,name.lastIndexOf("."));
     				//System.out.println(s);
+    				System.out.println("====="+pack+"=====");
+    				System.out.println(s);
     				list.add(s);
     			}
     		}

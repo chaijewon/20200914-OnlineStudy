@@ -1,6 +1,9 @@
 package com.sist.controller;
 
 import java.io.*;
+import java.lang.reflect.Method;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -85,7 +88,70 @@ public class DispatcherServlet extends HttpServlet {
 	}
     // 요청 결과값 ==> 해당 JSP로 전송 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 메소드 찾아서 수행 => 결과값을 JSP로 전송
+		// 사용자가 요청한 내용을 받는다 
+		// http://localhost
+		String cmd=request.getRequestURI();
+		// main/main.do
+		cmd=cmd.substring(request.getContextPath().length()+1);
+		///OnLineStudy18_MVCFinal/
+		try
+		{
+			// 메모리 할당  (Model클래스 메모리 할당) => clsList
+			// new MainModel() ==> Controller (한개) ==> 공유 (수정을 하면 => 유지보수가 어렵다) => 고정
+			// XML => C/Java/C#/JavaScript
+			for(String cls:clsList)
+			{
+				Class clsName=Class.forName(cls);
+				Object obj=clsName.newInstance();
+				// MainModel m=new MainModel();
+				/*
+				 *     class A
+				 *     class B
+				 *     
+				 *     //A a=new A();
+				 *    // a=new B();
+				 *    Object obj=new A();
+				 *    obj=new B();
+				 */
+				// 메소드를 찾아서 호출 (invoke())
+				Method[] methods=clsName.getDeclaredMethods();
+				// 클래스에 선언된 모든 메소드를 가지고 온다 
+				for(Method m:methods)
+				{
+					RequestMapping rm=m.getAnnotation(RequestMapping.class);
+					if(cmd.equals(rm.value()))
+					{
+						 String jsp=(String)m.invoke(obj, request);
+								// a.display()
+						if(jsp.equals("redirect"))
+						{
+							response.sendRedirect(jsp.substring(jsp.indexOf(":")+1));
+							// return redirect:list.do
+							// return "../main/main.jsp"
+						}
+						else
+						{
+							// request전송 
+							RequestDispatcher rd=request.getRequestDispatcher(jsp);
+							rd.forward(request, response);
+						}
+						return;// 종료 (response=>사용자에게 데이터 전송시 한번만 수행)
+						
+					}
+				}
+			}
+			
+		}catch(Exception ex) 
+		{
+			ex.printStackTrace();
+		}
 		
 	}
 
 }
+
+
+
+
+
