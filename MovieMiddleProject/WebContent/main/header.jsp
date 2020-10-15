@@ -38,7 +38,7 @@
 	        </ul>
 	      </li>
         <li><a href="#">영화예매</a></li>
-        <li><a href="#">영화뉴스</a></li>
+        <li><a href="../movie/news.do">영화뉴스</a></li>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티
 	        <span class="caret"></span></a>

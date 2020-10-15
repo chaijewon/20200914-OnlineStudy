@@ -120,6 +120,9 @@ public class MovieModel {
 	   int rowSize=20;
 	   int start=(rowSize*curpage)-(rowSize-1);
 	   int end=rowSize*curpage;
+	   
+	   map.put("start",start);
+	   map.put("end", end);
 	   List<NewsVO> nList=MovieDAO.movieNewsData(map);
 	   // 총페이지 
 	   int totalpage=MovieDAO.newsTotalPage();
