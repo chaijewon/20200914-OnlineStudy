@@ -200,7 +200,7 @@
 <%-- header가 들어가는 위치 --%>
 <jsp:include page="../main/header.jsp"></jsp:include>
 
-<div class="container">
+<div class="container-fluid">
   <!-- 화면 변경이 되는 부분 -->
   <jsp:include page="${main_jsp }"></jsp:include>
 </div>

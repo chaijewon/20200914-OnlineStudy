@@ -15,10 +15,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">SIST Movie</a>
+      <a class="navbar-brand" href="../main/main.do">SIST Movie</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="../main/main.do">Home</a></li>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">회원관리
 	        <span class="caret"></span></a>
@@ -37,7 +38,7 @@
 	          <li><a href="../movie/box.do?cateno=3">박스오피스</a></li>
 	        </ul>
 	      </li>
-        <li><a href="#">영화예매</a></li>
+        <li><a href="../reserve/reserve.do">영화예매</a></li>
         <li><a href="../movie/news.do">영화뉴스</a></li>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티
