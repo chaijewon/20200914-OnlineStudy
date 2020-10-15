@@ -109,4 +109,33 @@ public class MovieModel {
 	   request.setAttribute("main_jsp", "../movie/box.jsp");
 	   return "../main/main.jsp";
    }
+   @RequestMapping("movie/news.do")
+   public String movie_news(HttpServletRequest request)
+   {
+	   String page=request.getParameter("page");
+	   if(page==null)
+		   page="1";
+	   int curpage=Integer.parseInt(page);
+	   Map map=new HashMap();
+	   int rowSize=20;
+	   int start=(rowSize*curpage)-(rowSize-1);
+	   int end=rowSize*curpage;
+	   List<NewsVO> nList=MovieDAO.movieNewsData(map);
+	   // 총페이지 
+	   int totalpage=MovieDAO.newsTotalPage();
+	   
+	   request.setAttribute("curpage", curpage);
+	   request.setAttribute("totalpage", totalpage);
+	   request.setAttribute("nList", nList);
+	   // include => news.jsp
+	   request.setAttribute("main_jsp", "../movie/news.jsp");
+	   return "../main/main.jsp";
+   }
 }
+
+
+
+
+
+
+

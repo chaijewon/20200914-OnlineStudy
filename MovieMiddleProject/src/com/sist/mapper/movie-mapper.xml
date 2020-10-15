@@ -51,6 +51,10 @@
     FROM daum_news))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
+  
+  <select id="newsTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/20.0) FROM daum_news
+  </select>
 </mapper>
 
 
