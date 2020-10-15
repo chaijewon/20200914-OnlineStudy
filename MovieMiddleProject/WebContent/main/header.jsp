@@ -32,9 +32,9 @@
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">영화
 	        <span class="caret"></span></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="../movie/real.do">현재상영영화</a></li>
-	          <li><a href="../movie/sch.do">개봉예정영화</a></li>
-	          <li><a href="../movie/box.do">박스오피스</a></li>
+	          <li><a href="../movie/real.do?cateno=1">현재상영영화</a></li>
+	          <li><a href="../movie/sch.do?cateno=2">개봉예정영화</a></li>
+	          <li><a href="../movie/box.do?cateno=3">박스오피스</a></li>
 	        </ul>
 	      </li>
         <li><a href="#">영화예매</a></li>
