@@ -134,10 +134,28 @@ public class Controller extends HttpServlet {
 		{
 			RequestDispatcher rd=request.getRequestDispatcher(jsp);
 			rd.forward(request, response);
+			// request를 공유 ==> 화면의 HTML만 변경
 			// 화면 이동 ==> forward  ===> request를 전송 => jsp에서 request에 담은 데이터를 받아서 출력 
 		}
 		
 	}
+	/*
+	 *   1. 화면 변경 
+	 *      1) request를 초기화 => URL변경  ===> sendRedirect
+	 *      2) request를 공유 => URL변경이 없이 (파일을 복사한다) Ctrl+V forward
+	 *      
+	 *   2. 역할 
+	 *      1) Controller(서블릿) : 요청을 받아서 Model클래스를 연결 => 요청 결과값을 받아서 jsp로 전송 
+	 *                            ==> 웹에서 데이터를 전송 : request,session
+	 *      2) Model(자바) : 요청처리한다 => 요청 결과값을 가지고 온다 
+	 *      3) View(jsp)  : 요청결과값만 출력 
+	 *      
+	 *      Model을 간단하게 만드는 방법 
+	 *      ===================== 클래스가 많아진다 
+	 *      찾는 방법 
+	 *      
+	 *      
+	 */
     
 }
 

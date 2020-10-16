@@ -13,7 +13,7 @@ public class MovieModel {
   {
 	  request.setAttribute("msg", "영화목록");
 	  // include에 포함될 jsp파일 전송
-	  request.setAttribute("main_jsp", "../movie/list.jsp");
+	  //request.setAttribute("main_jsp", "../movie/list.jsp");
 	  return "../main/main.jsp";// request를 전송할 jsp파일명 
   }
   @RequestMapping("movie/detail.do")

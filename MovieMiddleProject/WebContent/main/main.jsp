@@ -194,6 +194,10 @@
     }
   }
   </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -206,6 +210,7 @@
 </div>
 <%-- footer가 들어가는 위치 --%>
  <jsp:include page="../main/footer.jsp"></jsp:include>
+ 
 <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
@@ -240,6 +245,15 @@ $(document).ready(function(){
         }
     });
   });
+  
+  $('#login').click(function(){
+	 $('#dialog').show();
+	 $('#dialog').dialog(); 
+  });
+  $('#canBtn').click(function(){
+	  $('#dialog').hide(); 
+	 $('#dialog').dialog('close');
+  }); 
 })
 </script>
 

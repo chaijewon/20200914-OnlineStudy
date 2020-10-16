@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
     <title>슬라이드 연습</title>
      <style media="screen">
       *{

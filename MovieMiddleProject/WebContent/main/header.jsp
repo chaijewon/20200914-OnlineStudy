@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="../main/main.do">Home</a></li>
-        <li><a href="#">로그인</a></li><%-- 모달 --%>
+        <li><a href="#" id="login">로그인</a></li><%-- 모달 --%>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">회원관리
 	        <span class="caret"></span></a>
@@ -78,6 +78,9 @@
       </div>
     </div>
   </form>
+</div>
+<div id="dialog" style="display:none">
+  <jsp:include page="../member/login.jsp"></jsp:include>
 </div>
 </body>
 </html>
