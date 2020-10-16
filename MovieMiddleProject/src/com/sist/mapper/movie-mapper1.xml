@@ -71,19 +71,8 @@
        hit를 증가 
        cookie 
    -->
-  <update id="hitIncrement" parameterType="int">
-    UPDATE daum_movie SET
-    hit=hit+1
-    WHERE no=#{no}
-  </update>
-  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
-    SELECT * FROM daum_movie
-    WHERE no=#{no}
-  </select>
+  
 </mapper>
-
-
-
 
 
 

@@ -73,6 +73,52 @@ public class MovieDAO {
 	   session.close();
 	   return total;
    }
+   /*
+    *   <select id="movieTotalData" resultType="MovieVO" parameterType="hashmap">
+		    SELECT no,poster,title,num
+		    FROM (SELECT no,poster,title,rownum as num
+		    FROM (SELECT no,poster,title 
+		    FROM daum_movie ORDER BY score DESC))
+		    WHERE num BETWEEN #{start} AND #{end}
+		  </select>
+		  <select id="movieTotalPage2" resultType="int" parameterType="int">
+		    SELECT CEIL(COUNT(*)/12.0) FROM daum_movie
+		  </select>
+    */
+   public static List<MovieVO> movieTotalData(Map map)
+   {
+	   SqlSession session=ssf.openSession();
+	   List<MovieVO> list=session.selectList("movieTotalData",map);
+	   session.close();// 반환
+	   return list;
+   }
+   public static int movieTotalPage2()
+   {
+	   SqlSession session=ssf.openSession();
+	   int total=session.selectOne("movieTotalPage2");
+	   session.close();
+	   return total;
+   }
+   /*
+    *   <update id="hitIncrement" parameterType="int">
+		    UPDATE daum_movie SET
+		    hit=hit+1
+		    WHERE no=#{no}
+		  </update>
+		  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+		    SELECT * FROM daum_movie
+		    WHERE no=#{no}
+		  </select>
+    */
+   public static MovieVO movieDetailData(int no)
+   {
+	   SqlSession session=ssf.openSession();
+	   session.update("hitIncrement", no);
+	   session.commit();
+	   MovieVO vo=session.selectOne("movieDetailData", no);
+	   session.close();
+	   return vo;
+   }
 }
 
 
