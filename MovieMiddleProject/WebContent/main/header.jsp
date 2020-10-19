@@ -154,11 +154,15 @@ $(function(){
 	    </div>
 	  </form>
   </c:if>
+  <%--
+       HTML(JSP)=> 처리 요청   ==> .do ==> Model <==> DAO
+                               JSP <=== 결과값 전송 
+   --%>
   <c:if test="${sessionScope.id!=null }">
-	  <form>
+	  <form action="../member/logout.do"><%-- get(생략이 가능) --%>
 	    <div class="text-right">
-	      ${sessionScope.name }님 로그인중입니다...
-	      <button type="button" class="btn btn-danger btn-sm">로그아웃</button>
+	      ${sessionScope.name }(${sessionScope.admin=='y'?'관리자':'일반유저' })님 로그인중입니다...
+	      <button class="btn btn-danger btn-sm">로그아웃</button>
 	    </div>
 	  </form>
   </c:if>

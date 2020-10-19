@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MemberDAO;
@@ -77,7 +78,35 @@ public class MemberModel {
 	   String pwd=request.getParameter("pwd");
 	   // DAO로 전송 결과값을 가지고 온다 
 	   // 받은 결과값을 ==> login.jsp전송 
+	   MemberVO vo=MemberDAO.memberLogin(id, pwd);
+	   if(vo.getMsg().equals("OK"))
+	   {
+		   // 세션 저장위치 : 서버에 클라이언트 일부 정보를 저장해서 모든 JSP에 사용이 가능 
+		   /*
+		    *   서버에 저장 ( session vs cookie )
+		    *   저장  setAttribute()
+		    *   저장 읽기 getAttribute()
+		    *   전체 해제 invalidate()
+		    *   default ==> 저장 기간 : 30분
+		    *   일부만 해제  => removeAttribute()
+		    */
+		   HttpSession session=request.getSession();
+		   // request ==> Session/Cookie생성이 가능 
+		   session.setAttribute("id", vo.getId());
+		   session.setAttribute("name", vo.getName());
+		   session.setAttribute("admin", vo.getAdmin());
+		   
+	   }
+	   
+	   request.setAttribute("msg", vo.getMsg());
 	   return "../member/login.jsp";
+   }
+   @RequestMapping("member/logout.do")
+   public String member_logout(HttpServletRequest request)
+   {
+	   HttpSession session=request.getSession();
+	   session.invalidate();
+	   return "../member/logout.jsp";
    }
 }
 
