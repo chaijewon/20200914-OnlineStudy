@@ -28,18 +28,59 @@ function postfind()
 		}
 	}).open();
 }
+function idcheck()
+{
+	window.open("../member/idcheck.do","idcheck","width=320,height=300,scrollbars=no");
+}
+/*
+ *   function idcheck()
+ *   {
+              처리 
+     }
+     var idcheck=function()
+     {
+    	 
+     }
+     // 가장 많이 사용하는 방법
+         화살표 함수 => function,return  
+     var idcheck=()=>{
+    	 
+     }
+     
+     return형이 있는 경우
+     function func_name()
+     {
+    	 return 값;
+     }
+     
+         매개변수가 있는 경우
+     function func_name(addr,name)
+     {
+        	 
+     }
+         
+         내장 객체
+        window  ==> 새로운 창을 여는 경우
+                    open ==> 팝업창
+        document ==> 브라우저에 출력 
+        location ==> 파일 이동 
+        form     ==> 입력값을 가지고 오는 경우에 사용 
+               제어문 , 	배열 : 본인이 공부
+               배열 => 데이터형이 틀려도 된다  [10,"aaa",10.5] 
+ */
 </script>
 </head>
 <body>
   <div style="height: 30px"></div>
   <div class="row row1">
     <h1 class="text-center">회원가입</h1>
+    <form method=post action="../member/join_ok.do" name="joinFrm">
     <table class="table">
      <tr>
        <th class="text-right danger" width="15%">아이디</th>
        <td width=85%>
-         <input type=text name=id class="input-sm" size=15>
-         <input type=button value="중복체크" class="btn btn-sm btn-primary">
+         <input type=text name=id class="input-sm" size=15 readonly>
+         <input type=button value="중복체크" class="btn btn-sm btn-primary" onclick="idcheck()">
        </td>
      </tr>
      <tr>
@@ -112,6 +153,7 @@ function postfind()
        </td>
      </tr>
     </table>
+    </form>
   </div>
 </body>
 </html>

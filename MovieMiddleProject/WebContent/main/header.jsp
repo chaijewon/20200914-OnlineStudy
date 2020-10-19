@@ -77,6 +77,14 @@
         <button type="button" class="btn btn-danger">검색</button>
       </div>
     </div>
+    <!-- <form>
+    <div class="text-right">
+      <input type="text" class="input-sm" size="50" placeholder="아이디" required >
+      <input type="password" class="input-sm" size="50" placeholder="비밀번호" required>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-danger">로그인</button>
+      </div>
+    </div> -->
   </form>
 </div>
 <div id="dialog" style="display:none">

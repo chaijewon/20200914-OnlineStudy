@@ -96,6 +96,7 @@
   <mappers>
     <mapper resource="com/sist/mapper/movie-mapper.xml"/>
     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
+    <mapper resource="com/sist/mapper/member-mapper.xml"/>
   </mappers>
 </configuration>
 
