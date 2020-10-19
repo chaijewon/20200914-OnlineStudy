@@ -77,18 +77,18 @@
         <button type="button" class="btn btn-danger">검색</button>
       </div>
     </div>
-    <!-- <form>
+  </form>
+  <div style="height:30px"></div>
+  <form>
     <div class="text-right">
-      <input type="text" class="input-sm" size="50" placeholder="아이디" required >
-      <input type="password" class="input-sm" size="50" placeholder="비밀번호" required>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-danger">로그인</button>
-      </div>
-    </div> -->
+      <input type="text" class="input-sm" size="15" placeholder="아이디입력" required style="color:black">
+      <input type="password" class="input-sm" size="15" placeholder="비밀번호입력" required style="color:black">
+      <button type="button" class="btn btn-danger btn-sm">로그인</button>
+    </div>
   </form>
 </div>
 <div id="dialog" style="display:none">
-  <jsp:include page="../member/login.jsp"></jsp:include>
+  <jsp:include page="../member/login.jsp"></jsp:include> 
 </div>
 </body>
 </html>

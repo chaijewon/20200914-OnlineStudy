@@ -30,4 +30,15 @@ public class MemberModel {
 	    request.setAttribute("count", count);
 	    return "../member/idcheck_ok.jsp";
    }
+   @RequestMapping("member/join_ok.do")
+   public String member_join_ok(HttpServletRequest request)
+   {
+	   return "redirect:../main/main.do";
+   }
 }
+
+
+
+
+
+

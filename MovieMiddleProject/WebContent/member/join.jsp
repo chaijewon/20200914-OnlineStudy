@@ -68,32 +68,103 @@ function idcheck()
                제어문 , 	배열 : 본인이 공부
                배열 => 데이터형이 틀려도 된다  [10,"aaa",10.5] 
  */
+$(function(){
+	$('#joinBtn').click(function(){
+		let id=$('#id').val();
+		if(id.trim()=="")
+		{
+			$('#id').focus();
+			return;
+		}
+		
+		// 비밀번호
+		let pwd=$('#pwd').val();
+		if(pwd.trim()=="")
+		{
+			$('#pwd').focus();
+			return;
+		}
+		
+		let pwd1=$('#pwd1').val();
+		if(pwd1.trim()=="")
+		{
+			$('#pwd1').focus();
+			return;
+		}
+		
+		if(pwd!==pwd1)
+		{
+			alert("비밀번호를 다시 입력하세요!!");
+			$('#pwd1').val("");
+			$('#pwd1').focus();
+			return;
+		}
+		
+		let name=$('#name').val();
+		if(name.trim()=="")
+		{
+			$('#name').focus();
+			return;
+		}
+		
+		let birthday=$('#birthday').val();
+		if(birthday.trim()=="")
+		{
+			$('#birthday').focus();
+			return;
+		}
+		
+		let post=$('#post').val();
+		if(post.trim()=="")
+		{
+			$('#post').focus();
+			return;
+		}
+		
+		let addr1=$('#addr1').val();
+		if(addr1.trim()=="")
+		{
+			$('#addr1').focus();
+			return;
+		}
+		
+		let content=$('#content').val();
+		if(content.trim()=="")
+		{
+			$('#content').focus();
+			return;
+		}
+		
+		// 데이어 전송 
+		$('#joinFrm').submit();
+	});
+});
 </script>
 </head>
 <body>
   <div style="height: 30px"></div>
   <div class="row row1">
     <h1 class="text-center">회원가입</h1>
-    <form method=post action="../member/join_ok.do" name="joinFrm">
+    <form method=post action="../member/join_ok.do" name="joinFrm" id="joinFrm">
     <table class="table">
      <tr>
        <th class="text-right danger" width="15%">아이디</th>
        <td width=85%>
-         <input type=text name=id class="input-sm" size=15 readonly>
+         <input type=text name=id class="input-sm" size=15 readonly id="id">
          <input type=button value="중복체크" class="btn btn-sm btn-primary" onclick="idcheck()">
        </td>
      </tr>
      <tr>
        <th class="text-right danger" width="15%">비밀번호</th>
        <td width=85%>
-         <input type=password name=pwd class="input-sm" size=15>
-         &nbsp;재입력:<input type=password name=pwd1 class="input-sm" size=15>
+         <input type=password name=pwd class="input-sm" size=15 id="pwd">
+         &nbsp;재입력:<input type=password name=pwd1 class="input-sm" size=15 id="pwd1">
        </td>
      </tr>
      <tr>
        <th class="text-right danger" width="15%">이름</th>
        <td width=85%>
-         <input type=text name=name class="input-sm" size=15>
+         <input type=text name=name class="input-sm" size=15 id="name">
        </td>
      </tr>
      <tr>
@@ -105,7 +176,7 @@ function idcheck()
      <tr>
        <th class="text-right danger" width="15%">생년월일</th>
        <td width=85%>
-         <input type=data name=birthday class="input-sm" size=25>
+         <input type=data name=birthday class="input-sm" size=25 id="birthday">
        </td>
      </tr>
      <tr>
@@ -141,12 +212,12 @@ function idcheck()
      <tr>
        <th class="text-right danger" width="15%">소개</th>
        <td width=85%>
-         <textarea rows="8" cols="55" name="content"></textarea>
+         <textarea rows="8" cols="55" name="content" id="content"></textarea>
        </td>
      </tr>
      <tr>
        <td colspan="2" class="text-center">
-         <input type=button value="회원가입" class="btn btn-sm btn-danger">
+         <input type=button value="회원가입" class="btn btn-sm btn-danger" id="joinBtn">
          <input type=button value="취소" class="btn btn-sm btn-warning"
            onclick="javascript:history.back()"
          >
