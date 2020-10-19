@@ -33,6 +33,11 @@
        'n'
      )
    </insert>
+   <select id="memberLogin" resultType="com.sist.vo.MemberVO" parameterType="String">
+     SELECT id,name,pwd,admin
+     FROM member
+     WHERE id=#{id}
+   </select>
 </mapper>
 
 

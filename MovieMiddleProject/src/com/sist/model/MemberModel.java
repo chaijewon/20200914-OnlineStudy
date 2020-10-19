@@ -69,6 +69,16 @@ public class MemberModel {
 	   
 	   return "../member/join_ok.jsp";
    }
+   @RequestMapping("member/login.do")
+   public String member_login(HttpServletRequest request)
+   {
+	   // 데이터 받기 
+	   String id=request.getParameter("id");
+	   String pwd=request.getParameter("pwd");
+	   // DAO로 전송 결과값을 가지고 온다 
+	   // 받은 결과값을 ==> login.jsp전송 
+	   return "../member/login.jsp";
+   }
 }
 
 
