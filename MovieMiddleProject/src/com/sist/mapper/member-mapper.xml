@@ -5,4 +5,36 @@
     SELECT COUNT(*) FROM member
     WHERE id=#{id}
   </select>
+  <!-- 
+        ID       NOT NULL VARCHAR2(20)   
+		PWD      NOT NULL VARCHAR2(10)   
+		NAME     NOT NULL VARCHAR2(34)   
+		EMAIL             VARCHAR2(1000) 
+		BIRTHDAY NOT NULL VARCHAR2(20)   
+		POST     NOT NULL VARCHAR2(10)   
+		ADDR1    NOT NULL VARCHAR2(200)  
+		ADDR2             VARCHAR2(100)  
+		TEL               VARCHAR2(20)   
+		CONTENT  NOT NULL CLOB           
+		ADMIN             CHAR(1)
+   -->
+   <insert id="memberInsert" parameterType="com.sist.vo.MemberVO">
+     INSERT INTO member VALUES(
+       #{id},
+       #{pwd},
+       #{name},
+       #{email},
+       #{birthday},
+       #{post},
+       #{addr1},
+       #{addr2},
+       #{tel},
+       #{content},
+       'n'
+     )
+   </insert>
 </mapper>
+
+
+
+

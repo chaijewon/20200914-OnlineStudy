@@ -32,14 +32,14 @@ $(function(){
      <tr>
        <td width=30% class="text-right">아이디</td>
        <td width=70%>
-         <input type=text id=id size=15 class="input-sm">
+         <input type=text id=id1 size=15 class="input-sm">
          <div id="log"></div>
        </td>
      </tr>
      <tr>
        <td width=30% class="text-right">비밀번호</td>
        <td width=70%>
-         <input type=password id=pwd size=15 class="input-sm">
+         <input type=password id=pwd2 size=15 class="input-sm">
          <div id="can"></div>
        </td>
      </tr>

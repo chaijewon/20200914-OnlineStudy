@@ -70,6 +70,7 @@ function idcheck()
  */
 $(function(){
 	$('#joinBtn').click(function(){
+		//alert("aaa");
 		let id=$('#id').val();
 		if(id.trim()=="")
 		{

@@ -3,6 +3,8 @@ package com.sist.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.sist.vo.MemberVO;
+
 public class MemberDAO {
   private static SqlSessionFactory ssf;
   static
@@ -22,7 +24,27 @@ public class MemberDAO {
 	  session.close();
 	  return count;
   }
+  
+  // <insert id="memberInsert" parameterType="com.sist.vo.MemberVO"> ==> MemberModel
+  public static void memberInsert(MemberVO vo)
+  {
+	  SqlSession session=ssf.openSession(true);
+	  session.insert("memberInsert", vo);
+	  session.close();
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
