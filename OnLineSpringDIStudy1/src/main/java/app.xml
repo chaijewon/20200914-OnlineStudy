@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <!--  메모리 할당 : 스프링에서 메모리 할당(클래스 등록)
+         <bean id="aa" class="com.sist.music.Abc">
+         Class cls=Class.forName("com.sist.music.Abc");
+         Object obj=cls.newInstance();
+         
+         Map map=new HashMap();
+         map.put("aa",obj);
+    -->
+    <!-- 
+          Sawon sa=new Sawon();
+		  sa.setName("홍길동");
+		  sa.setSex("남자");
+		  sa.setAge(20);
+     -->
+    <bean id="sa" class="com.sist.di.Sawon" scope="singleton">
+      <property name="name">
+        <value>심청이</value>
+      </property>
+      <property name="sex" value="여자"/>
+      <property name="age">
+        <value>20</value>
+      </property>
+    </bean>
+    
+    <bean id="sa1" class="com.sist.di.Sawon"
+      p:name="박문수"
+      p:sex="남자"
+      p:age="30"
+    />
+</beans>
+
+
+
+
+
+
