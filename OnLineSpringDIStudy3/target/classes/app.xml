@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="s1" class="com.sist.di.Student"
+      p:name="홍길동"
+      p:kor="80"
+      p:eng="85"
+      p:math="90"
+     />
+     <bean id="s2" class="com.sist.di.Student"
+      p:name="심청이"
+      p:kor="80"
+      p:eng="85"
+      p:math="90"
+     />
+     <bean id="s3" class="com.sist.di.Student"
+      p:name="박문수"
+      p:kor="80"
+      p:eng="85"
+      p:math="90"
+     />
+     <!-- 알고 있어야 한다 : Restful => 한글 처리 -->
+     <bean id="school" class="com.sist.di.School">
+       <property name="list">
+         <list>
+           <ref bean="s1"/><!-- list.add(s1) -->
+           <ref bean="s2"/>
+           <ref bean="s3"/>
+         </list>
+       </property>
+     </bean>
+</beans>
+
+
+
+
+
+
