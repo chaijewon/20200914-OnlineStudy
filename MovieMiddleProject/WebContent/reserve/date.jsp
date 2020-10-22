@@ -6,17 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .row {
    margin:0px auto;
    width:350pt;
 }
-</style>
+</style> -->
 </head>
 <body>
-  <div class="container">
-    <div class="row">
+ 
       <h3 class="text-center">${year }년도 ${month }월</h3>
       <table class="table">
         <tr>
@@ -89,8 +88,7 @@
         </c:forEach>
         </tr>
       </table>
-    </div>
-  </div>
+  
 </body>
 </html>
 

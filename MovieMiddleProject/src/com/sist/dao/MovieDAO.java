@@ -119,6 +119,14 @@ public class MovieDAO {
 	   session.close();
 	   return vo;
    }
+   
+   public static List<MovieVO> movieReserveData()
+   {
+	   SqlSession session=ssf.openSession();
+	   List<MovieVO> list=session.selectList("movieReserveData");
+	   session.close();// 반환
+	   return list;
+   }
 }
 
 

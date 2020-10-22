@@ -37,6 +37,16 @@
     		    	  
     		      })
  */
+ $(function(){
+	 $.ajax({
+		 type:'post',
+		 url:'../reserve/date.do',
+		 success:function(result)
+		 {
+			 $('.info').html(result);
+		 }
+	 }) 
+ });
 </script>
 </head>
 <body>

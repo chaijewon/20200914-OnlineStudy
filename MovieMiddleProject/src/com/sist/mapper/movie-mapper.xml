@@ -80,6 +80,12 @@
     SELECT * FROM daum_movie
     WHERE no=#{no}
   </select>
+  
+  <select id="movieReserveData" resultType="MovieVO">
+    SELECT no,title,poster 
+    FROM daum_movie
+    WHERE title LIKE '%2020%' <!-- '%||#{ss}||%' -->
+  </select>
 </mapper>
 
 

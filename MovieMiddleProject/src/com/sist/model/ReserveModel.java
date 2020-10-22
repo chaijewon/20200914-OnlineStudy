@@ -3,6 +3,8 @@ package com.sist.model;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.MovieDAO;
+import com.sist.vo.MovieVO;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -62,6 +64,19 @@ public class ReserveModel {
 	  // 1일자의 요일 
 	  return "../reserve/date.jsp";
   }
+  @RequestMapping("reserve/movie.do")
+  public String reserve_movie(HttpServletRequest request)
+  {
+	    List<MovieVO> list=MovieDAO.movieReserveData();
+	    request.setAttribute("list", list);
+	    return "../reserve/movie.jsp";
+  }
+  // 극장 
+  // 시간
+  // 인원
+  // 예매 
+  // 마이페이지
+  // 어드민 페이지
 }
 
 
