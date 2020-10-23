@@ -20,7 +20,13 @@ public class ReserveModel {
   {
 	  String strYear=request.getParameter("year");
 	  String strMonth=request.getParameter("month");
-	  Date date=new Date();
+	  Date date=null;
+		try {
+			date = new Date();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	  // 2020-10
 	  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");
 	  // MM dd (X)  M d 01 ~ 09 10 11 12   09

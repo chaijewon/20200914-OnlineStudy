@@ -82,9 +82,8 @@
   </select>
   
   <select id="movieReserveData" resultType="MovieVO">
-    SELECT no,title,poster 
-    FROM daum_movie
-    WHERE title LIKE '%2020%' <!-- '%||#{ss}||%' -->
+    SELECT no,title,poster,theater_no 
+    FROM movie_info
   </select>
 </mapper>
 

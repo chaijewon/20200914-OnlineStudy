@@ -43,9 +43,19 @@
 		 url:'../reserve/date.do',
 		 success:function(result)
 		 {
-			 $('.info').html(result);
+			 $('#reserve_date').html(result);
 		 }
-	 }) 
+	 });
+	 
+	 $.ajax({
+		 type:'post',
+		 url:'../reserve/movie.do',
+		 success:function(result)
+		 {
+			 $('#movie_info').html(result);
+		 }
+	 })
+	 
  });
 </script>
 </head>
@@ -54,23 +64,52 @@
   <div class="row">
    <table class="table">
      <tr>
-       <td width=20% height=500 class="danger">
+       <td width=20% height=500>
          <table class="table">
            <caption class="text-center"><h3>영화정보</h3></caption>
            <tr>
-             <td id="movie_info">
-               
+             <td>
+               <div id="movie_info" style="overflow-y:auto;height:450px"></div>
              </td>
            </tr>
          </table>
        </td>
-       <td width=15% height=500 class="warning"></td>
-       <td width=35% height=500 class="info"></td>
-       <td width=30% height=700 class="success" rowspan="2"></td>
+       <td width=15% height=500>
+         <table class="table">
+           <caption class="text-center"><h3>극장정보</h3></caption>
+           <tr>
+             <td>
+               <div id="theater_info" style="overflow-y:auto;height:450px"></div>
+             </td>
+           </tr>
+         </table>
+       </td>
+       <td width=35% height=500>
+         
+       </td>
+       <td width=30% height=700 rowspan="2">
+         <table class="table">
+           <caption class="text-center"><h3>예매정보</h3></caption>
+           <tr>
+             <td class="text-center">
+               <img src="" width=100 height=120 id="movie_poster">
+             </td>
+           </tr>
+           <tr>
+             <td class="text-center">
+                         영화명:<span id="movie_title"></span>
+             </td>
+           </tr>
+         </table>
+       </td>
      </tr>
      <tr>
-       <td colspan="2" height=200 class="active"></td>
-       <td width=15% height=200></td>
+       <td colspan="2" height=200>
+         
+       </td>
+       <td width=15% height=200>
+         
+       </td>
      </tr>
    </table>
   </div>

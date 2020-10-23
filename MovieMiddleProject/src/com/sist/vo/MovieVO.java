@@ -26,6 +26,14 @@ public class MovieVO {
     private String director;
     private String story;
     private String key;
+    private String theater_no;
+    
+	public String getTheater_no() {
+		return theater_no;
+	}
+	public void setTheater_no(String theater_no) {
+		this.theater_no = theater_no;
+	}
 	public int getNo() {
 		return no;
 	}
