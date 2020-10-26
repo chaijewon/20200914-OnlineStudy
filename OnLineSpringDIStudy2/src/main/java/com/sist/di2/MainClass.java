@@ -12,6 +12,7 @@ public class MainClass {
         ApplicationContext app=
         		new ClassPathXmlApplicationContext("app2.xml");
         EmpDAO dao=(EmpDAO)app.getBean("empDAO");
+        //
         List<EmpVO> list=dao.empAllData();
         for(EmpVO vo:list)
         {
