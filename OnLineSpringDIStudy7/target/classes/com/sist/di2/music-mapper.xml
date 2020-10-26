@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.di.music-mapper">
+  <!-- PreparedStatement (SQL문장을 전송), ResultSet 설정(결과값) -->
+  <select id="musicListData" resultType="MusicVO">
+    SELECT mno,title,singer,album 
+    FROM genie_music
+  </select>
+</mapper>

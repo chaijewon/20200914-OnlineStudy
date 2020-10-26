@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!-- 
+        1. 사용자 정의 클래스 등록 : 패키지 단위 
+        2. AOP => 반복 코딩 제거 (등록) ==> 7장
+        =================================
+        3. DataSource설정 
+        4. DataSource => 트랜잭션 등록 
+        5. SqlSessionFactoryBean 설정
+        ================================= 8장
+        6. WebSocket
+        7. 보안 설정 
+     -->
+     <context:component-scan base-package="com.sist.di2"/>
+     <!-- 어노테이션을 이용해서 메모리 할당 -->
+     
+     <!--모든 DAO에 적용되는 데이터설정  -->
+     <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+       p:driverClassName="oracle.jdbc.driver.OracleDriver"
+       p:url="jdbc:oracle:thin:@211.238.142.181:1521:XE"
+       p:username="hr"
+       p:password="happy"
+     />
+     
+     <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+       p:configLocation="classpath:Config.xml"
+     />
+     <!-- 
+          1. 스프링 = 클래스를 관리 
+             ================
+                         생성 => 필요한 데이터 첨부(DI) => 소멸
+                   ==================
+                   1) 일반 데이터 (setter,constructor)
+                   2) 클래스 자체를 첨부 (@Autowired:생성된 클래스 객체의 주소) 
+             ====
+              1) XML로 생성 
+                 <bean id="" class="">
+              2) Annotation으로 생성 
+                 <context:component-scan base-package="패키지명">
+                                스프링에 의해 생성되는 클래스
+                       = 클래스 위에 Annotation을 사용
+                       @Component,@Repository,@Controller,@RestController,@Service
+                                프로그래머가 직접 생성하는 클래스 (VO,interface)
+                 => DI
+                    = @Autowired : 스프링에서 자동으로 첨부 
+                    = @Resource : 스프링에 저장되어 있는 객체중에 지정해서 가지고 온다 
+                    
+                    interface I
+                    class A implements I
+                    class B implements I
+                    
+                       @Autowired => 오류 ( A , B ) : 단점은 원하는 클래스를 지정할 수 없다
+                    => I i;
+                       @Resource(name="b")
+                    => I i
+                    
+                    => 스프링에서 미리 생성되어 있는 클래스 객체 주소를 이용할 때 사용
+                    
+                    => 기능이 있는 모든 클래스는 스프링에 맡긴다
+                                           필요시마다 스프링을 통해서 얻어 온다
+                    => @Autowired , @Resource(name="b")를 사용하기 위해서
+                                           반드시 스프링에서 메모리 할당을 해야 사용 할 수 있다
+      -->
+</beans>
+
+
+
+
+
+
+
