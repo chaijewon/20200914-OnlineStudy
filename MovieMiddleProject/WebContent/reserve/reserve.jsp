@@ -85,19 +85,37 @@
          </table>
        </td>
        <td width=35% height=500>
-         
+         <table class="table">
+           <caption class="text-center"><h3>예매일정보</h3></caption>
+           <tr>
+             <td>
+               <div id="date_info"></div>
+             </td>
+           </tr>
+         </table>
        </td>
        <td width=30% height=700 rowspan="2">
          <table class="table">
            <caption class="text-center"><h3>예매정보</h3></caption>
            <tr>
-             <td class="text-center">
-               <img src="" width=100 height=120 id="movie_poster">
+             <td class="text-center" colspan="2">
+               <img src="def.png" width=250 height=300 id="movie_poster">
              </td>
            </tr>
            <tr>
-             <td class="text-center">
-                         영화명:<span id="movie_title"></span>
+             <td class="text-right" width=25%>
+                         영화명:
+             </td>
+             <td width=75%>
+               <span id="movie_title"></span>
+             </td>
+           </tr>
+           <tr>
+             <td class="text-right" width=25%>
+                         극장명:
+             </td>
+             <td width=75%>
+               <span id="movie_theater"></span>
              </td>
            </tr>
          </table>

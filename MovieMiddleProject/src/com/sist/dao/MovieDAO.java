@@ -127,6 +127,32 @@ public class MovieDAO {
 	   session.close();// 반환
 	   return list;
    }
+   /*
+    *  <select id="movieTheaterNo" resultType="String" parameterType="int">
+		    SELECT theater_no FROM movie_info
+		    WHERE no=#{no}
+		  </select>
+		  
+		  <select id="theaterListData" resultType="com.sist.vo.TheaterVO" parameterType="int">
+		    SELECT * FROM theater_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   public static String movieTheaterNo(int no)
+   {
+	   SqlSession session=ssf.openSession();
+	   String tdata=session.selectOne("movieTheaterNo", no);
+	   session.close();
+	   return tdata;
+   }
+   
+   public static TheaterVO theaterListData(int tno)
+   {
+	   SqlSession session=ssf.openSession();
+	   TheaterVO tdata=session.selectOne("theaterListData", tno);
+	   session.close();
+	   return tdata;
+   }
 }
 
 

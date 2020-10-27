@@ -12,14 +12,13 @@ public class MainClass {
 		 * while(st.hasMoreTokens()) { String s=st.nextToken(); String
 		 * r=dao.theaterInfoData(Integer.parseInt(s)); System.out.println(r); }
 		 */
-		MovieDAO dao=new MovieDAO();
-		List<Integer> list=dao.movieData();
-		for(int no:list)
-		{
-			String res=getRand();
-			dao.theaterInsert(no, res);
-		}
-		System.out.println("Insert 완료!!");
+		/*
+		 * MovieDAO dao=new MovieDAO(); List<Integer> list=dao.movieData(); for(int
+		 * no:list) { String res=getRand(); dao.theaterInsert(no, res); }
+		 * System.out.println("Insert 완료!!");
+		 */
+		String s="aaaaa&cbbbb&ccc";
+		System.out.println(s.replace("&", "^"));
 	}
 	public static String getRand()
 	{

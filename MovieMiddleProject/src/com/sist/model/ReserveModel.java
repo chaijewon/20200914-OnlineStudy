@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MovieDAO;
 import com.sist.vo.MovieVO;
+import com.sist.vo.TheaterVO;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -78,6 +79,23 @@ public class ReserveModel {
 	    return "../reserve/movie.jsp";
   }
   // 극장 
+  @RequestMapping("reserve/theater.do")
+  public String reserve_theater(HttpServletRequest request)
+  {
+	  String no=request.getParameter("no");
+	  // DB연동 
+	  String tdata=MovieDAO.movieTheaterNo(Integer.parseInt(no));
+	  StringTokenizer st=new StringTokenizer(tdata,",");
+	  List<TheaterVO> list=new ArrayList<TheaterVO>();
+	  // 1,3,5,7,8
+	  while(st.hasMoreTokens())
+	  {
+		  TheaterVO vo=MovieDAO.theaterListData(Integer.parseInt(st.nextToken()));
+		  list.add(vo);
+	  }
+	  request.setAttribute("list", list);
+	  return "../reserve/theater.jsp";
+  }
   // 시간
   // 인원
   // 예매 

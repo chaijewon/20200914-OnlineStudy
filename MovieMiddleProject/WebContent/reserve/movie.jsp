@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+/*
+ *    브라우저에 요청 
+       XMLHttpRequest req : 생성 
+       
+       1) 서버연결 
+          req.open("POST","URL",true/false) ==> true : 비동기
+                                                false : 동기화 
+ */
 $(function(){
 	$('.movie').click(function(){
 		let no=$(this).attr("data-value");
@@ -16,6 +24,7 @@ $(function(){
 		let title=$(this).attr("data-title");
 		$('#movie_poster').attr("src",poster);
 		$('#movie_title').text(title);
+		//theater.do?no=1
 		$.ajax({
 			type:'post',
 			url:'../reserve/theater.do',

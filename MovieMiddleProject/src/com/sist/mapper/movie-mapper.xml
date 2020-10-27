@@ -85,6 +85,18 @@
     SELECT no,title,poster,theater_no 
     FROM movie_info
   </select>
+  <!-- 
+      1,2,3,4
+   -->
+  <select id="movieTheaterNo" resultType="String" parameterType="int">
+    SELECT theater_no FROM movie_info
+    WHERE no=#{no}
+  </select>
+  
+  <select id="theaterListData" resultType="com.sist.vo.TheaterVO" parameterType="int">
+    SELECT * FROM theater_info
+    WHERE tno=#{tno}
+  </select>
 </mapper>
 
 
