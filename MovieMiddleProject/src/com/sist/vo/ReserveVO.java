@@ -20,6 +20,14 @@ public class ReserveVO {
     private String price;
     private String isreserve;
     private Date regdate;
+    private MovieVO mvo=new MovieVO();
+    
+	public MovieVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MovieVO mvo) {
+		this.mvo = mvo;
+	}
 	public int getNo() {
 		return no;
 	}

@@ -117,10 +117,10 @@ $(function(){
 	      </li>
 	    <c:if test="${ sessionScope.id!=null}">
 	      <c:if test="${ sessionScope.admin=='n'}">
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="../reserve/mypage.do">마이페이지</a></li>
           </c:if>
           <c:if test="${ sessionScope.admin=='y'}">
-            <li><a href="#">예매현황</a></li>
+            <li><a href="../reserve/adminpage.do">예매현황</a></li>
           </c:if>
         </c:if>
       </ul>

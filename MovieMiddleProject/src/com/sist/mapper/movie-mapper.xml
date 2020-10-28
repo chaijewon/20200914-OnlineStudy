@@ -112,6 +112,55 @@
     SELECT time FROM time_info
     WHERE tno=#{tno}
   </select>
+  <!-- 
+     no NUMBER PRIMARY KEY,
+  id VARCHAR2(20) NOT NULL,
+  mno NUMBER,
+  theater VARCHAR2(100),
+  time VARCHAR2(20),
+  inwon VARCHAR2(20),
+  price VARCHAR2(10),
+  isreserve CHAR(1) DEFAULT 'n',
+  regdate DATE DEFAULT SYSDAT
+   -->
+  <insert id="reserveInsert" parameterType="com.sist.vo.ReserveVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM reserve
+    </selectKey>
+    INSERT INTO reserve VALUES(
+      #{no},
+      #{id},
+      #{mno},
+      #{theater},
+      #{time},
+      #{inwon},
+      #{price},
+      'n',SYSDATE)
+  </insert>
+  <resultMap type="com.sist.vo.ReserveVO" id="reserveList">
+   <result property="no" column="no"/>
+   <result property="id" column="id"/>
+   <result property="theater" column="theater"/>
+   <result property="time" column="time"/>
+   <result property="inwon" column="inwon"/>
+   <result property="price" column="price"/>
+   <result property="isreserve" column="isreserve"/>
+   <result property="mvo.title" column="title"/>
+   <result property="mvo.poster" column="poster"/>
+   <!-- 
+         vo.getMvo().setPoster(rs.getString("poster"));
+    -->
+  </resultMap>
+  <select id="mypageReserveListData" resultMap="reserveList" parameterType="string">
+    SELECT reserve.no,title,poster,theater,time,inwon,price,isreserve
+    FROM reserve,movie_info
+    WHERE mno=movie_info.no AND id=#{id}
+  </select>
+  <select id="adminReserveListData" resultMap="reserveList">
+    SELECT reserve.no,id,title,poster,theater,time,inwon,price,isreserve
+    FROM reserve,movie_info
+    WHERE mno=movie_info.no
+  </select>
 </mapper>
 
 

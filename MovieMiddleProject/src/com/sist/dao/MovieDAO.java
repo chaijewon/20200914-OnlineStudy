@@ -194,8 +194,42 @@ public class MovieDAO {
 	   session.close();
 	   return time;
    }
+   /*
+    *  <insert id="reserveInsert" parameterType="com.sist.vo.ReserveVO">
+    */
+   public static void reserveInsert(ReserveVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.insert("reserveInsert",vo);
+	   session.close();
+   }
    
-   
+   /*
+    * <select id="mypageReserveListData" resultMap="reserveList" parameterType="string">
+	    SELECT no,title,poster,theater,time,inwon,price,isreserve
+	    FROM reserve,movie_info
+	    WHERE mno=no AND id=#{id}
+	  </select>
+	  <select id="adminReserveListData" resultMap="reserveList">
+	    SELECT no,title,poster,theater,time,inwon,price,isreserve
+	    FROM reserve,movie_info
+	    WHERE mno=no
+	  </select>
+    */
+   public static List<ReserveVO> mypageReserveListData(String id)
+   {
+	   SqlSession session=ssf.openSession();
+	   List<ReserveVO> list=session.selectList("mypageReserveListData",id);
+	   session.close();
+	   return list;
+   }
+   public static List<ReserveVO> adminReserveListData()
+   {
+	   SqlSession session=ssf.openSession();
+	   List<ReserveVO> list=session.selectList("adminReserveListData");
+	   session.close();
+	   return list;
+   }
 }
 
 

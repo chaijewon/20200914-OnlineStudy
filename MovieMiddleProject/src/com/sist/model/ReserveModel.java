@@ -1,10 +1,12 @@
 package com.sist.model;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MovieDAO;
 import com.sist.vo.MovieVO;
+import com.sist.vo.ReserveVO;
 import com.sist.vo.TheaterVO;
 
 import java.text.SimpleDateFormat;
@@ -148,16 +150,53 @@ public class ReserveModel {
   @RequestMapping("reserve/reserve_ok.do")
   public String reserve_reserve_ok(HttpServletRequest request)
   {
-	  System.out.println(request.getParameter("mno"));
-	  System.out.println(request.getParameter("tname"));
-	  System.out.println(request.getParameter("inwon"));
-	  System.out.println(request.getParameter("day"));
-	  System.out.println(request.getParameter("price"));
-	  System.out.println(request.getParameter("time"));
-	  return "../reserve/inwon.jsp";
+	 
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex) {}
+	  
+	  String mno=request.getParameter("mno");
+	  String tname=request.getParameter("tname");
+	  String inwon=request.getParameter("inwon");
+	  String day=request.getParameter("day");
+	  String price=request.getParameter("price");
+	  String time=request.getParameter("time");
+	  
+	  HttpSession session=request.getSession();
+	  String id=(String)session.getAttribute("id");
+	   
+	  ReserveVO vo=new ReserveVO();
+	  vo.setId(id);
+	  vo.setMno(Integer.parseInt(mno));
+	  vo.setInwon(inwon);
+	  vo.setPrice(price);
+	  vo.setTheater(tname);
+	  vo.setTime(day+"("+time+")");
+	  // insert
+	  MovieDAO.reserveInsert(vo);
+	  return "../reserve/reserve_ok.jsp";
   }
   // 마이페이지
+  @RequestMapping("reserve/mypage.do")
+  public String reserve_mypage(HttpServletRequest request)
+  {
+	  HttpSession session=request.getSession();
+	  String id=(String)session.getAttribute("id");
+	  List<ReserveVO> list=MovieDAO.mypageReserveListData(id);
+	  request.setAttribute("list", list);
+	  request.setAttribute("main_jsp", "../reserve/mypage.jsp");
+	  return "../main/main.jsp";
+  }
   // 어드민 페이지
+  @RequestMapping("reserve/adminpage.do")
+  public String reserve_adminpage(HttpServletRequest request)
+  {
+	  List<ReserveVO> list=MovieDAO.adminReserveListData();
+	  request.setAttribute("list", list);
+	  request.setAttribute("main_jsp", "../reserve/adminpage.jsp");
+	  return "../main/main.jsp";
+  }
 }
 
 
