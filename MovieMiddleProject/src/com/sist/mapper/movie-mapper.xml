@@ -102,6 +102,16 @@
     SELECT rday FROM theater_info
     WHERE tno=#{tno}
   </select>
+  
+  <select id="dayTimeData" resultType="String" parameterType="int">
+    SELECT rtime FROM date_info
+    WHERE rday=#{rday}
+  </select>
+  
+  <select id="timeData" resultType="String" parameterType="int">
+    SELECT time FROM time_info
+    WHERE tno=#{tno}
+  </select>
 </mapper>
 
 

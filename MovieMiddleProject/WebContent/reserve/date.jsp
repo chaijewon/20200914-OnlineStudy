@@ -56,6 +56,21 @@ $(function(){
 		let day=$(this).text();
 		let rday=year+"년도 "+month+"월 "+day+"일";
 		$('#movie_reserve').text(rday);
+		
+		// 시간 출력 
+		/*
+		    result => text,html,xml,json
+		    @Controller , @RestController
+		*/
+		$.ajax({
+			type:'post',
+			url:'../reserve/time.do',
+			data:{"day":day},
+			success:function(result)
+			{
+				$('#time_info').html(result);
+			}
+		})
 	})
 });
 </script>

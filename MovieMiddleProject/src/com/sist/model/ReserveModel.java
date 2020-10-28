@@ -120,7 +120,30 @@ public class ReserveModel {
 	  return "../reserve/theater.jsp";
   }
   // 시간
+  @RequestMapping("reserve/time.do")
+  public String reserve_time(HttpServletRequest request)
+  {
+	  String day=request.getParameter("day");
+	  // 데이터베이스 = DB연동
+	  String rdays=MovieDAO.dayTimeData(Integer.parseInt(day));
+	  // 1(08:00),2(09:00),5(...),6,7,8
+	  StringTokenizer st=new StringTokenizer(rdays,",");
+	  List<String> list=new ArrayList<String>();
+	  while(st.hasMoreTokens())
+	  {
+		  String s=st.nextToken();
+		  String time=MovieDAO.timeData(Integer.parseInt(s));
+		  list.add(time);
+	  }
+	  request.setAttribute("list", list);
+	  return "../reserve/time.jsp";
+  }
   // 인원
+  @RequestMapping("reserve/inwon.do")
+  public String reserve_inwon(HttpServletRequest request)
+  {
+	  return "../reserve/inwon.jsp";
+  }
   // 예매 
   // 마이페이지
   // 어드민 페이지

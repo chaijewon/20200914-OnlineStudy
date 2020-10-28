@@ -126,15 +126,37 @@
                <span id="movie_reserve"></span>
              </td>
            </tr>
+           <tr>
+             <td class="text-right" width=25%>
+                         시간:
+             </td>
+             <td width=75%>
+               <span id="movie_time"></span>
+             </td>
+           </tr>
          </table>
        </td>
      </tr>
      <tr>
        <td colspan="2" height=200>
-         
+         <table class="table">
+           <caption class="text-center"><h3>시간정보</h3></caption>
+           <tr>
+             <td>
+               <div id="time_info"></div>
+             </td>
+           </tr>
+         </table>
        </td>
        <td width=15% height=200>
-         
+         <table class="table">
+           <caption class="text-center"><h3>인원정보</h3></caption>
+           <tr>
+             <td>
+               <div id="inwon_info"></div>
+             </td>
+           </tr>
+         </table>
        </td>
      </tr>
    </table>

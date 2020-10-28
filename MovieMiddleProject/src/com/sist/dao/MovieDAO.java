@@ -167,6 +167,35 @@ public class MovieDAO {
 	   session.close();
 	   return rday;
    }
+   /*
+    *   <select id="dayTimeData" resultType="String" parameterType="int">
+		    SELECT rtime FROM date_info
+		    WHERE rday=#{rday}
+		  </select>
+		  
+		  <select id="timeData" resultType="String" parameterType="int">
+		    SELECT time FROM time_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   // 1,4,5, 10
+   public static String dayTimeData(int rday)
+   {
+	   SqlSession session=ssf.openSession();
+	   String times=session.selectOne("dayTimeData", rday);
+	   session.close();
+	   return times;
+   }
+   
+   public static String timeData(int tno)
+   {
+	   SqlSession session=ssf.openSession();
+	   String time=session.selectOne("timeData", tno);
+	   session.close();
+	   return time;
+   }
+   
+   
 }
 
 

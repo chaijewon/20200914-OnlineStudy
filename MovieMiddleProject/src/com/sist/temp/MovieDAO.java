@@ -120,6 +120,25 @@ public class MovieDAO {
 		   disConnection();
 	   }
    }
+   public void date_time(int month,String time)
+   {
+	   try
+	   {
+		   getConnection();
+		   String sql="INSERT INTO date_info VALUES(?,?)";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, month);
+		   ps.setString(2, time);
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
 }
 
 
