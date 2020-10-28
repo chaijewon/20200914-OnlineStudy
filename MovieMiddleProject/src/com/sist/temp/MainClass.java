@@ -17,13 +17,18 @@ public class MainClass {
 		 * no:list) { String res=getRand(); dao.theaterInsert(no, res); }
 		 * System.out.println("Insert 완료!!");
 		 */
-		String s="aaaaa&cbbbb&ccc";
-		System.out.println(s.replace("&", "^"));
+		MovieDAO dao=new MovieDAO();
+		for(int i=1;i<=18;i++)
+		{
+			String rday=getRand();
+			dao.theater_rday(i, rday);
+		}
+		System.out.println("Update완료");
 	}
 	public static String getRand()
 	{
 		String result="";
-		int count=5+(int)(Math.random()*10);// 5~14
+		int count=7+(int)(Math.random()*6);// 5~14
 		System.out.println(count);
 		int[] com=new int[count];
 		int su=0;
@@ -33,7 +38,7 @@ public class MainClass {
 			bCheck=true;
 			while(bCheck)
 			{
-				su=(int)(Math.random()*18)+1;
+				su=(int)(Math.random()*31)+1;
 				bCheck=false;
 				for(int j=0;j<i;j++)
 				{

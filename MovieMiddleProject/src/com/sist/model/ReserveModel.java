@@ -21,6 +21,10 @@ public class ReserveModel {
   {
 	  String strYear=request.getParameter("year");
 	  String strMonth=request.getParameter("month");
+	  String tno=request.getParameter("tno");
+	  if(tno==null)
+		  tno="1";
+	  
 	  Date date=null;
 		try {
 			date = new Date();
@@ -61,6 +65,25 @@ public class ReserveModel {
 	  System.out.println("요일:"+strWeek[week-1]);
 	  System.out.println("마지막날:"+lastday);
 	  
+	  // DB => 예약날짜 읽기
+	  System.out.println("tno="+tno);
+	  String rday=MovieDAO.theaterReserveData(Integer.parseInt(tno));
+	  System.out.println("rday="+rday);
+	  int[] days=new int[32];
+	  StringTokenizer st2=new StringTokenizer(rday,",");
+	  //int i=0;
+	  while(st2.hasMoreTokens())
+	  {
+		  String d=st2.nextToken();
+		  days[Integer.parseInt(d)]=Integer.parseInt(d);
+	  }
+	  
+	  for(int k:days)
+	  {
+		  System.out.println("k="+k);
+	  }
+	  
+	  request.setAttribute("rdays", days);
 	  // jsp로 전송 
 	  request.setAttribute("year", year);
 	  request.setAttribute("month", month);

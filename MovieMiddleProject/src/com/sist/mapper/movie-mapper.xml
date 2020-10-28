@@ -97,6 +97,11 @@
     SELECT * FROM theater_info
     WHERE tno=#{tno}
   </select>
+  
+  <select id="theaterReserveData" resultType="String" parameterType="int">
+    SELECT rday FROM theater_info
+    WHERE tno=#{tno}
+  </select>
 </mapper>
 
 

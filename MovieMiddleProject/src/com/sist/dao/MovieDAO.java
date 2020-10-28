@@ -142,6 +142,7 @@ public class MovieDAO {
    {
 	   SqlSession session=ssf.openSession();
 	   String tdata=session.selectOne("movieTheaterNo", no);
+	   
 	   session.close();
 	   return tdata;
    }
@@ -152,6 +153,19 @@ public class MovieDAO {
 	   TheaterVO tdata=session.selectOne("theaterListData", tno);
 	   session.close();
 	   return tdata;
+   }
+   /*
+    *   <select id="theaterReserveData" resultType="String" parameterType="int">
+		    SELECT rday FROM theater_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   public static String theaterReserveData(int tno)
+   {
+	   SqlSession session=ssf.openSession();
+	   String rday=session.selectOne("theaterReserveData", tno);
+	   session.close();
+	   return rday;
    }
 }
 

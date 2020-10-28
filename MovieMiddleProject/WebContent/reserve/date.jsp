@@ -13,6 +13,52 @@
    width:350pt;
 }
 </style> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.rdays_ok').hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","");
+	})
+	$('#year').change(function(){
+		let year=$(this).val();
+		$.ajax({
+			type:'post',
+			url:'../reserve/date.do',
+			data:{"year":year},
+			success:function(result)
+			{
+				$('#date_info').html(result);
+			}
+		})
+	})
+	$('#month').change(function(){
+		let month=$(this).val();
+		$.ajax({
+			type:'post',
+			url:'../reserve/date.do',
+			data:{"month":month},
+			success:function(result)
+			{
+				$('#date_info').html(result);
+			}
+		})
+	});
+	
+	// 예약일 클릭시 
+	// <span data-year="2020"> => attr("data-year")
+	// <span>28</span> => text()
+	// <input type=text> <select> ==> val()
+	$('.rdays_ok').click(function(){
+		let year=$(this).attr("data-year");
+		let month=$(this).attr("data-month");
+		let day=$(this).text();
+		let rday=year+"년도 "+month+"월 "+day+"일";
+		$('#movie_reserve').text(rday);
+	})
+});
+</script>
 </head>
 <body>
  
@@ -20,13 +66,13 @@
       <table class="table">
         <tr>
           <td>
-            <select name="year">
+            <select name="year" id="year">
              <c:forEach var="i" begin="2020" end="2030">
                <option ${i==year?"selected":"" }>${i }</option>
              </c:forEach>
             </select>년도&nbsp;
             
-            <select name="month">
+            <select name="month" id="month">
              <c:forEach var="i" begin="1" end="12">
                <option ${i==month?"selected":"" }>${i }</option>
              </c:forEach>
@@ -71,14 +117,21 @@
              </c:forEach>
            </c:if>
            
-           <c:if test="${i==day }">
+           <c:if test="${i==rdays[i] }">
              <c:set var="bg" value="text-center danger"/>
            </c:if>
-           <c:if test="${i!=day }">
+           <c:if test="${i!=rdays[i]  }">
              <c:set var="bg" value="text-center"/>
            </c:if>
            
-           <td class="${bg }"><font color="${color }">${i }</font></td>
+           <td class="${bg }"><font color="${color }">
+            <c:if test="${i==rdays[i] }">
+             <span class="rdays_ok" data-year=${year } data-month=${month }>${i }</span>
+            </c:if>
+            <c:if test="${i!=rdays[i]  }">
+             ${i }
+            </c:if>
+           </font></td>
            <c:set var="week" value="${week+1 }"/>
            <c:if test="${week>6 }">
              <c:set var="week" value="0"/>

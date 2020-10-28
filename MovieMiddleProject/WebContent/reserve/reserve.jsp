@@ -118,6 +118,14 @@
                <span id="movie_theater"></span>
              </td>
            </tr>
+           <tr>
+             <td class="text-right" width=25%>
+                         예매일:
+             </td>
+             <td width=75%>
+               <span id="movie_reserve"></span>
+             </td>
+           </tr>
          </table>
        </td>
      </tr>
