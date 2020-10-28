@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.inwon').hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","");
+	})
+	$('.inwon').click(function(){
+		let inwon=$(this).text();
+		let price=inwon*10000;
+		$('#movie_inwon').text(inwon+"명");
+		$('#movie_price').text(price+"원");
+		$('#okbtn').show();
+		$('#inwon').val(inwon);
+		$('#price').val(price);
+	})
+})
+</script>
 </head>
 <body>
   <table class="table">
@@ -13,15 +32,7 @@
       <td>
        성인:
        <c:forEach var="i" begin="1" end="10">
-         <span class="btn btn-xs btn-info">${i }</span>
-       </c:forEach>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       소인:
-       <c:forEach var="i" begin="1" end="10">
-         <span class="btn btn-xs btn-warning">${i }</span>
+         <span class="btn btn-xs btn-info inwon">${i }</span>
        </c:forEach>
       </td>
     </tr>

@@ -56,6 +56,7 @@ $(function(){
 		let day=$(this).text();
 		let rday=year+"년도 "+month+"월 "+day+"일";
 		$('#movie_reserve').text(rday);
+		$('#day').val(rday);
 		
 		// 시간 출력 
 		/*

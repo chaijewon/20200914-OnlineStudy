@@ -25,6 +25,7 @@ $(function(){
 		$('#movie_poster').attr("src",poster);
 		$('#movie_title').text(title);
 		//theater.do?no=1
+		$('#mno').val(no);
 		$.ajax({
 			type:'post',
 			url:'../reserve/theater.do',

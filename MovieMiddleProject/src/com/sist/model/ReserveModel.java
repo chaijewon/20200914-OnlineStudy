@@ -145,6 +145,17 @@ public class ReserveModel {
 	  return "../reserve/inwon.jsp";
   }
   // 예매 
+  @RequestMapping("reserve/reserve_ok.do")
+  public String reserve_reserve_ok(HttpServletRequest request)
+  {
+	  System.out.println(request.getParameter("mno"));
+	  System.out.println(request.getParameter("tname"));
+	  System.out.println(request.getParameter("inwon"));
+	  System.out.println(request.getParameter("day"));
+	  System.out.println(request.getParameter("price"));
+	  System.out.println(request.getParameter("time"));
+	  return "../reserve/inwon.jsp";
+  }
   // 마이페이지
   // 어드민 페이지
 }

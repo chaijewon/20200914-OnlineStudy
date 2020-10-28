@@ -134,6 +134,37 @@
                <span id="movie_time"></span>
              </td>
            </tr>
+           <tr>
+             <td class="text-right" width=25%>
+                         인원:
+             </td>
+             <td width=75%>
+               <span id="movie_inwon"></span>
+             </td>
+           </tr>
+           <tr>
+             <td class="text-right" width=25%>
+                         금액:
+             </td>
+             <td width=75%>
+               <span id="movie_price"></span>
+             </td>
+           </tr>
+           <tr style="display:none" id="okbtn">
+              <td colspan="2" class="text-center">
+                <form method="post" action="../reserve/reserve_ok.do">
+                  <input type=hidden name="mno" id="mno">
+                  <input type=hidden name="tname" id="tname">
+                  <input type=hidden name="day" id="day">
+                  <input type=hidden name="time" id="time">
+                  <input type=hidden name="inwon" id="inwon">
+                  <input type=hidden name="price" id="price">
+                  <input type=submit value="예매하기"
+                           class="btn btn-lg btn-primary">
+                </form>
+                
+              </td>
+           </tr>
          </table>
        </td>
      </tr>

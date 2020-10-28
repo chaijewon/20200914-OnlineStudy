@@ -17,7 +17,7 @@ $(function(){
 	$('.times').click(function(){
 		let time=$(this).text();
 		$('#movie_time').text(time);
-		
+		$('#time').val(time);
 		$.ajax({
 			type:'post',
 			url:'../reserve/inwon.do',

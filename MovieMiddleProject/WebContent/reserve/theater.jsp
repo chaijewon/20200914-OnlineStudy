@@ -21,6 +21,7 @@ $(function(){
 	   let no=$(this).attr("data-tno");
 	   let tname=$(this).attr("data-name");
 	   $('#movie_theater').text(tname);
+	   $('#tname').val(tname);
 	   $.ajax({
 		   type:'post',
 		   url:'../reserve/date.do',
