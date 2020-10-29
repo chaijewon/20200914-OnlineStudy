@@ -14,6 +14,7 @@
       <td>
         <table class="table table-striped">
           <tr class="danger">
+           <th class="text-center"></th>
            <th class="text-center">예매번호</th>
            <th class="text-center"></th>
            <th class="text-center">ID</th>
@@ -26,6 +27,11 @@
           </tr>
           <c:forEach var="vo" items="${list }">
             <tr>
+               <td class="text-center">
+                 <c:if test="${vo.isreserve=='n' }">
+                  <input type="checkbox" value="${vo.no }" class="cb" name=cb>
+                 </c:if>
+               </td>
                <td class="text-center">${vo.no }</td>
 	           <td class="text-center">
 	             <img src="${vo.mvo.poster }" width=30 height=30>
@@ -37,11 +43,11 @@
 	           <td class="text-center">${vo.inwon }</td>
 	           <td class="text-center">${vo.price }</td>
 	           <td class="text-center">
-	             <c:if test="${vo.isreserve=='y' }">
-	              <a href="#" class="btn btn-sm btn-primary">승인완료</a>
-	             </c:if>
 	             <c:if test="${vo.isreserve=='n' }">
-	              <span class="btn btn-sm btn-danger">승인대기</span>
+	              <a href="../reserve/admin_ok.do?no=${vo.no }" class="btn btn-sm btn-primary">승인대기</a>
+	             </c:if>
+	             <c:if test="${vo.isreserve=='y' }">
+	              <span class="btn btn-sm btn-danger">승인완료</span>
 	             </c:if>
 	           </td>
             </tr>

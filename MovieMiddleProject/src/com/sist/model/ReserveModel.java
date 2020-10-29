@@ -197,6 +197,16 @@ public class ReserveModel {
 	  request.setAttribute("main_jsp", "../reserve/adminpage.jsp");
 	  return "../main/main.jsp";
   }
+  
+  @RequestMapping("reserve/admin_ok.do")
+  public String reserve_admin_ok(HttpServletRequest request)
+  {
+	  // 예약번호 
+	  String no=request.getParameter("no");
+	  // UPDATE
+	  MovieDAO.reserveOk(Integer.parseInt(no));
+	  return "redirect:../reserve/adminpage.do";// 원상복귀
+  }
 }
 
 

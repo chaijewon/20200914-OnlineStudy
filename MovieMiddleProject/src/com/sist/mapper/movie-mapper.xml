@@ -155,12 +155,20 @@
     SELECT reserve.no,title,poster,theater,time,inwon,price,isreserve
     FROM reserve,movie_info
     WHERE mno=movie_info.no AND id=#{id}
+    ORDER BY no DESC
   </select>
   <select id="adminReserveListData" resultMap="reserveList">
     SELECT reserve.no,id,title,poster,theater,time,inwon,price,isreserve
     FROM reserve,movie_info
-    WHERE mno=movie_info.no
+    WHERE mno=movie_info.no AND isreserve='n'
+    ORDER BY no DESC
   </select>
+  
+  <update id="reserveOk" parameterType="int">
+    UPDATE reserve SET
+    isreserve='y'
+    WHERE no=#{no}
+  </update>
 </mapper>
 
 

@@ -230,6 +230,29 @@ public class MovieDAO {
 	   session.close();
 	   return list;
    }
+   /*
+    *   <update id="reserveOk" parameterType="int">
+		    UPDATE reserve SET
+		    isreserve='y'
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void reserveOk(int no)
+   {
+	   SqlSession session=ssf.openSession(true);//autocommit
+	   session.update("reserveOk",no);
+	   session.close();
+   }
+   /*
+    *   사용자 요청  ==> *.do ==> DispatcherServlet(Controller) => Model(RequestMapping)
+    *   ========
+    *     1. <a href="main.do">
+    *     2. <form action="insert.do"> 
+    *     3. ajax => url:'update.do'
+    *     
+    *    =====> main.do 처리를 하는 메소드 찾기 
+    *    =====> insert.do 
+    */
 }
 
 
