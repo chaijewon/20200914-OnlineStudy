@@ -94,6 +94,7 @@ public class DispatcherServlet extends HttpServlet {
 		String cmd=request.getRequestURI();
 		// main/main.do
 		cmd=cmd.substring(request.getContextPath().length()+1);
+		System.out.println(cmd);
 		///OnLineStudy18_MVCFinal/
 		try
 		{
@@ -113,6 +114,10 @@ public class DispatcherServlet extends HttpServlet {
 				 *    // a=new B();
 				 *    Object obj=new A();
 				 *    obj=new B();
+				 *    
+				 *    public void display(int a,String s)
+				 *    
+				 *    display(10)
 				 */
 				// 메소드를 찾아서 호출 (invoke())
 				Method[] methods=clsName.getDeclaredMethods();
@@ -122,9 +127,20 @@ public class DispatcherServlet extends HttpServlet {
 					RequestMapping rm=m.getAnnotation(RequestMapping.class);
 					if(cmd.equals(rm.value()))
 					{
-						 String jsp=(String)m.invoke(obj, request);
+						 String jsp="";
+						 if(rm.value().equals("movie/detail_before.do"))
+						 {
+						     jsp=(String)m.invoke(obj, request,response);
+						     // request=> cookie,session 생성 
+						     
+						     // response => cookie , upload
+						 }
+						 else
+						 {
+							 jsp=(String)m.invoke(obj, request);
+						 }
 								// a.display()
-						if(jsp.equals("redirect"))
+						if(jsp.startsWith("redirect"))
 						{
 							response.sendRedirect(jsp.substring(jsp.indexOf(":")+1));
 							// return redirect:list.do
