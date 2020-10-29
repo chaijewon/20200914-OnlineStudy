@@ -17,6 +17,14 @@
                                                 false : 동기화 
  */
 $(function(){
+	// keyup , keydown
+	$('#keyword').keyup(function(){
+		let k=$('#keyword').val();// 검색어 입력한 값을 읽어 온다 
+		$('#movie-table > tbody > tr').hide();
+		let temp=$('#movie-table > tbody > tr> td:nth-child(2n+2):contains("'+k+'")');
+		$(temp).parent().show();
+		// temp ==> td
+	});
 	$('.movie').click(function(){
 		let no=$(this).attr("data-value");
 		//alert("no:"+no);
@@ -40,14 +48,23 @@ $(function(){
 </script>
 </head>
 <body>
-   <table class="table striped">
-     <c:forEach var="vo" items="${list }">
-       <tr class="movie" data-value="${vo.no }"
-           data-poster="${vo.poster }" data-title="${vo.title }">
-         <td><img src="${vo.poster }" width=20 height=20></td>
-         <td style="font-size:8pt">${vo.title }</td>
-       </tr>
-     </c:forEach>
+   <table class="table">
+    <tr>
+      <td>
+       <input type=text id="keyword" size=15 placeholder="검색어 입력">
+      </td>
+    </tr>
+   </table>
+   <table class="table table-striped" id="movie-table">
+       <tbody>
+		     <c:forEach var="vo" items="${list }">
+		       <tr class="movie" data-value="${vo.no }"
+		           data-poster="${vo.poster }" data-title="${vo.title }">
+		         <td><img src="${vo.poster }" width=20 height=20></td>
+		         <td style="font-size:8pt">${vo.title }</td>
+		       </tr>
+		     </c:forEach>
+     </tbody>
    </table>
 </body>
 </html>

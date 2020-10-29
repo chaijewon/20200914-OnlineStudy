@@ -15,6 +15,33 @@
 </style> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+// click(태그 전체)=> img,tr,div...button , change => select , hover(전체태그)
+/*
+ *   태그가지고 오기 (selector)
+ *   $('태그명')
+     $('#id')
+     $('.class')
+     
+     => 제어 
+        <태그>값</태그> => text()
+        <태그 속성="값"> => attr(속성명)
+        <input><select> => val()
+        
+        <태그><태그>값</태그></태그>  => text() => 값
+                                 => html() => <태그>값</태그>
+                                 ==============================
+        <태그>와 </태그>에 데이터,태그를 여러개 첨부 ==> append
+        
+        = $('a').hide() , show() 
+        = contains() => like
+        = parent()
+          <tr>
+           <td>
+             <img> click
+           </td>
+          </tr>
+        = child()
+ */
 $(function(){
 	$('.rdays_ok').hover(function(){
 		$(this).css("cursor","pointer");

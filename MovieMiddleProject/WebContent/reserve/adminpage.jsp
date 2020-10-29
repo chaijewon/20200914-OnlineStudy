@@ -6,12 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+// $('input[type=checkbox]')
+$(function(){
+	$('#allBtn').click(function(){
+		// 체크박스의 선택여부 확인 => radio
+		let len=$('.cb:checked').length;
+		if(len==0)
+		{
+		   alert("승인할 대상을 선택하세요!!");
+		}
+		else
+		{
+			$('#frm').submit();//submit효과 => form태그의 action에등록 파일로 데이터 전송
+		}
+	})
+})
+</script>
 </head>
 <body>
   <table class="table">
     <caption>예매목록</caption>
     <tr>
       <td>
+        <input type="button" class="btn btn-sm btn-primary" id="allBtn"
+          value="전체 승인"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <form id="frm" action="../reserve/reserve_all_ok.do" method="post">
         <table class="table table-striped">
           <tr class="danger">
            <th class="text-center"></th>
@@ -53,6 +78,7 @@
             </tr>
           </c:forEach>
         </table>
+        </form>
       </td>
     </tr>
   </table>

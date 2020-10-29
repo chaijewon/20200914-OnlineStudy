@@ -207,6 +207,18 @@ public class ReserveModel {
 	  MovieDAO.reserveOk(Integer.parseInt(no));
 	  return "redirect:../reserve/adminpage.do";// 원상복귀
   }
+  
+  @RequestMapping("reserve/reserve_all_ok.do")
+  public String reserve_all_ok(HttpServletRequest request)
+  {
+	  // 데이터 받기 
+	  String[] nos=request.getParameterValues("cb");
+	  for(String n:nos)
+	  {
+		  MovieDAO.reserveOk(Integer.parseInt(n));
+	  }
+	  return "redirect:../reserve/adminpage.do";
+  }
 }
 
 
