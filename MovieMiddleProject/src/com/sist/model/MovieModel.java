@@ -2,6 +2,7 @@ package com.sist.model;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
@@ -176,6 +177,25 @@ public class MovieModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("main_jsp", "../movie/total.jsp");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		// 쿠키 읽기
+		Cookie[] cookies=request.getCookies();
+		List<MovieVO> cList=new ArrayList<MovieVO>();
+		if(cookies!=null)
+		{
+			for(int i=0;i<cookies.length;i++)
+			{
+				if(cookies[i].getName().startsWith(id))
+				{
+					String no=cookies[i].getValue();
+					MovieVO vo=MovieDAO.movieDetailData(Integer.parseInt(no));
+					cList.add(vo);
+				}
+			}
+		}
+		request.setAttribute("cList", cList);
 		return "../main/main.jsp";
 	}
 
@@ -198,20 +218,38 @@ public class MovieModel {
 	 * cookie : 클라이언트 (브라우저) ==> 저장 내용을 서버에서 전송 (response) session : 서버에 저장
 	 * (response를 이용하지 않는다)
 	 */
-	public String movie_detail_before(HttpServletRequest request) {
+	public String movie_detail_before(HttpServletRequest request,
+			HttpServletResponse response) {
 		// ../movie/detail_before.do?no=${vo.no }
 		String no = request.getParameter("no");
 		// no=1&aaa=1
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		//   shim123
 		Cookie cookie=new Cookie(id+no, no);
+		// 기간 
+		cookie.setMaxAge(60*60*24);
 		//전송
+		response.addCookie(cookie);
+		
 		//cookie=new Cookie(id+no, no);
 		return "redirect:../movie/detail.do?no=" + no;// 재요청 
 	}
 
 	@RequestMapping("movie/detail.do")
 	public String movie_detail(HttpServletRequest request) {
+		
+		String no=request.getParameter("no");
+		// DB연동
+		MovieVO vo=MovieDAO.movieDetailData(Integer.parseInt(no));
+		String str=vo.getStory();
+		if(str.length()>300)
+		{
+		    str=str.substring(0,300);
+		    str+="...";
+		}
+		vo.setStory(str);
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../movie/detail.jsp");
 		return "../main/main.jsp";
 	}

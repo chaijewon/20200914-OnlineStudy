@@ -48,6 +48,18 @@
 		</ul>
     </div>
   </div>
+  <div class="row">
+    <c:forEach var="vo" items="${cList }">
+      <div class="col-md-2">
+	    <div class="thumbnail">
+	        <img src="${vo.poster }" alt="Lights" style="width:100%">
+	        <div class="caption">
+	          <p>${vo.title }</p>
+	        </div>
+       </div>
+     </div>
+    </c:forEach>
+  </div>
 </body>
 </html>
 
