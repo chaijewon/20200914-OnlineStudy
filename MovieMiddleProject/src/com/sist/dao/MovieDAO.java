@@ -253,6 +253,75 @@ public class MovieDAO {
     *    =====> main.do 처리를 하는 메소드 찾기 
     *    =====> insert.do 
     */
+   /*
+    *  <!-- 좋아요 -->
+		  <update id="likeIncrement" parameterType="int">
+		    UPDATE movie_info SET
+		    hit=hit+1
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void likeIncrement(int no)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("likeIncrement", no);
+	   session.close();
+   }
+   /*
+		  <!-- 찜 저장  -->
+		  <insert id="jjimInsert" parameterType="com.sist.vo.JjimVO">
+		    INSERT INTO jjim VALUES(
+		      (SELECT NVL(MAX(no)+1,1) FROM jjim),#{id},#{mno}
+		    )
+		  </insert>
+    */
+   public static void jjimInsert(JjimVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("jjimInsert", vo);
+	   session.close();
+   }
+   /*
+		  <!-- 데이터 읽기(찜 목록) -->
+		  <select id="jjimListData" parameterType="String" resultType="com.sist.vo.JjimVO">
+		    SELECT * FROM jjim
+		    WHERE id=#{id}
+		  </select>
+   */
+   public static List<JjimVO> jjimListData(String id)
+   {
+	   SqlSession session=ssf.openSession();
+	   List<JjimVO> list=session.selectList("jjimListData",id);
+	   session.close();
+	   return list;
+   }
+   /*
+		  <!-- 찜여부 확인 -->
+		  <select id="jjimCount" parameterType="com.sist.vo.JjimVO" resultType="int">
+		    SELECT COUNT(*) FROM jjim
+		    WHERE id=#{id} AND mno=#{mno}
+		  </select>
+   */
+   public static int jjimCount(JjimVO vo)
+   {
+	   SqlSession session=ssf.openSession();
+	   int count=session.selectOne("jjimCount",vo);
+	   session.close();
+	   return count;
+   }
+   /*
+		  <!-- 찜 취소시에 처리  -->
+		  <delete id="jjimDelete" parameterType="int">
+		    DELETE FROM jjim
+		    WHERE no=#{no}
+		  </delete>
+    */
+   public static void jjimDelete(int no)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.delete("jjimDelete", no);
+	   session.close();
+   }
 }
 
 

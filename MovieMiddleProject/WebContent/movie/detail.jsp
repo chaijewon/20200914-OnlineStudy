@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,10 @@
        </tr>
        <tr>
          <td colspan="3" class="text-right">
-           <a href="#" class="btn btn-sm btn-primary">좋아요</a>
-           <a href="#" class="btn btn-sm btn-primary">찜하기</a>
+           <a href="../movie/like.do?no=${vo.no }" class="btn btn-sm btn-primary">좋아요</a>
+           <c:if test="${count==0 }">
+            <a href="../movie/jjim.do?no=${vo.no }" class="btn btn-sm btn-primary">찜하기</a>
+           </c:if>
            <a href="../movie/total.do" class="btn btn-sm btn-primary">목록</a>
          </td>
        </tr>

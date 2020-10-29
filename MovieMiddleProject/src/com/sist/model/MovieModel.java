@@ -251,6 +251,40 @@ public class MovieModel {
 		vo.setStory(str);
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../movie/detail.jsp");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		JjimVO jvo=new JjimVO();
+		jvo.setId(id);
+		jvo.setMno(Integer.parseInt(no));
+		int count=MovieDAO.jjimCount(jvo);
+		
+		request.setAttribute("count", count);
 		return "../main/main.jsp";
 	}
+	@RequestMapping("movie/like.do")
+	public String movie_like(HttpServletRequest request)
+	{
+		String no=request.getParameter("no");
+		MovieDAO.likeIncrement(Integer.parseInt(no));
+		return "redirect:../movie/detail.do?no="+no;
+	}
+	
+	@RequestMapping("movie/jjim.do")
+	public String movie_jjim(HttpServletRequest request)
+	{
+		String no=request.getParameter("no");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		JjimVO vo=new JjimVO();
+		vo.setId(id);
+		vo.setMno(Integer.parseInt(no));
+		MovieDAO.jjimInsert(vo);
+		return "redirect:../movie/detail.do?no="+no;
+	}
 }
+
+
+
+
+

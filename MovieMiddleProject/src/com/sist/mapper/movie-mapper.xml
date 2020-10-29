@@ -169,6 +169,34 @@
     isreserve='y'
     WHERE no=#{no}
   </update>
+  
+  <!-- 좋아요 -->
+  <update id="likeIncrement" parameterType="int">
+    UPDATE movie_info SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <!-- 찜 저장  -->
+  <insert id="jjimInsert" parameterType="com.sist.vo.JjimVO">
+    INSERT INTO jjim VALUES(
+      (SELECT NVL(MAX(no)+1,1) FROM jjim),#{id},#{mno}
+    )
+  </insert>
+  <!-- 데이터 읽기(찜 목록) -->
+  <select id="jjimListData" parameterType="String" resultType="com.sist.vo.JjimVO">
+    SELECT * FROM jjim
+    WHERE id=#{id}
+  </select>
+  <!-- 찜여부 확인 -->
+  <select id="jjimCount" parameterType="com.sist.vo.JjimVO" resultType="int">
+    SELECT COUNT(*) FROM jjim
+    WHERE id=#{id} AND mno=#{mno}
+  </select>
+  <!-- 찜 취소시에 처리  -->
+  <delete id="jjimDelete" parameterType="int">
+    DELETE FROM jjim
+    WHERE no=#{no}
+  </delete>
 </mapper>
 
 
