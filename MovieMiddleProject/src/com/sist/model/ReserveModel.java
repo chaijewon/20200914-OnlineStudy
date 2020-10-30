@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MovieDAO;
+import com.sist.vo.JjimVO;
 import com.sist.vo.MovieVO;
 import com.sist.vo.ReserveVO;
 import com.sist.vo.TheaterVO;
@@ -186,6 +187,22 @@ public class ReserveModel {
 	  List<ReserveVO> list=MovieDAO.mypageReserveListData(id);
 	  request.setAttribute("list", list);
 	  request.setAttribute("main_jsp", "../reserve/mypage.jsp");
+	  
+	  List<JjimVO> jList=MovieDAO.jjimListData(id);
+	  List<MovieVO> mList=new ArrayList<MovieVO>();
+	  for(JjimVO vo:jList)
+	  {
+		  MovieVO mvo=MovieDAO.movieDetailData(vo.getMno());
+		  String story=mvo.getStory();
+		  mvo.setJno(vo.getNo());
+		  if(story.length()>150)
+		  {
+			  story=story.substring(0,150)+"...";
+			  mvo.setStory(story);
+		  }
+		  mList.add(mvo);
+	  }
+	  request.setAttribute("mList", mList);
 	  return "../main/main.jsp";
   }
   // 어드민 페이지

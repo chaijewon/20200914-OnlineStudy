@@ -185,7 +185,7 @@ public class MovieModel {
 		List<MovieVO> cList=new ArrayList<MovieVO>();
 		if(cookies!=null)
 		{
-			for(int i=0;i<cookies.length;i++)
+			for(int i=cookies.length-1;i>=0;i--)
 			{
 				if(cookies[i].getName().startsWith(id))
 				{
@@ -281,6 +281,13 @@ public class MovieModel {
 		vo.setMno(Integer.parseInt(no));
 		MovieDAO.jjimInsert(vo);
 		return "redirect:../movie/detail.do?no="+no;
+	}
+	@RequestMapping("movie/jjim_cancel.do")
+	public String movie_jjim_cancel(HttpServletRequest request)
+	{
+		String no=request.getParameter("no");
+		MovieDAO.jjimDelete(Integer.parseInt(no));
+		return "redirect:../reserve/mypage.do";
 	}
 }
 

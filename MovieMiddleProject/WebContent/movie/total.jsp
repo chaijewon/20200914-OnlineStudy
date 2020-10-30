@@ -49,7 +49,9 @@
     </div>
   </div>
   <div class="row">
-    <c:forEach var="vo" items="${cList }">
+    <h2>최근 방문한 영화</h2>
+    <c:forEach var="vo" items="${cList }" varStatus="s">
+      <c:if test="${s.index<6 }">
       <div class="col-md-2">
 	    <div class="thumbnail">
 	        <img src="${vo.poster }" alt="Lights" style="width:100%">
@@ -58,6 +60,7 @@
 	        </div>
        </div>
      </div>
+     </c:if>
     </c:forEach>
   </div>
 </body>

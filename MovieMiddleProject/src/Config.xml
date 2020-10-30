@@ -11,6 +11,8 @@
     <!-- VO를 등록 -->
     <typeAlias type="com.sist.vo.MovieVO" alias="MovieVO"/>
     <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
+    <typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
+    <typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
     <!-- 
                       오라클에서 가지고 오는 데이터를 받아서 저장 
             while(rs.next())
@@ -97,6 +99,7 @@
     <mapper resource="com/sist/mapper/movie-mapper.xml"/>
     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
     <mapper resource="com/sist/mapper/member-mapper.xml"/>
+    <mapper resource="com/sist/mapper/board-mapper.xml"/>
   </mappers>
 </configuration>
 

@@ -52,7 +52,24 @@
     <caption>찜목록</caption>
     <tr>
       <td>
-        
+        <c:forEach var="vo" items="${mList }">
+          <table class="table">
+            <tr>
+              <td width=30% class="text-center" rowspan="3">
+               <img src="${vo.poster }" width=200 height=150>
+              </td>
+              <td width=70%>${vo.title }</td>
+            </tr>
+            <tr>
+               <td width=70% valign="top">${vo.story }</td>
+            </tr>
+            <tr>
+               <td width=70% class="text-right">
+                 <a href="../movie/jjim_cancel.do?no=${vo.jno }" class="btn btn-sm btn-danger">취소</a>
+               </td>
+            </tr>
+          </table>
+        </c:forEach>
       </td>
     </tr>
   </table>

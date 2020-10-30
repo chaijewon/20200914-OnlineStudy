@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.board-mapper">
+  <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+    SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num
+    FROM (SELECT no,subject,name,regdate,hit,rownum as num
+    FROM (SELECT no,subject,name,regdate,hit 
+    FROM movie_board ORDER BY no DESC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <insert id="boardInsert" parameterType="BoardVO">
+    <selectKey></selectKey>
+  </insert>
+</mapper>

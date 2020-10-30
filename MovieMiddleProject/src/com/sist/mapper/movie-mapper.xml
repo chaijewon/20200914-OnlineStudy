@@ -186,6 +186,7 @@
   <select id="jjimListData" parameterType="String" resultType="com.sist.vo.JjimVO">
     SELECT * FROM jjim
     WHERE id=#{id}
+    ORDER BY no DESC
   </select>
   <!-- 찜여부 확인 -->
   <select id="jjimCount" parameterType="com.sist.vo.JjimVO" resultType="int">
