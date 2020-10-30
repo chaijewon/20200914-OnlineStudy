@@ -39,7 +39,46 @@
       0
     )
   </insert>
+  <!-- 내용보기  -->
+  <update id="boardHitIncrement" parameterType="int">
+    UPDATE movie_board SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" parameterType="int" resultType="BoardVO">
+    SELECT * FROM movie_board
+    WHERE no=#{no}
+  </select>
+  
+  <!-- 댓글 올리기  -->
+  <insert id="replyInsert" parameterType="ReplyVO">
+    <!-- 적용할 수 없다(한번) -->
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM movie_reply
+    </selectKey>
+    INSERT INTO movie_reply(no,bno,id,name,msg,group_id) VALUES(
+      #{no},
+      #{bno},
+      #{id},
+      #{name},
+      #{msg},
+      (SELECT NVL(MAX(group_id)+1,1) FROM movie_reply)
+    )
+  </insert>
+  <select id="replyListData" resultType="ReplyVO" parameterType="int">
+    SELECT no,bno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,
+    group_tab FROM movie_reply
+    WHERE bno=#{bno}
+  </select>
 </mapper>
+
+
+
+
+
+
+
+
 
 
 

@@ -38,7 +38,7 @@
         <tr>
 	        <td class="text-center btd" width=10%>${vo.no }</td>
 	        <td class="text-left btd" width=45%>
-	        ${vo.subject }
+	         <a href="../board/detail.do?no=${vo.no }">${vo.subject }</a>
 	        <c:if test="${today==vo.dbday }">
 	          <font color=red><sup>new</sup></font>
 	        </c:if>

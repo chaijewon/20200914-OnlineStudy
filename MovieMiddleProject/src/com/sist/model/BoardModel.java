@@ -26,10 +26,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.BoardDAO;
 import com.sist.vo.BoardVO;
+import com.sist.vo.ReplyVO;
 public class BoardModel {
    @RequestMapping("board/list.do")
    public String board_list(HttpServletRequest request)
@@ -96,6 +98,47 @@ public class BoardModel {
 	    // DAO로 전송 
 	    BoardDAO.boardInsert(vo);
 	   return "redirect:../board/list.do";
+   }
+   
+   @RequestMapping("board/detail.do")
+   public String board_detail(HttpServletRequest request)
+   {
+	   String no=request.getParameter("no");
+	   // DB연동
+	   BoardVO vo=BoardDAO.boardDetailData(Integer.parseInt(no));
+	   // 데이터 전송
+	   request.setAttribute("vo", vo);
+	   // 화면 
+	   request.setAttribute("main_jsp", "../board/detail.jsp");
+	   
+	   List<ReplyVO> list=BoardDAO.replyListData(Integer.parseInt(no));
+	   
+	   request.setAttribute("rList", list);
+	   return "../main/main.jsp";
+   }
+   // 게시물에 댓글 
+   @RequestMapping("board/reply_insert.do")
+   public String reply_insert(HttpServletRequest request)
+   {
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+		   
+	   }catch(Exception ex) {}
+	   String bno=request.getParameter("bno");
+	   String msg=request.getParameter("msg");
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   String name=(String)session.getAttribute("name");
+	   // VO에 담아서 => DAO
+	   ReplyVO vo=new ReplyVO();
+	   vo.setBno(Integer.parseInt(bno));
+	   vo.setId(id);
+	   vo.setMsg(msg);
+	   vo.setName(name);
+	   // DAO연결 
+	   BoardDAO.replyInsert(vo);
+	   return "redirect:../board/detail.do?no="+bno;
    }
 }
 
