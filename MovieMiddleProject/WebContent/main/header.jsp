@@ -111,7 +111,7 @@ $(function(){
 	        <ul class="dropdown-menu">
 	          <%-- 블록별 처리 --%>
 	          <li><a href="#">공지사항</a></li>
-	          <li><a href="#">자유게시판</a></li>
+	          <li><a href="../board/list.do">자유게시판</a></li>
 	          <li><a href="#">묻고답하기</a></li>
 	        </ul>
 	      </li>

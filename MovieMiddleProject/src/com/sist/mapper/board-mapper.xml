@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.board-mapper">
+  <!-- 
+        서브쿼리 => 메인쿼리 
+        단일행
+        WHERE sal = (SEELCT AVG(sal) ~~)
+        
+        ==> 평균 구하기 
+        ==> sal 대입 출력 
+        다중행  WHERE  deptno IN(SELECT deptno FROM dept) ==> 10,20,30,40
+                 deptno=10 OR deptno=20 OR deptno=30..
+                 MAX: ALL MIN: ANY
+         
+        스칼라 SELECT no,(SELECT~)
+   -->
   <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
     SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num
     FROM (SELECT no,subject,name,regdate,hit,rownum as num
@@ -8,7 +21,26 @@
     FROM movie_board ORDER BY no DESC))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
+  <!-- 총페이지 -->
+  <select id="boardTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/10.0) FROM movie_board
+  </select>
   <insert id="boardInsert" parameterType="BoardVO">
-    <selectKey></selectKey>
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM movie_board
+    </selectKey>
+    INSERT INTO movie_board VALUES(
+      #{no},
+      #{name},
+      #{subject},
+      #{content},
+      #{pwd},
+      SYSDATE,
+      0
+    )
   </insert>
 </mapper>
+
+
+
+
