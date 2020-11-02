@@ -140,6 +140,31 @@ public class BoardModel {
 	   BoardDAO.replyInsert(vo);
 	   return "redirect:../board/detail.do?no="+bno;
    }
+   @RequestMapping("board/reply_reply_insert.do")
+   public String reply_reply_insert(HttpServletRequest request)
+   {
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception ex) {}
+	   String no=request.getParameter("no");
+	   System.out.println("no="+no);
+	   String bno=request.getParameter("bno");
+	   System.out.println("bno="+bno);
+	   String msg=request.getParameter("msg");
+	   ReplyVO vo=new ReplyVO();
+	   //vo.setRoot(Integer.parseInt(no));
+	   vo.setBno(Integer.parseInt(bno));
+	   vo.setMsg(msg);
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   String name=(String)session.getAttribute("name");
+	   vo.setId(id);
+	   vo.setName(name);
+	   // DB연동 
+	   BoardDAO.replyReplyInsert(Integer.parseInt(no), vo);
+	   return "redirect:../board/detail.do?no="+bno;
+   }
 }
 
 

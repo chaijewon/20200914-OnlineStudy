@@ -65,11 +65,60 @@
       (SELECT NVL(MAX(group_id)+1,1) FROM movie_reply)
     )
   </insert>
+  
   <select id="replyListData" resultType="ReplyVO" parameterType="int">
     SELECT no,bno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,
-    group_tab FROM movie_reply
+    group_tab FROM movie_reply 
     WHERE bno=#{bno}
+    ORDER BY group_id DESC , group_step ASC
   </select>
+  
+  <!-- 
+                         no  group_id   group_step  group_tab  root  depth
+        AAAAAA            1     1          0            0              3
+          =>OOOOOOO      8     1          1            1              0
+          =>KKKKKKK       7     1          2            1              0
+          =>BBBBBB        2     1          3            1              1
+          
+           =>CCCCCCC      3     1          4            2              1
+            =>FFFFFFF     5     1          5            3              0
+          
+        DDDDDD            4     2          0            0              1
+          => GGGGGGG      6     2          1            1              0
+          => KKKKKK       9     2          1            1
+   -->
+  <select id="replyParentData" parameterType="int" resultType="ReplyVO">
+   SELECT group_id,group_step,group_tab
+   FROM movie_reply
+   WHERE no=#{no}
+  </select>
+  <update id="replyStepIncrement" parameterType="ReplyVO">
+    UPDATE movie_reply SET
+    group_step=group_step+1
+    WHERE group_id=#{group_id} AND group_step>#{group_step}
+  </update>
+  <insert id="resplyReplyInsert" parameterType="ReplyVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM movie_reply
+    </selectKey>
+    INSERT INTO movie_reply(no,bno,id,name,msg,group_id,group_step,group_tab,root,depth) VALUES(
+      #{no},
+      #{bno},
+      #{id},
+      #{name},
+      #{msg},
+      #{group_id},
+      #{group_step},
+      #{group_tab},
+      #{root},
+      0
+    )
+  </insert>
+  <update id="replyDepthIncrement" parameterType="int">
+    UPDATE movie_reply SET
+    depth=depth+1
+    WHERE no=#{no}
+  </update>
 </mapper>
 
 

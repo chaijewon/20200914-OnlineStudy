@@ -289,6 +289,7 @@ public class MovieModel {
 		MovieDAO.jjimDelete(Integer.parseInt(no));
 		return "redirect:../reserve/mypage.do";
 	}
+	
 }
 
 
