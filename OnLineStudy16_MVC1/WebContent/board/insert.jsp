@@ -17,17 +17,8 @@ h1 {
 </style>
 </head>
 <body>
-  <div class="row">
-   <h1 class="text-center">글쓰기</h1>
-   <%-- 파일 업로드 : 프로토콜 (post)
-        enctype="multipart/form-data" => 업로드시만 사용 
-               프로토콜
-          http : 80
-          ftp  : 21
-          smtp : 25
-          multipart/form-data : 파일을 업로드 
-                  범용적으로 사용되는 약속 
-    --%>
+  <div class="row row1">
+   <h3 class="text-center">글쓰기</h3>
    <form method="post" action="insert_ok.do">
    <table class="table table-hover">
      <tr>

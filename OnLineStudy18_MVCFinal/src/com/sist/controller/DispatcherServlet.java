@@ -124,6 +124,23 @@ public class DispatcherServlet extends HttpServlet {
 				// 클래스에 선언된 모든 메소드를 가지고 온다 
 				for(Method m:methods)
 				{
+					/*
+					 *      public class A
+					 *      {
+					 *         public void display()
+					 *         {
+					 *         }
+					 *      }
+					 *      
+					 *      A a=new A();
+					 *      a.display();
+					 *      
+					 *      Class clasName=Class.forName("A")
+					 *      Object obj=clsName.newInstance();
+					 *      
+					 *      Method[] m=clsName.getDeclareMethods();
+					 *      m.invoke()
+					 */
 					RequestMapping rm=m.getAnnotation(RequestMapping.class);
 					if(cmd.equals(rm.value()))
 					{
