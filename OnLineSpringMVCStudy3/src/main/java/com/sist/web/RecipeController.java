@@ -72,9 +72,39 @@ public class RecipeController {
 	 *    @PostMapping => ajax , form
 	 */
 	@GetMapping("recipe/chef.do")
-	public String recipe_chef(String chef,Model model)
+	public String recipe_chef(String page,String chef,Model model)
 	{
-		return "";
+		// DB연동
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=20;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("chef", chef);
+		List<RecipeVO> list=dao.recipeChefData(map);
+		for(RecipeVO vo:list)
+		{
+			String title=vo.getTitle();
+			if(title.length()>22)
+			{
+				title=title.substring(0,22);
+				title+="...";
+			}
+			vo.setTitle(title);
+		}
+		// 총페이지 
+		int totalpage=dao.recipeChefTotalPage(chef);
+		
+		// 전송 
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("chef", chef);
+		model.addAttribute("list", list);
+		return "recipe/chef";
 	}
 	
 }
