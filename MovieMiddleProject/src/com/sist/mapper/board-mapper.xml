@@ -119,6 +119,33 @@
     depth=depth+1
     WHERE no=#{no}
   </update>
+  
+  <update id="replyUpdate" parameterType="ReplyVO">
+    UPDATE movie_reply SET
+    msg=#{msg}
+    WHERE no=#{no}
+  </update>
+  <!-- 삭제 -->
+  <select id="replyInfoData" resultType="ReplyVO" parameterType="int">
+    SELECT depth,root FROM movie_reply
+    WHERE no=#{no}
+  </select>
+  <!-- depth==0 -->
+  <delete id="replyDelete" parameterType="int">
+    DELETE FROM movie_reply
+    WHERE no=#{no}
+  </delete>
+  <!-- depth!=0 -->
+  <update id="replyMsgUpdate" parameterType="int">
+    UPDATE movie_reply SET
+    msg='관리자가 삭제한 댓글입니다'
+    WHERE no=#{no}
+  </update>
+  <update id="replyDepthDecrement" parameterType="int">
+    UPDATE movie_reply SET
+    depth=depth-1
+    WHERE no=#{no}
+  </update>
 </mapper>
 
 

@@ -165,6 +165,26 @@ public class BoardModel {
 	   BoardDAO.replyReplyInsert(Integer.parseInt(no), vo);
 	   return "redirect:../board/detail.do?no="+bno;
    }
+   
+   @RequestMapping("board/reply_update.do")
+   public String reply_update(HttpServletRequest request)
+   {
+	   // 데이터 받기
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception ex) {}
+	   String no=request.getParameter("no");
+	   String bno=request.getParameter("bno");
+	   String msg=request.getParameter("msg");
+	   // DB => UPDATE
+	   ReplyVO vo=new ReplyVO();
+	   vo.setNo(Integer.parseInt(no));
+	   vo.setMsg(msg);
+	   
+	   BoardDAO.replyUpdate(vo);
+	   return "redirect:../board/detail.do?no="+bno;
+   }
 }
 
 

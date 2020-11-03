@@ -16,9 +16,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 let i=0;
+let u=0;
 $(function(){
 	$('.reply_reply').click(function(){
 	  $('.rIn').hide();
+	  $('.rUp').hide();
 	  $('.reply_reply').text("댓글");
 	  let no=$(this).attr('value');
 	  if(i==0)
@@ -26,7 +28,7 @@ $(function(){
 		    
 			$('#rIn'+no).show();
 			$(this).text("취소");
-;			i=1;
+			i=1;
 	  }
 	  else
 	  {
@@ -36,6 +38,22 @@ $(function(){
 	  }
 		
 	});
+	
+	$('.reply_update').click(function(){
+		let no=$(this).attr("value");
+		$('.rIn').hide();
+		$('.rUp').hide();
+		if(u==0)
+		{
+			$('#rUp'+no).show();
+			u=1;
+		}
+		else
+		{
+			$('#rUp'+no).hide();
+			u=0;
+		}
+	})
 });
 </script>
 </head>
@@ -101,8 +119,8 @@ $(function(){
           </td>
           <td class="text-right">
             <c:if test="${sessionScope.id==rvo.id }">
-             <a href="#" class="btn btn-xs btn-primary">수정</a>
-             <a href="#" class="btn btn-xs btn-success">삭제</a>
+             <span class="btn btn-xs btn-primary reply_update" value="${rvo.no }">수정</span>
+             <a href="../board/reply_delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs btn-success">삭제</a>
             </c:if>
              <span class="btn btn-xs btn-danger reply_reply" value="${rvo.no }">댓글</span>
           </td>
@@ -131,9 +149,10 @@ $(function(){
       </tr>
       <tr class="rUp" id="rUp${rvo.no }" value="${rvo.no }" style="display:none">
        <td colspan="2">
-        <form method=post action="../board/reply_insert.do">
+        <form method=post action="../board/reply_update.do">
+            <input type=hidden name="no" value="${rvo.no }">
             <input type=hidden name="bno" value="${vo.no }">
-	        <textarea rows="3" cols="80" name="msg" style="float: left"></textarea>
+	        <textarea rows="3" cols="80" name="msg" style="float: left">${rvo.msg }</textarea>
 	        <input type=submit value="댓글수정" style="height:70px;float: left"
 	          class="btn btn-sm btn-primary"
 	        >

@@ -187,6 +187,20 @@ public class BoardDAO {
 	   session.commit();
 	   session.close();
    }
+   /*
+    *  <update id="replyUpdate" parameterType="ReplyVO">
+		    UPDATE movie_reply SET
+		    msg=#{msg}
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void replyUpdate(ReplyVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("replyUpdate",vo);
+	   session.close();
+	   
+   }
 }
 
 
