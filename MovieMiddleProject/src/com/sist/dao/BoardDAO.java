@@ -201,6 +201,60 @@ public class BoardDAO {
 	   session.close();
 	   
    }
+   /*
+    *   <!-- 삭제 -->
+	  <select id="replyInfoData" resultType="ReplyVO" parameterType="int">
+	    SELECT depth,root FROM movie_reply
+	    WHERE no=#{no}
+	  </select>
+	  <!-- depth==0 -->
+	  <delete id="replyDelete" parameterType="int">
+	    DELETE FROM movie_reply
+	    WHERE no=#{no}
+	  </delete>
+	  <!-- depth!=0 -->
+	  <update id="replyMsgUpdate" parameterType="int">
+	    UPDATE movie_reply SET
+	    msg='관리자가 삭제한 댓글입니다'
+	    WHERE no=#{no}
+	  </update>
+	  <update id="replyDepthDecrement" parameterType="int">
+	    UPDATE movie_reply SET
+	    depth=depth-1
+	    WHERE no=#{no}
+	  </update>
+    */
+   public static void replyDelete(int no)
+   {
+	   SqlSession session=ssf.openSession();
+	   // depth,root
+	   ReplyVO vo=session.selectOne("replyInfoData", no);
+	   if(vo.getDepth()==0)
+	   {
+		   session.delete("replyDelete", no);
+	   }
+	   else
+	   {
+		   session.update("replyMsgUpdate",no);
+	   }
+	   session.update("replyDepthDecrement",vo.getRoot());
+	   
+	   session.commit();
+	   session.close();
+   }
+   /*
+    *  <select id="replyCount" resultType="int" parameterType="int">
+   SELECT COUNT(*) FROM movie_reply
+   WHERE bno=#{bno}
+  </select>
+    */
+   public static int replyCount(int bno)
+   {
+	   SqlSession session=ssf.openSession();
+	   int count=session.selectOne("replyCount", bno);
+	   session.close();
+	   return count;
+   }
 }
 
 

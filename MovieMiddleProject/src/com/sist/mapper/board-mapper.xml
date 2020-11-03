@@ -146,6 +146,11 @@
     depth=depth-1
     WHERE no=#{no}
   </update>
+  
+  <select id="replyCount" resultType="int" parameterType="int">
+   SELECT COUNT(*) FROM movie_reply
+   WHERE bno=#{bno}
+  </select>
 </mapper>
 
 

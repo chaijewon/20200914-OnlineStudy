@@ -42,6 +42,9 @@
 	        <c:if test="${today==vo.dbday }">
 	          <font color=red><sup>new</sup></font>
 	        </c:if>
+	        <c:if test="${vo.replyCount>0 }">
+	         (${vo.replyCount })
+	        </c:if>
 	        </td>
 	        <td class="text-center btd" width=15%>${vo.name }</td>
 	        <td class="text-center btd" width=20%>${vo.dbday }</td>

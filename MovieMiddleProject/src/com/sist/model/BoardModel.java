@@ -50,6 +50,11 @@ public class BoardModel {
 	   map.put("end",end);
 	   
 	   List<BoardVO> list=BoardDAO.boardListData(map);
+	   for(BoardVO vo:list)
+	   {
+		   int rc=BoardDAO.replyCount(vo.getNo());
+		   vo.setReplyCount(rc);
+	   }
 	   
 	   // 총페이지 읽기
 	   int totalpage=BoardDAO.boardTotalPage();
@@ -183,6 +188,17 @@ public class BoardModel {
 	   vo.setMsg(msg);
 	   
 	   BoardDAO.replyUpdate(vo);
+	   return "redirect:../board/detail.do?no="+bno;
+   }
+   
+   @RequestMapping("board/reply_delete.do")
+   public String reply_delete(HttpServletRequest request)
+   {
+	   // 데이터 받기
+	  
+	   String no=request.getParameter("no");
+	   String bno=request.getParameter("bno");
+	   BoardDAO.replyDelete(Integer.parseInt(no));
 	   return "redirect:../board/detail.do?no="+bno;
    }
 }
