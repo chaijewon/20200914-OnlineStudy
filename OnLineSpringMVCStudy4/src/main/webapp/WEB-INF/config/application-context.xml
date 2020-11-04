@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!-- 
+       ** 1. 사용자 정의 클래스 등록 => <bean> : 클래스한개씩 등록시 사용
+                                        => DI(setter메소드에 값을 첨부할시)
+                               <context:component-scan>
+                                      : 클래스를 패키지 단위로 등록 (DI사용이 어렵다)
+                                      : 반드시 => 어노테이션을 이용해서 처리 
+        2. 반복적인 코딩이 있는 경우에 반복코딩 제거(AOP) => 공통모듈을 등록
+       ** 3. 데이터베이스 관련 
+           3-1. 데이터베이스 정보를 모운다 (DataSource)
+                ============ driver,username,password,url
+           3-2. Transaction처리 
+           3-3. MyBatis (SqlSessionFactory)설정 => getConnection,disConnection
+           3-4. 인터페이스 => 구현하는 클래스 등록  MapperFactoryBean
+        4. 몽고비디 사용시 등록 
+        5. 보안 설정 
+        6. websocket등록 
+       ** 7. ViewResolver , Tiles등록 
+     -->
+     <!-- 1. 사용자 정의 클래스 등록 -->
+     <context:component-scan base-package="com.sist.*"/>
+     <!-- 2. 데이터베이스 관련 -->
+     <!-- 2-1. 데이터베이스 정보를 모운다 -->
+     <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+       p:driverClassName="oracle.jdbc.driver.OracleDriver"
+       p:url="jdbc:oracle:thin:@211.238.142.181:1521:XE"
+       p:username="hr"
+       p:password="happy"
+       p:maxActive="20"
+       p:maxIdle="10"
+       p:maxWait="-1"
+     />
+     <!-- 2-2. SqlSessionFactory 처리 -->
+     <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+     />
+     <!-- 2-3. Mapper구현 (인터페이스 구현) -->
+     <bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.dao.RecipeMapper"
+     />
+     
+     <!-- JSP 찾기 ViewResolver -->
+     <!-- 
+          Spring MVC 동작 순서 
+          1. 사용자 요청 (.do) (주문)  ===> 
+          2. (서빙) DispatcherServlet 요청을 받는다 ===>
+          3. 요청처리 => Model(@Controller) => 요청처리 하는 메소드 찾기 
+             ================================================= HandlerMapping
+                                          => 스프링에 의해서 메모리 할당된 클래스중에
+                                             @Controller가 올라간 클래스만 찾는다
+          4. Model => 해당 메소드 호출 => invoke()
+          5. 결과값 (request,session) ==> 전송 
+          6. 전송 => JSP를 찾아서 request를 전송하는 클래스 ==> ViewResolver
+                                                      ============ 경로명,확장자
+      -->
+      <bean id="viewResolver"
+         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+         p:prefix="/"
+         p:suffix=".jsp"
+       />
+       <!--  return "main/main"
+             /main/main.jsp
+            ==         ====  
+                      스프링
+              = web전용이 아니다 (application=> 게임업체)
+              = 자바전용이 아니다 (.net...) 
+        -->
+</beans>
+
+
+
+
+
+
+
+
+
+
