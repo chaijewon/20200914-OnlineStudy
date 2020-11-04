@@ -54,6 +54,19 @@ $(function(){
 			u=0;
 		}
 	})
+	let d=0;
+	$('#delBtn').click(function(){
+		if(d==0)
+		{
+			$('#delTr').show();
+			d=1;
+		}
+		else
+		{
+			$('#delTr').hide();
+			d=0;
+		}
+	});
 });
 </script>
 </head>
@@ -84,15 +97,18 @@ $(function(){
       </tr>
       <tr>
         <td colspan="4" class="text-right">
-          <a href="#" class="btn btn-xs btn-danger">수정</a>
-          <a href="#" class="btn btn-xs btn-info">삭제</a>
+          <a href="../board/update.do?no=${vo.no }" class="btn btn-xs btn-danger">수정</a>
+          <span class="btn btn-xs btn-info" id="delBtn">삭제</span>
           <a href="../board/list.do" class="btn btn-xs btn-success">목록</a>
         </td>
-      </tr>
-      <tr style="display:none">
+      </tr> 
+      <tr style="display:none" id="delTr">
         <td colspan="4" class="text-right">
-          비밀번호:<input type=password id=pwd size=10 class="input-sm">
-            <input type=button value="삭제" class="btn btn-sm btn-primary">
+            <form method=post action="../board/delete.do">
+          비밀번호:<input type=password id=pwd size=10 class="input-sm" name=pwd>
+            <input type=hidden name=no value="${vo.no }">
+            <input type=submit value="삭제" class="btn btn-sm btn-primary">
+            </form>
         </td>
       </tr>
       <tr style="display:none">

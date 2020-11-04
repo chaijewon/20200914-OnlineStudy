@@ -255,6 +255,76 @@ public class BoardDAO {
 	   session.close();
 	   return count;
    }
+   /*
+    *   <select id="boardGetPassword" resultType="String" parameterType="int">
+		    SELECT pwd FROM movie_board
+		    WHERE no=#{no}
+		  </select>
+    */
+   // 게시판 수정 
+   public static BoardVO boardUpdateData(int no)
+   {
+	// 연결
+	   SqlSession session=ssf.openSession();
+	   // 데이터 읽기
+	   BoardVO vo=session.selectOne("boardDetailData", no);
+	   session.close();
+	   return vo;
+   }
+   public static String boardGetPassword(int no)
+   {
+	   SqlSession session=ssf.openSession();
+	   String db_pwd=session.selectOne("boardGetPassword", no);
+	   session.close();
+	   return db_pwd;
+   }
+   
+   /*
+    *  <update id="boardUpdate" parameterType="BoardVO">
+    UPDATE movie_board SET
+    name=#{name},subject=#{subject},content=#{content}
+    WHERE no=#{no}
+  </update>
+    */
+   public static void boardUpdate(BoardVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("boardUpdate", vo);
+	   session.close();
+   }
+   /*
+    *   <delete id="boardDelete" parameterType="int">
+		    DELETE FROM movie_board 
+		    WHERE no=#{no}
+		  </delete>
+		  <delete id="boardReplyDelete" parameterType="int">
+		    DELETE FROM movie_reply
+		    WHERE bno=#{bno}
+		  </delete>
+    */// replyCount
+   public static boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   SqlSession session=ssf.openSession();
+	   String db_pwd=session.selectOne("boardGetPassword", no);
+	   if(db_pwd.equals(pwd))
+	   {
+		   bCheck=true;
+		   int count=session.selectOne("replyCount", no);
+		   if(count>0)
+		   {
+			   session.delete("boardReplyDelete",no);
+		   }
+		   session.delete("boardDelete",no);
+		   session.commit();
+	   }
+	   else
+	   {
+		   bCheck=false;
+	   }
+	   session.close();
+	   return bCheck;
+   }
 }
 
 

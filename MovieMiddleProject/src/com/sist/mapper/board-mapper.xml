@@ -151,6 +151,25 @@
    SELECT COUNT(*) FROM movie_reply
    WHERE bno=#{bno}
   </select>
+  
+  <select id="boardGetPassword" resultType="String" parameterType="int">
+    SELECT pwd FROM movie_board
+    WHERE no=#{no}
+  </select>
+  <update id="boardUpdate" parameterType="BoardVO">
+    UPDATE movie_board SET
+    name=#{name},subject=#{subject},content=#{content}
+    WHERE no=#{no}
+  </update>
+  
+  <delete id="boardDelete" parameterType="int">
+    DELETE FROM movie_board 
+    WHERE no=#{no}
+  </delete>
+  <delete id="boardReplyDelete" parameterType="int">
+    DELETE FROM movie_reply
+    WHERE bno=#{bno}
+  </delete>
 </mapper>
 
 

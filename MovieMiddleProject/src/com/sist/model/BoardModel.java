@@ -201,6 +201,67 @@ public class BoardModel {
 	   BoardDAO.replyDelete(Integer.parseInt(no));
 	   return "redirect:../board/detail.do?no="+bno;
    }
+   @RequestMapping("board/update.do")
+   public String board_update(HttpServletRequest request)
+   {
+	   String no=request.getParameter("no");
+	   BoardVO vo=BoardDAO.boardUpdateData(Integer.parseInt(no));
+	   request.setAttribute("vo", vo);
+	   request.setAttribute("main_jsp", "../board/update.jsp");
+	   return "../main/main.jsp";
+   }
+   @RequestMapping("board/password_ok.do")
+   public String board_password(HttpServletRequest request)
+   {
+	   String no=request.getParameter("no");
+	   String pwd=request.getParameter("pwd");
+	   String db_pwd=BoardDAO.boardGetPassword(Integer.parseInt(no));
+	   String res="";
+	   if(pwd.equals(db_pwd))
+	   {
+		   res="YES";
+	   }
+	   else
+	   {
+		   res="NO";
+	   }
+	   request.setAttribute("res", res);
+	   return "../board/password.jsp";
+   }
+   @RequestMapping("board/update_ok.do")
+   public String board_update_ok(HttpServletRequest request)
+   {
+	   try {
+			request.setCharacterEncoding("UTF-8");
+		   } catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		   }
+	    String name=request.getParameter("name");
+	    String subject=request.getParameter("subject");
+	    String content=request.getParameter("content");
+	    String no=request.getParameter("no");
+	   
+	    BoardVO vo=new BoardVO();
+	    vo.setName(name);
+	    vo.setSubject(subject);
+	    vo.setContent(content);
+	    vo.setNo(Integer.parseInt(no));
+	    
+	    // DAO로 전송 
+	    BoardDAO.boardUpdate(vo);
+	   return "redirect:../board/detail.do?no="+no;
+   }
+   @RequestMapping("board/delete.do")
+   public String board_delete(HttpServletRequest request)
+   {
+	   String no=request.getParameter("no");
+	   String pwd=request.getParameter("pwd");
+	   // DAO연결
+	   boolean bCheck=BoardDAO.boardDelete(Integer.parseInt(no), pwd);
+	   request.setAttribute("bCheck", bCheck);
+	   return "../board/delete.jsp";
+   }
 }
 
 
