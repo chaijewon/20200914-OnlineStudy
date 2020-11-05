@@ -8,7 +8,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
     <context:component-scan base-package="com.sist.*"/>
-    <mvc:annotation-driven/><!-- RestController에서 데이터 전송시에 한글이 깨진다 -->
+    <!-- RestController에서 데이터 전송시에 한글이 깨진다 -->
+    <mvc:annotation-driven>
+	    <mvc:message-converters>
+	        <!-- @ResponseBody Content-Type:application/json;charset=UTF-8  -->
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html;charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+     </mvc:annotation-driven>
     <!-- JSP 찾기 -->
     <bean id="viewResolver"
        class="org.springframework.web.servlet.view.InternalResourceViewResolver"

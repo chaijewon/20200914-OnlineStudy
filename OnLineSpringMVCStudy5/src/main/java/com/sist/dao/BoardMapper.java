@@ -33,6 +33,14 @@ public interface BoardMapper {
 		 +"WHERE no=#{no}")
   public BoardVO boardDeteilData(int no);
   // 수정 
+  @Select("SELECT pwd FROM spring_board "
+		 +"WHERE no=#{no}")
+  public String boardGetPassword(int no);
+  
+  @Update("UPDATE spring_board SET "
+		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"WHERE no=#{no}")
+  public void boardUpdate(BoardVO vo);
   // 삭제  
   @Delete("DELETE FROM spring_board "
 		 +"WHERE no=#{no}")

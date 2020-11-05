@@ -28,4 +28,42 @@ public class BoardDAO {
 	{
 		mapper.boardInsert(vo);
 	}
+	// 수정 
+	public BoardVO boardUpdateData(int no)
+	{
+		return mapper.boardDeteilData(no);
+	}
+	// 실제 수정 
+	public boolean boardUpdate(BoardVO vo)
+	{
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			bCheck=true;
+			mapper.boardUpdate(vo);
+		}
+		else
+		{
+			bCheck=false;
+		}
+		return bCheck;
+	}
+	// 삭제
+	public boolean boardDelete(int no,String pwd)
+	{
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(no);
+		if(db_pwd.equals(pwd))
+		{
+			bCheck=true;
+			mapper.boardDelete(no);
+		}
+		else
+		{
+			bCheck=false;
+		}
+		return bCheck;
+	}
+	
 }
