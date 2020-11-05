@@ -20,8 +20,8 @@ public interface BoardMapper {
   // 데이터 추가 
   @SelectKey(keyProperty="no",resultType=int.class,before=true,
 		    statement="SELECT NVL(MAX(no)+1,1) as no FROM spring_board")
-  @Insert("INSERT INTO spring_board(no,name,subject,content,pwd) "
-		 +"VALUES(#{no},#{name},#{subject},#{content},#{pwd})")
+  @Insert("INSERT INTO spring_board(no,name,subject,content,pwd,filename,filesize,filecount) "
+		 +"VALUES(#{no},#{name},#{subject},#{content},#{pwd},#{filename},#{filesize},#{filecount})")
   public void boardInsert(BoardVO vo);
   // 상세보기 
   @Update("UPDATE spring_board SET "

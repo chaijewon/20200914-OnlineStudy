@@ -1,5 +1,7 @@
 package com.sist.dao;
 import java.util.*;
+
+import org.springframework.web.multipart.MultipartFile;
 public class BoardVO {
    private int no;
    private String name;
@@ -8,6 +10,35 @@ public class BoardVO {
    private String pwd;
    private Date regdate;
    private int hit;
+   private String filename;
+   private String filesize;
+   private int filecount;
+   private List<MultipartFile> files;
+   
+public String getFilename() {
+	return filename;
+}
+public void setFilename(String filename) {
+	this.filename = filename;
+}
+public String getFilesize() {
+	return filesize;
+}
+public void setFilesize(String filesize) {
+	this.filesize = filesize;
+}
+public int getFilecount() {
+	return filecount;
+}
+public void setFilecount(int filecount) {
+	this.filecount = filecount;
+}
+public List<MultipartFile> getFiles() {
+	return files;
+}
+public void setFiles(List<MultipartFile> files) {
+	this.files = files;
+}
 public int getNo() {
 	return no;
 }

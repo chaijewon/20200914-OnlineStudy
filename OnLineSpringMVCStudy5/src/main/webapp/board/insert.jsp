@@ -15,12 +15,34 @@ h1 {
    text-align: center;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let fileIndex=0;
+$(function(){
+	$('#addBtn').click(function(){
+		$('#user-table').append(
+		   '<tr id=f'+fileIndex+'>'
+		  +'<td width="15%" class="text-right">파일'+(fileIndex+1)+'</td>'
+		  +'<td width="85%"><input type="file" name=files['+fileIndex+']>'
+		  +'</td></tr>'
+		);
+		fileIndex=fileIndex+1;
+	});
+	$('#removeBtn').click(function(){
+		if(fileIndex>0)
+		{
+			$('#f'+(fileIndex-1)).remove();
+			fileIndex=fileIndex-1;
+		}
+	});
+});
+</script>
 </head>
 <body>
   <div class="container">
     <div class="row">
      <h1>글쓰기</h1>
-     <form method=post action="insert_ok.do">
+     <form method=post action="insert_ok.do" enctype="multipart/form-data">
      <table class="table">
        <tr>
         <th class="text-right danger" width=15%>이름</th>
@@ -42,7 +64,21 @@ h1 {
           <textarea rows="8" cols="55" name=content></textarea>
         </td>
        </tr>
-       
+       <tr>
+         <td colspan="2">
+	         <table class="table">
+	           <tr>
+	            <td class="text-right">
+	              <input type=button value="add" class="btn btn-xs btn-success" id="addBtn">
+	              <input type=button value="remove" class="btn btn-xs btn-warning" id="removeBtn">
+	            </td>
+	           </tr>
+	         </table>
+	         <table class="table" id="user-table">
+	           
+	         </table>
+         </td>
+       </tr>
        <tr>
         <th class="text-right danger" width=15%>비밀번호</th>
         <td width=85%>

@@ -27,4 +27,10 @@
        p:prefix="/"
        p:suffix=".jsp"
      />
+     <!--  id : 대소문자 구분 단어를 반드시 설정 
+                     이미 설정되어 있는 디폴트 ID
+      -->
+     <bean id="multipartResolver"
+       class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+     />
 </beans>

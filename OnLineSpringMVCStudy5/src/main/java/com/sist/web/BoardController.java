@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.*;
 import com.sist.dao.*;
 /*
@@ -97,8 +99,48 @@ public class BoardController {
 		return "board/insert";
 	}
 	@RequestMapping("board/insert_ok.do")
-	public String board_insert_ok(BoardVO vo)
+	/*
+	 *   스프링 => 데이터를 받는 경우 
+	 *     일반 데이터 (String,int...)
+	 *     VO단위로 데이터를 받는다 => <input type=text name=subject>
+	 *                                                ========
+	 *                                                VO에 변수명이 동일
+	 *     List로 데이터를 받을 수 있다 => <input type=text name=name[0]>
+	 *                                              ============
+	 *     같은 값 여러개  ==> String[]
+	 *     <input type=checkbox name=cb>
+	 *     <input type=checkbox name=cb>
+	 *     <input type=checkbox name=cb>
+	 */
+	public String board_insert_ok(BoardVO vo) throws Exception
 	{
+		List<MultipartFile> list=vo.getFiles();
+		if(list==null || list.size()<1)
+		{
+			vo.setFilename("");
+			vo.setFilesize("");
+			vo.setFilecount(0);
+		}
+		else
+		{
+			String fn="";
+			String fs="";
+			for(MultipartFile mf:list)
+			{
+				//System.out.println(mf.getOriginalFilename());
+				String filename=mf.getOriginalFilename();
+				File file=new File("c:\\upload\\"+filename);
+				mf.transferTo(file);// 업로드하는 소스 
+				fn+=filename+",";
+				fs+=file.length()+",";
+			}
+			fn=fn.substring(0,fn.lastIndexOf(","));
+			fs=fs.substring(0,fs.lastIndexOf(","));
+			vo.setFilename(fn);
+			vo.setFilesize(fs);
+			vo.setFilecount(list.size());
+		}
+		
 		dao.boardInsert(vo);
 		return "redirect:list.do";
 	}
