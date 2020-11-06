@@ -28,11 +28,16 @@
        p:dataSource-ref="ds"
     />
     <!-- 인터페이스 구현 -->
-    <bean id="mapper"
+    <bean id="bmapper"
        class="org.mybatis.spring.mapper.MapperFactoryBean"
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.dao.BoardMapper"
     />  
+    <bean id="rmapper"
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.dao.ReplyMapper"
+    />
 </beans>
 
 

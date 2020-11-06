@@ -8,8 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
 import java.util.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.sist.dao.*;
 /*
  *    public void display()
@@ -150,6 +159,24 @@ public class BoardController {
 	{
 		// DB연동 
 		BoardVO vo=dao.boardDetailData(no);
+		List<String> fList=new ArrayList<String>();
+		List<Integer> sList=new ArrayList<Integer>();
+		if(vo.getFilecount()>0)
+		{
+			StringTokenizer st=new StringTokenizer(vo.getFilename(),",");
+			while(st.hasMoreTokens())
+			{
+				fList.add(st.nextToken());
+			}
+			
+			StringTokenizer st1=new StringTokenizer(vo.getFilesize(),",");
+			while(st1.hasMoreTokens())
+			{
+				sList.add(Integer.parseInt(st1.nextToken()));
+			}
+		}
+		model.addAttribute("fList", fList);
+		model.addAttribute("sList", sList);
 		model.addAttribute("vo", vo);
 		return "board/detail";
 	}
@@ -168,6 +195,7 @@ public class BoardController {
 		model.addAttribute("no", no);
 		return "board/delete";
 	}
+	
 	/*
 	 *    1. 사용자 요청(브라우저) ==> .do
 	 *       .do (요청) 
@@ -187,7 +215,37 @@ public class BoardController {
 	 *         ***5) 전송받은 request를 출력 : Jquery,Ajax,React,Vue
 	 *         =========================================================
 	 */
-}
+	@RequestMapping("board/download.do")
+	public void board_download(String fn,HttpServletResponse response) 
+	{
+		try
+		{
+			// 헤더 ==> 데이터 전송전에 보내는 내용 : 다운로드창을 보여준다 (파일명,파일크기)
+			// 헤더 => response
+			// request : 사용자가 요청값 전송 => 사용자 정보(IP)
+			// response : 응답 (Cookie,Header,HTML)
+			response.setHeader("Content-Disposition", "attachment;filename="
+					  +URLEncoder.encode(fn,"UTF-8"));
+			File file=new File("c:\\upload\\"+fn);
+			response.setContentLength((int)file.length());
+			// 파일크기 => long
+			
+			BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));
+			BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
+			
+			int i=0;
+			// 읽은 바이트수
+			byte[] buffer=new byte[1024];
+			while((i=bis.read(buffer, 0, 1024))!=-1)
+			{
+				bos.write(buffer, 0, i);
+			}
+			
+		    bis.close();
+		    bos.close();
+		}catch(Exception ex){}
+	}
+} 
 
 
 

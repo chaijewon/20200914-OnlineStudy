@@ -28,7 +28,7 @@ public interface BoardMapper {
 		 +"hit=hit+1 "
 		 +"WHERE no=#{no}")
   public void boardHitIncrement(int no);
-  @Select("SELECT no,name,subject,content,regdate,hit "
+  @Select("SELECT no,name,subject,content,regdate,hit,filename,filesize,filecount "
 		 +"FROM spring_board "
 		 +"WHERE no=#{no}")
   public BoardVO boardDeteilData(int no);
@@ -38,13 +38,19 @@ public interface BoardMapper {
   public String boardGetPassword(int no);
   
   @Update("UPDATE spring_board SET "
-		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"name=#{name},subject=#{subject},content=#{content},"
+		 +"filename=#{filename},filesize=#{filesize},filecount=#{filecount} "
 		 +"WHERE no=#{no}")
   public void boardUpdate(BoardVO vo);
   // 삭제  
   @Delete("DELETE FROM spring_board "
 		 +"WHERE no=#{no}")
   public void boardDelete(int no);
+  // 삭제 - 1
+  @Select("SELECT filename,filecount,filesize "
+		 +"FROM spring_board "
+		 +"WHERE no=#{no}")
+  public BoardVO boardFileInfoData(int no);
 }
 
 

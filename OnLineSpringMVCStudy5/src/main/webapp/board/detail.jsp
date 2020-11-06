@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,7 +27,9 @@ h1 {
           <th width=20% class="text-center danger">번호</th>
           <td width=30% class="text-center">${vo.no }</td>
           <th width=20% class="text-center danger">작성일</th>
-          <td width=30% class="text-center">${vo.regdate }</td>
+          <td width=30% class="text-center"> 
+            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
+          </td>
         </tr>
         <tr>
           <th width=20% class="text-center danger">이름</th>
@@ -37,6 +41,23 @@ h1 {
           <th width=20% class="text-center danger">제목</th>
           <td colspan="3" class="text-left">${vo.subject }</td>
         </tr>
+        <c:if test="${vo.filecount>0 }">
+          <tr>
+            <th width=20% class="text-center danger">첨부파일</th>
+            <td colspan="3" class="text-left">
+              <ul>
+               <c:forEach var="file" items="${fList }" varStatus="s">
+                 <%-- fList의 인덱스 번호 (varStatus="s")
+                      fList.get(0) => sList.get(0)
+                                      ============
+                                      ${sList[s.index]}
+                  --%>
+                 <li><a href="download.do?fn=${file }">${file }</a>&nbsp;(${sList[s.index]}Bytes)</li>
+               </c:forEach>
+              </ul>
+            </td>
+          </tr>
+        </c:if>
         <tr>
           <td colspan="4" class="text-left" valign="top" height=200>
             ${vo.content }

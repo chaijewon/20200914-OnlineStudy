@@ -65,5 +65,9 @@ public class BoardDAO {
 		}
 		return bCheck;
 	}
+	public BoardVO boardFileInfoData(int no)
+	{
+		return mapper.boardFileInfoData(no);
+	}
 	
 }
