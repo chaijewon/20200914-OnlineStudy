@@ -3,10 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
     <!-- 1. 사용자 정의 클래스 등록 -->
+     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
      <context:component-scan base-package="com.sist.*"/>
+     <bean id="dbcon"
+        class="com.sist.board.dao.DBConnection"
+        c:driver="oracle.jdbc.driver.OracleDriver"
+        c:url="jdbc:oracle:thin:@211.238.142.181:1521:XE"
+        c:username="hr"
+        c:password="happy"
+     />
      <!-- 2. 데이터베이스 관련 -->
      <!-- 2-1. 데이터베이스 정보를 모운다 -->
      <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"

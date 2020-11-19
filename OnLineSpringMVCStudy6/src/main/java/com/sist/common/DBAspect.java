@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.sist.board.dao.DBConnection;
 
 @Aspect
+//<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 @Component
 public class DBAspect {
    @Autowired
