@@ -17,23 +17,23 @@ public class DBAspect {
    @Autowired
    private DBConnection dbCon;
    
-   @Before("execution(* com.sist.board.dao.BoardDAO.board*(..))")
+   @Before("execution(* com.sist.board.dao.BoardDAO.board*(..))||execution(* com.sist.board.dao.BoardDAO.reply*(..))")
    public void before()
    {
 	   System.out.println("DBAspect:"+dbCon);
 	   dbCon.getConnection();
    }
-   @After("execution(* com.sist.board.dao.BoardDAO.board*(..))")
+   @After("execution(* com.sist.board.dao.BoardDAO.board*(..))||execution(* com.sist.board.dao.BoardDAO.reply*(..))")
    public void after()
    {
 	   dbCon.disConnection();
    }
-   @AfterThrowing(value="execution(* com.sist.board.dao.BoardDAO.board*(..))",throwing="ex")
+   @AfterThrowing(value="execution(* com.sist.board.dao.BoardDAO.board*(..))||execution(* com.sist.board.dao.BoardDAO.reply*(..))",throwing="ex")
    public void afterThrowing(Throwable ex)
    {
 	   ex.printStackTrace();
    }
-   @AfterReturning(value="execution(* com.sist.board.dao.BoardDAO.board*(..))",returning="obj")
+   @AfterReturning(value="execution(* com.sist.board.dao.BoardDAO.board*(..))||execution(* com.sist.board.dao.BoardDAO.reply*(..))",returning="obj")
    public void afterReturning(Object obj)
    {
 	   System.out.println("obj="+obj);

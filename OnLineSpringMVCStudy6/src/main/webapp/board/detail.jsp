@@ -11,7 +11,7 @@
 <style type="text/css">
 .row {
    margin: 0px auto;
-   width:700px;
+   width:1000px;
 }
 h1 {
    text-align: center;
@@ -58,6 +58,19 @@ h1 {
      </div>
      <div class="row">
        <%-- 분석 결과 출력  --%>
+       <div class="col-sm-6">
+       
+        <table class="table">
+         <tr>
+          <td>
+            <textarea rows="3" cols="45" style="float: left"></textarea>
+            <input type=submit value="댓글쓰기"
+              class="btn btn-sm btn-danger" style="height:65px;float: left">
+          </td>
+         </tr>
+        </table>
+       </div>
+       <div class="col-sm-6"></div>
      </div>
    </div>
 </body>

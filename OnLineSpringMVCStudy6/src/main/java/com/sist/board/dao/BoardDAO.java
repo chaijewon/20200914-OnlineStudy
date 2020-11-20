@@ -268,6 +268,48 @@ public class BoardDAO {
 		}catch(Exception ex){}
 		return total;
 	}
+	// 댓글 
+	/*
+	 *   CREATE OR REPLACE PROCEDURE replyListData(
+		   pType project_reply.type%TYPE,
+		   pCno project_reply.cno%TYPE,
+		   pStart NUMBER,
+		   pEnd NUMBER,
+		   pResult OUT SYS_REFCURSOR
+		)
+		IS
+		BEGIN
+		   OPEN pResult FOR
+		    SELECT no,type,cno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS'),num
+		    FROM (SELECT no,type,cno,id,name,msg,regdate,rownum as num
+		    FROM (SELECT no,type,cno,id,name,msg,regdate
+		    FROM project_reply WHERE type=pType AND cno=pCno ORDER BY no DESC))
+		    WHERE num BETWEEN pStart AND pEnd;
+		END;
+		/
+	 */
+	public List<ReplyVO> replyListData(int type,int cno,int page)
+	{
+		List<ReplyVO> list=
+				new ArrayList<ReplyVO>();
+		// dbConn.getConnection()
+		try
+		{
+			String sql="{CALL replyListData(?,?,?,?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, type);
+			cs.setInt(2, cno);
+			int rowSize=5;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=rowSize*page;
+			cs.setInt(3, start);
+			cs.setInt(4, end);
+			cs.registerOutParameter(5, OracleTypes.CURSOR);
+			cs.executeQuery();
+		}catch(Exception ex){}
+		// dbConn.disConnection()
+		return list;
+	}
     
 }
 
