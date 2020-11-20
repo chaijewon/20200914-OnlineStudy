@@ -306,9 +306,163 @@ public class BoardDAO {
 			cs.setInt(4, end);
 			cs.registerOutParameter(5, OracleTypes.CURSOR);
 			cs.executeQuery();
+			ResultSet rs=(ResultSet)cs.getObject(5);
+			//no,type,cno,id,name,msg,TO_CHAR(regdate
+			while(rs.next())
+			{
+				ReplyVO vo=new ReplyVO();
+				vo.setNo(rs.getInt(1));
+				vo.setType(rs.getInt(2));
+				vo.setCno(rs.getInt(3));
+				vo.setId(rs.getString(4));
+				vo.setName(rs.getString(5));
+				vo.setMsg(rs.getString(6));
+				vo.setDbday(rs.getString(7));
+				list.add(vo);
+			}
+			rs.close();
 		}catch(Exception ex){}
 		// dbConn.disConnection()
 		return list;
+	}
+	/*
+	 *   CREATE OR REPLACE PROCEDURE replyInsert(
+		   pType project_reply.type%TYPE,
+		   pCno project_reply.cno%TYPE,
+		   pId project_reply.id%TYPE,
+		   pName project_reply.name%TYPE,
+		   pMsg project_reply.msg%TYPE
+		)
+		IS
+		  vNo project_reply.no%TYPE;
+		BEGIN
+		  SELECT NVL(MAX(no)+1,1) INTO vNo
+		  FROM project_reply;
+		  
+		  INSERT INTO project_reply(no,type,cno,id,name,msg)
+		  VALUES(vNo,pType,pCno,pId,pName,pMsg);
+		  COMMIT;
+		END;
+		/
+	 */
+	public void replyInsert(ReplyVO vo)
+	{
+		// dbConn.getConnection()
+		try
+		{
+			String sql="{CALL replyInsert(?,?,?,?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, vo.getType());
+			cs.setInt(2, vo.getCno());
+			cs.setString(3, vo.getId());
+			cs.setString(4, vo.getName());
+			cs.setString(5, vo.getMsg());
+			
+			cs.executeQuery();
+		}catch(Exception ex){}
+		//dbConn.disConnection()
+	}
+	/*
+	 *   CREATE OR REPLACE PROCEDURE replyUpdate(
+		   pNo project_reply.no%TYPE,
+		   pMsg project_reply.msg%TYPE
+		)
+		IS
+		BEGIN
+		  UPDATE project_reply SET
+		  msg=pMsg
+		  WHERE no=pNo;
+		  COMMIT;
+		END;
+		/
+	*/
+	public void replyUpdate(int no,String msg)
+	{
+		try
+		{
+			String sql="{CALL replyUpdate(?,?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, no);
+			cs.setString(2, msg);
+			cs.executeQuery();
+		}catch(Exception ex){}
+	}
+	/*
+		-- 삭제 
+		CREATE OR REPLACE PROCEDURE replyDelete(
+		   pNo project_reply.no%TYPE
+		)
+		IS
+		BEGIN
+		  DELETE FROM project_reply
+		  WHERE no=pNo;
+		  COMMIT;
+		END;
+		/
+	 */
+	public void replyDelete(int no)
+	{
+		try
+		{
+			String sql="{CALL replyDelete(?)}";
+			cs=dbConn.getConn().prepareCall(sql);
+			cs.setInt(1, no);
+			cs.executeQuery();
+		}catch(Exception ex){}
+	}
+	
+	// 로그인 
+	public MemberVO memberLogin(String id,String pwd)
+	{
+		MemberVO vo=new MemberVO();
+		try
+		{
+			dbConn.getConnection();
+			String sql="SELECT COUNT(*) FROM member "
+					  +"WHERE id=?";
+			ps=dbConn.getConn().prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			int count=rs.getInt(1);
+			rs.close();
+			
+			if(count==0)//ID가 없는 상태
+			{
+				vo.setMessage("NOID");
+			}
+			else // ID가 존재하는 상태 
+			{
+				sql="SELECT pwd,name FROM member "
+				   +"WHERE id=?";
+				ps=dbConn.getConn().prepareStatement(sql);
+				ps.setString(1, id);
+				rs=ps.executeQuery();
+				rs.next();
+				String db_pwd=rs.getString(1);
+				String name=rs.getString(2);
+				rs.close();
+				
+				if(db_pwd.equals(pwd))//로그인
+				{
+					vo.setId(id);
+					vo.setName(name);
+					vo.setMessage("OK");
+				}
+				else//비밀번호가 틀린 경우
+				{
+					vo.setMessage("NOPWD");
+				}
+			}
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		finally
+		{
+			dbConn.disConnection();
+		}
+		return vo;
 	}
     
 }
