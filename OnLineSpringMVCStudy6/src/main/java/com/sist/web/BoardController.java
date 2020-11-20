@@ -126,6 +126,13 @@ public class BoardController {
 	   return "redirect:detail.do?no="+cno;
    }
    
+   @RequestMapping("reply_update.do")
+   public String reply_update(int no,int cno,String msg)
+   {
+	   dao.replyUpdate(no, msg);
+	   return "redirect:detail.do?no="+cno;
+   }
+   
 }
 
 
