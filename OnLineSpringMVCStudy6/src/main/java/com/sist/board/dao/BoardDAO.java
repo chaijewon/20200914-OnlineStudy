@@ -190,6 +190,7 @@ public class BoardDAO {
 		{
 			String sql="{CALL projectBoardUpdate(?,?,?,?,?,?)}";
 			// 전송 => 오라클 
+			
 			cs=dbConn.getConn().prepareCall(sql);
 			cs.setInt(1, vo.getNo());
 			cs.setString(2, vo.getName());
