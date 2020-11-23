@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!-- 사용자 정의 클래스 : 메모리할당 요청 -->
+    <context:component-scan base-package="com.sist.*"/>
+    <!-- ViewResolver -->
+    <bean id="tilesViewResolver"
+       class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+       p:requestContextAttribute="requestContext"
+       p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView"
+       p:order="0"
+     />
+     <bean id="tilesConfigurer"
+       class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
+       p:definitions="/WEB-INF/tiles.xml"
+     />
+     
+     <bean id="viewResolver"
+       class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+       p:prefix="/"
+       p:suffix=".jsp"
+       p:order="1"
+      />
+</beans>
