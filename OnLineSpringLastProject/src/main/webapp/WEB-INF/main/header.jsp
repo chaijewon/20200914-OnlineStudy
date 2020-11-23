@@ -17,24 +17,24 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home
+                <a class="nav-link" href="../main/main.do">Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="products.html">레시피</a>
+                <a class="nav-link" href="../recipe/list.do">레시피</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">맛집</a>
+                <a class="nav-link" href="../food/list.do">맛집</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">커뮤니티</a>
+                <a class="nav-link" href="../board/list.do">커뮤니티</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">추천</a>
+                <a class="nav-link" href="../recommon/list.do">추천</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">뉴스</a>
+                <a class="nav-link" href="../news/list.do">뉴스</a>
               </li>
             </ul>
           </div>
