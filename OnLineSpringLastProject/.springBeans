@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/webapp/WEB-INF/config/application-context.xml</config>
+		<config>src/main/webapp/WEB-INF/config/application-datasource.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
