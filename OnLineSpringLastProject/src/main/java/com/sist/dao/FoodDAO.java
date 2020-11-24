@@ -11,4 +11,12 @@ public class FoodDAO {
      {
     	 return mapper.foodCategoryAllData();
      }
+     public List<FoodVO> foodCategoryFoodListData(int cateno)
+     {
+    	 return mapper.foodCategoryFoodListData(cateno);
+     }
+     public FoodCategoryVO foodCategoryInfoData(int no)
+     {
+    	 return mapper.foodCategoryInfoData(no);
+     }
 }

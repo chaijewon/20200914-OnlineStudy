@@ -142,8 +142,12 @@ public class FoodManager {
     			 */
     			String url="https://www.mangoplate.com"+fvo.getLink();
     			int cateno=fvo.getNo();
+    			/*
+    			 *  span class="title 
+    			 */
     			Document doc=Jsoup.connect(url).get();
-    			Elements link=doc.select("figure.restaurant-item a");
+    			Elements link=doc.select("figure.restaurant-item span.title a");
+    			System.out.println(link.size());
     			System.out.println("카테고리 번호:"+cateno);
     			for(int i=0;i<link.size();i++)
     			{
@@ -167,6 +171,7 @@ public class FoodManager {
 							SOSO            NUMBER         
 							BAD             NUMBER  
     			     */
+    			    FoodVO vo2=new FoodVO();
     			    String strPoster="";
     			    try
     			    {
@@ -175,18 +180,27 @@ public class FoodManager {
 	    			    for(int j=0;j<poster.size();j++)
 	    			    {
 	    			    	String s=poster.get(j).attr("src");
-	    			    	strPoster+=s+",";
+	    			    	strPoster+=s+"^";
 	    			    }
-	    			    strPoster=strPoster.substring(0,strPoster.lastIndexOf(","));
+	    			    strPoster=strPoster.substring(0,strPoster.lastIndexOf("^"));
     			    }catch(Exception ex){
     			    	strPoster="no";
     			    }
+    			    vo2.setPoster(strPoster);
     			    
     			    Element title=doc2.selectFirst("span.title h1.restaurant_name");
     			    Element score=doc2.selectFirst("span.title strong.rate-point span");
     			    Element addr=doc2.select("tr.only-desktop td").get(0);
     			    Element tel=doc2.select("tr.only-desktop td").get(1);
     			    Element type=doc2.select("tr td span").get(2);
+    			    /// 공통으로 출력 
+    			    vo2.setCateno(cateno);
+    			    vo2.setTitle(title.text());
+    			    vo2.setScore(score.text());
+    			    vo2.setAddr(addr.text());
+    			    vo2.setTel(tel.text());
+    			    vo2.setType(type.text());
+    			    
     			    String strPrice="";
     			    try{
     			         Element price=doc2.select("tr td").get(3);
@@ -195,6 +209,7 @@ public class FoodManager {
     			    {
     			    	strPrice="no";
     			    }
+    			    vo2.setPrice(strPrice);
     			    
     			    String strMenu="";
     			    try
@@ -202,13 +217,14 @@ public class FoodManager {
     			    	Elements menu=doc2.select("td.menu_td li.Restaurant_MenuItem");
     			       for(int j=0;j<menu.size();j++)
     			        {
-    			      	  strMenu+=menu.get(j).text()+",";
+    			      	  strMenu+=menu.get(j).text()+"^";
     			        }
-    			        strMenu=strMenu.substring(0,strMenu.lastIndexOf(","));
+    			        strMenu=strMenu.substring(0,strMenu.lastIndexOf("^"));
     			    }catch(Exception e)
     			    {
     			    	strMenu="no";
     			    }
+    			    vo2.setMenu(strMenu);
     			    /*
     			     *  <script id="reviewCountInfo" type="application/json">
     			     *  [{"action_value":1,"count":6},
@@ -227,14 +243,17 @@ public class FoodManager {
     			    		if(a==2)
     			    		{
     			    		  System.out.println("좋아요:"+obj.get("count"));
+    			    		  vo2.setGood(Integer.parseInt(String.valueOf(obj.get("count"))));
     			    		}
     			    		else if(a==1)
     			    		{
     			    		   System.out.println("괜찮다:"+obj.get("count"));
+    			    		   vo2.setSoso(Integer.parseInt(String.valueOf(obj.get("count"))));
     			    		}
     			    		else
     			    		{
     			    	     	System.out.println("별로:"+obj.get("count"));
+    			    	     	vo2.setBad(Integer.parseInt(String.valueOf(obj.get("count"))));
     			    		}
     			    	}
     			    }catch(Exception ex){}
@@ -248,8 +267,8 @@ public class FoodManager {
     			    System.out.println("메뉴:"+strMenu);
     			    System.out.println("리뷰:"+temp);
     			    
-    			    FoodVO vo2=new FoodVO();
-    			    vo2.setCateno(cateno);
+    			    dao.foodDetailInsert(vo2);
+    			    
     				}catch(Exception e)
     				{
     					System.out.println(e.getMessage());
