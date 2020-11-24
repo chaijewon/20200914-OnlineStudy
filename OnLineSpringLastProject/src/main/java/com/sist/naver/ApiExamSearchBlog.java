@@ -9,19 +9,19 @@ import java.util.Map;
 
 public class ApiExamSearchBlog {
 
-    public static void main(String[] args) {
+    public String naverFindData(String data) {
         String clientId = "6FQw_o8z3yxlzPREeUJr"; //애플리케이션 클라이언트 아이디값"
         String clientSecret = "wsJ4F6HtPN"; //애플리케이션 클라이언트 시크릿값"
 
         String text = null;
         try {
-            text = URLEncoder.encode("우성닭갈비", "UTF-8");
+            text = URLEncoder.encode(data, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
         String apiURL = "https://openapi.naver.com/v1/search/blog?display=100&start=1&query=" + text;    // json 결과
-        //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
+        //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?display=100&start=1&query="+ text; // xml 결과
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -29,6 +29,13 @@ public class ApiExamSearchBlog {
         String responseBody = get(apiURL,requestHeaders);
 
         System.out.println(responseBody);
+        /*try
+        {
+        	FileWriter fw=new FileWriter("c:\\upload\\naver.json");
+        	fw.write(responseBody);
+        	fw.close();
+        }catch(Exception ex){}*/
+        return responseBody;
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){

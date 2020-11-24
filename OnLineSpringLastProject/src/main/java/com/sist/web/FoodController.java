@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 import com.sist.dao.*;
+import com.sist.naver.NaverManager;
 @Controller
 @RequestMapping("food/")
 // 6FQw_o8z3yxlzPREeUJr
@@ -14,6 +15,10 @@ import com.sist.dao.*;
 public class FoodController {
    @Autowired
    private FoodDAO fdao;
+   @Autowired
+   private NaverManager nm;
+   @Autowired
+   private RManager rm;
    @RequestMapping("list.do")
    public String food_list(Model model)
    {
@@ -61,6 +66,9 @@ public class FoodController {
 	   }
 	   result=result.substring(0,result.lastIndexOf("|"));
 	   List<RecipeVO> list=fdao.foodLikeRecipeData(result);
+	   
+	   nm.naverData(vo.getTitle());
+	   rm.graph(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("list", list);
 	   return "food/food_detail";

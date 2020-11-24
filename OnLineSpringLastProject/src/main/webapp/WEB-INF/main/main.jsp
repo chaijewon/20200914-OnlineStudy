@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <title>SIST Recipe&Food</title>
+    
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!--
@@ -64,7 +65,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <script src="../assets/js/slick.js"></script>
     <script src="../assets/js/isotope.js"></script>
     <script src="../assets/js/accordions.js"></script>
-
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db0485ed4f0d0ece879a4510ed7f48e6&libraries=services"></script>
 
     <script language = "text/Javascript"> 
       cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
