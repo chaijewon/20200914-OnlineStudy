@@ -31,14 +31,14 @@
            <table class="table">
             <tr>
               <td width=35% class="text-center" rowspan="3">
-                <img src="${fvo.posterOne }" width=350 height=150>
+                <a href="../food/food_detail.do?no=${fvo.no }"><img src="${fvo.posterOne }" width=350 height=150></a>
               </td>
               <td width=65%>
-                <h3>${fvo.title }&nbsp;<span style="color:orange">${fvo.score }</span></h3>
+                <h3><a href="../food/food_detail.do?no=${fvo.no }">${fvo.title }</a>&nbsp;<span style="color:orange">${fvo.score }</span></h3>
               </td>
             </tr>
             <tr>
-              <td width=65%>${fvo.addr }</td>
+              <td width=65%>${fvo.addr1 }<br>지번:${fvo.addr2 }</td>
             </tr>
             <tr>
               <td width=65%>${fvo.tel }</td>

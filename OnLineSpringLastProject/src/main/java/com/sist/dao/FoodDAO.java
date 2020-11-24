@@ -19,4 +19,12 @@ public class FoodDAO {
      {
     	 return mapper.foodCategoryInfoData(no);
      }
+     public FoodVO foodDetailData(int no)
+     {
+    	 return mapper.foodDetailData(no);
+     }
+     public List<RecipeVO> foodLikeRecipeData(String finddata)
+     {
+    	 return mapper.foodLikeRecipeData(finddata);
+     }
 }
