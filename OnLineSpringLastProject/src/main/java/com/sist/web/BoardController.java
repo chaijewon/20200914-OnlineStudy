@@ -34,6 +34,13 @@ public class BoardController {
 	   bdao.boardInsert(vo);
 	   return "redirect:../board/list.do";
    }
+   @RequestMapping("board/detail.do")
+   public String board_detail(int no,Model model)
+   {
+	   BoardVO vo=bdao.boardDetailData(no);
+	   model.addAttribute("vo", vo);
+	   return "board/detail";
+   }
 }
 
 

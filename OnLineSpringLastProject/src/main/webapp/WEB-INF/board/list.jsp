@@ -31,7 +31,9 @@
 		     <c:forEach var="vo" items="${bList }">
 		       <tr class="success">
 			      <td class="text-center" width=10%>${vo.no }</td>
-			      <td class="text-left" width=45%>${vo.subject }</td>
+			      <td class="text-left" width=45%>
+			        <a href="../board/detail.do?no=${vo.no }">${vo.subject }</a>
+			      </td>
 			      <td class="text-center" width=15%>${vo.name }</td>
 			      <td class="text-center" width=20%>${vo.regdate }</td>
 			      <td class="text-center" width=10%>${vo.hit }</td>
