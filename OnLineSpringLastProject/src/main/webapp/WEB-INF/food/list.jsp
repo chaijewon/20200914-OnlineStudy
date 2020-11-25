@@ -14,8 +14,10 @@ $(function(){
 		let offset=$('#'+no).offset();
 		$('html,body').animate({scrollTop:offset.top},400);
 	});
+	
 });
 </script>
+
 </head>
 <body>
 <div class="latest-products">
@@ -87,6 +89,7 @@ $(function(){
 	         </c:if>
           </c:forEach>
           </div>
+           
          </div>
 </body>
 </html>

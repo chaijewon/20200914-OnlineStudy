@@ -22,6 +22,9 @@
                 </a>
               </li> 
               <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#myModal">로그인</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="../recipe/list.do">레시피</a>
               </li>
               <li class="nav-item">
