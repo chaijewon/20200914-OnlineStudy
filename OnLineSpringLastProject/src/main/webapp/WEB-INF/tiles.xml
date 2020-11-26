@@ -14,6 +14,8 @@
   </definition>
   <definition name="food_find" template="/WEB-INF/board/food_find.jsp">
   </definition>
+  <definition name="recomm_list" template="/WEB-INF/recommand/recomm_list.jsp">
+  </definition>
   <!-- <definition name="login" template="/WEB-INF/member/login.jsp">
   </definition>
   <definition name="join" template="/WEB-INF/member/join.jsp">

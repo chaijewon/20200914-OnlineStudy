@@ -34,7 +34,7 @@
                 <a class="nav-link" href="../board/list.do">커뮤니티</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../recommon/list.do">추천</a>
+                <a class="nav-link" href="../recommand/list.do">추천</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="../news/list.do">뉴스</a>
