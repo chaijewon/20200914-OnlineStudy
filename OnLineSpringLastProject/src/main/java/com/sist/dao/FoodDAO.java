@@ -27,4 +27,16 @@ public class FoodDAO {
      {
     	 return mapper.foodLikeRecipeData(finddata);
      }
+     public List<FoodVO> foodLocationFindData(String gu)
+     {
+    	 return mapper.foodLocationFindData(gu);
+     }
+     public List<FoodVO> foodTop10()
+     {
+    	 return mapper.foodTop10();
+     }
+     public List<RecipeVO> recipeTop10()
+     {
+    	 return mapper.recipeTop10();
+     }
 }

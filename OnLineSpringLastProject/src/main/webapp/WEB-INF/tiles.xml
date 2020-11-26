@@ -12,7 +12,7 @@
   <definition name="*/*/*" extends="main">
     <put-attribute name="content" value="/WEB-INF/{1}/{2}/{3}.jsp"/>
   </definition>
-  <definition name="login" template="/WEB-INF/member/login.jsp">
+  <definition name="food_find" template="/WEB-INF/board/food_find.jsp">
   </definition>
   <!-- <definition name="login" template="/WEB-INF/member/login.jsp">
   </definition>

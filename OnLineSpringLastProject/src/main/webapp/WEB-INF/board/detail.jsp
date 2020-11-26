@@ -6,6 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.images').hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","");
+	});
+	
+	$('.images').click(function(){
+		let no=$(this).attr("data-value");
+		$.ajax({
+			type:'POST',
+			url:'../board/food_find.do',
+			data:{"no":no},
+			success:function(res)
+			{
+				$('#print').html(res);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 <div class="latest-products">
@@ -50,13 +73,15 @@
 		  <div class="col-md-5">
 		   <div id="a">
 		     <img id="seoul_1" src="../map/1111.png">
-		     <c:forEach var="i" begin="1" end="25">
-		       <img id="gu${i }" src="../map/gu_${i }_off.png"
-		         onmouseover="this.src='../map/gu_${i }_on.png'" onmouseout="this.src='../map/gu_${i }_off.png'">
+		      <c:forEach var="i" begin="1" end="25">
+		       <img id="gu${i }" src="../map/gu_${i }_off.png" 
+		         onmouseover="this.src='../map/gu_${i}_on.png'"  
+		         onmouseout="this.src='../map/gu_${i}_off.png'" class="images" data-value="${i }"> 
 		     </c:forEach>
 		   </div>
+		   <div id="print" class="row"></div>
 		  </div>
-		  </div>
+		  </div><!-- row end -->
 		</div>
 </div>
 </body>

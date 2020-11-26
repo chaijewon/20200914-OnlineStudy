@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,7 +53,28 @@
 		   </form>
 		  </div>
 		  <div class="col-md-4">
-		  
+		    <h3>맛집 Top5</h3>
+		     <table class="table">
+		       <c:forEach var="fvo" items="${fList }">
+		         <tr>
+		           <td>
+		            <img src="${fvo.poster }" width=35 height=35>
+		           </td>
+		           <td>${fvo.title }</td>
+		         </tr>
+		       </c:forEach>
+		     </table>
+		     <h3>레시피 Top5</h3>
+		     <table class="table">
+		       <c:forEach var="rvo" items="${rList }">
+		         <tr>
+		           <td>
+		            <img src="${rvo.poster }" width=35 height=35>
+		           </td>
+		           <td>${rvo.title }</td>
+		         </tr>
+		       </c:forEach>
+		     </table>
 		  </div>
 		 </div><!-- row end -->
 		</div><!-- container end -->
