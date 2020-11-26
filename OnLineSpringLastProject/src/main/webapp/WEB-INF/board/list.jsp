@@ -21,7 +21,7 @@
 		     </tr>
 		   </table>
 		   <table class="table table-striped">
-		     <tr class="success">
+		     <tr class="success" bgcolor="#CCFFCC">
 		      <th class="text-center" width=10%>번호</th>
 		      <th class="text-center" width=45%>제목</th>
 		      <th class="text-center" width=15%>이름</th>
@@ -40,6 +40,13 @@
 			     </tr>
 		     </c:forEach>
 		   </table>
+		   <div>
+		     <div class="text-center">
+		      <a href="#" class="btn btn-sm btn-info">이전</a>
+		       ${curpage } page / ${totalpage } pages
+		      <a href="#" class="btn btn-sm btn-info">다음</a>
+		     </div>
+		   </div>
 		  </div>
 		  <div class="col-md-3">
 		  

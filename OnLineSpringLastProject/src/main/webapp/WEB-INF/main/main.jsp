@@ -25,6 +25,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <link rel="stylesheet" href="../assets/css/fontawesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-sixteen.css">
     <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/food.css">
     <style type="text/css">
     .modal-content{
       margin-top: 150px;
@@ -81,7 +82,7 @@ https://templatemo.com/tm-546-sixteen-clothing
           }
       }
     </script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
     <script type="text/javascript">
     $(function(){
     	$('#logBtn').click(function(){
@@ -105,6 +106,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     			success:function(res)
     			{
     				let no=res.trim();
+    				alert(no);
     				if(no==1)
     				{
     					$('#result').text("ID가 존재하지 않습니다");

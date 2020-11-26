@@ -96,7 +96,7 @@ public class BoardDAO {
 	   return list;
    }
    // 상세보기
-   public BoardVO boardDetailData(int no)
+   public BoardVO boardDetailData(int no,int type)
    {
 	   BoardVO vo=new BoardVO();
 	   try
@@ -106,9 +106,12 @@ public class BoardDAO {
 		   
 		   BasicDBObject obj=(BasicDBObject)dbc.findOne(where);
 		   //   dbc.findOne => SELECT * FROM board WHERE no=1; => {no:1},
-		   int hit=obj.getInt("hit");
-		   BasicDBObject up=new BasicDBObject("$set",new BasicDBObject("hit",hit+1));
-		   dbc.update(where, up);
+		   if(type==1)
+		   {
+			   int hit=obj.getInt("hit");
+			   BasicDBObject up=new BasicDBObject("$set",new BasicDBObject("hit",hit+1));
+			   dbc.update(where, up);
+		   }
 		   // 조회수 증가 
 		   obj=(BasicDBObject)dbc.findOne(where);
 		   vo.setNo(obj.getInt("no"));
@@ -124,8 +127,81 @@ public class BoardDAO {
 	   return vo;
    }
    // 수정하기
+   public boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   // 몽고디비에 저장된 비밀번호 읽기
+		   BasicDBObject where=new BasicDBObject();
+		   where.put("no", vo.getNo());//{no:1}
+		   
+		   BasicDBObject obj=(BasicDBObject)dbc.findOne(where);
+		   // find(): DBCursor => 여러개 {} ,findOne():BasicDBObject => 한개 {}
+		   if(vo.getPwd().equals(obj.getString("pwd")))
+		   {
+			   bCheck=true;
+			   BasicDBObject updateObj=new BasicDBObject();
+			   updateObj.put("name", vo.getName());
+			   updateObj.put("subject", vo.getSubject());
+			   updateObj.put("content", vo.getContent());
+			   
+			   BasicDBObject update=new BasicDBObject("$set",updateObj);
+			   // 몽고비디에 전송
+			   dbc.update(where, update);
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   System.out.println(ex.getMessage());
+	   }
+	   return bCheck;
+   }
    // 삭제하기 
-   // 찾기 
+   public boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   BasicDBObject where=new BasicDBObject();
+		   where.put("no", no);
+		   
+		   // 비밀번호 가지고 오기 
+		   BasicDBObject obj=(BasicDBObject)dbc.findOne(where);
+		   
+		   // 조건 
+		   if(pwd.equals(obj.getString("pwd")))
+		   {
+			   bCheck=true;
+			   dbc.remove(where);
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   System.out.println(ex.getMessage());
+	   }
+	   return bCheck;
+   }
+   // 총페이지 
+   public int boardTotalPage()
+   {
+	   int total=0;
+	   try
+	   {
+		   DBCursor cursor=dbc.find();
+		   total=cursor.count();// SELECT CEIL(COUNT(*)/10.0) FROM board
+	   }catch(Exception ex)
+	   {
+		   System.out.println(ex.getMessage());
+	   }
+	   return (int)Math.ceil(total/10.0);
+   }
 }
 
 
