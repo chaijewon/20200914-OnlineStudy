@@ -26,6 +26,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <link rel="stylesheet" href="../assets/css/templatemo-sixteen.css">
     <link rel="stylesheet" href="../assets/css/owl.css">
     <link rel="stylesheet" href="../assets/css/food.css">
+    <link rel="stylesheet" href="../assets/css/chat.css">
     <style type="text/css">
     .modal-content{
       margin-top: 150px;
@@ -44,7 +45,7 @@ https://templatemo.com/tm-546-sixteen-clothing
         </div>
     </div>  
     <!-- ***** Preloader End ***** -->
-
+    
     <!-- Header -->
     <tiles:insertAttribute name="header"/>
     <!-- end Header -->
@@ -133,6 +134,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     	});
     });
     </script>
+    
     <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -171,7 +173,9 @@ https://templatemo.com/tm-546-sixteen-clothing
 
   </div>
 </div>
-
+  <!-- <div id="root"></div>
+  <script src="../assets/js/bundle.js"></script> -->
+ 
   </body>
 
 </html>
