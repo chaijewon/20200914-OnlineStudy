@@ -1,5 +1,5 @@
 package com.sist.dao;
-
+import java.util.*;
 public class RecipeDetailVO {
    private int no;
    private String poster;
@@ -10,7 +10,14 @@ public class RecipeDetailVO {
    private String info1,info2,info3;
    private String content;
    private String foodmake;
+   private List<String> mList=new ArrayList<String>();
    
+	public List<String> getmList() {
+	return mList;
+	}
+	public void setmList(List<String> mList) {
+		this.mList = mList;
+	}
 	public int getNo() {
 	return no;
 	}
