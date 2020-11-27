@@ -10,7 +10,7 @@ public class RecipeDAO {
     	{
     		mc=new MongoClient("localhost",27017);
     		db=mc.getDB("mydb");
-    		dbc=db.getCollection("chef");
+    		dbc=db.getCollection("recipe_detail");
     	}catch(Exception ex){}
     }
     public void recipeInsert(RecipeVO vo)
@@ -30,7 +30,7 @@ public class RecipeDAO {
     		obj.put("poster", vo.getPoster());
     		obj.put("chef", vo.getChef());
     		obj.put("link", vo.getLink());
-    		
+    		obj.put("hit", vo.getHit());
     		dbc.insert(obj);
     	}catch(Exception ex){}
     }

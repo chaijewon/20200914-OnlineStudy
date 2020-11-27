@@ -65,12 +65,13 @@ public class RecipeMain {
 		    			 vo.setPoster(poster.get(j).attr("src"));
 		    			 vo.setChef(chef.get(j).text());
 		    			 vo.setLink(link.get(j).attr("href"));
-		    			 
+		    			 vo.setHit(hit.get(j).text());
 		    			 System.out.println("no:"+k);
 		    			 System.out.println("Title:"+vo.getTitle());
 		    			 System.out.println("Chef:"+vo.getChef());
 		    			 System.out.println("Poster:"+vo.getPoster());
 		    			 System.out.println("Link:"+vo.getLink());
+		    			 System.out.println("hit:"+vo.getHit());
 		    			 System.out.println("k="+k);
 		    			 //dao.recipeInsert(vo);
 		    			 recipeDetailData(vo.getLink(),k);
@@ -166,13 +167,13 @@ public class RecipeMain {
     		vo.setNo(no);
     		
     		dao.recipeDetailData(vo);
-    		System.out.println("����:"+vo.getTitle());
-    		System.out.println("����:"+vo.getChef());
-    		System.out.println("����:"+vo.getContent());
-    		System.out.println("�������:"+vo.getFoodmake());
-    		System.out.println("����1:"+vo.getInfo1());
-    		System.out.println("����2:"+vo.getInfo2());
-    		System.out.println("����3:"+vo.getInfo3());
+    		System.out.println("제목:"+vo.getTitle());
+    		System.out.println("세프:"+vo.getChef());
+    		System.out.println("내용:"+vo.getContent());
+    		System.out.println("방법:"+vo.getFoodmake());
+    		System.out.println("1.인용:"+vo.getInfo1());
+    		System.out.println("2.시간:"+vo.getInfo2());
+    		System.out.println("3.급수:"+vo.getInfo3());
     		
     		System.out.println("k="+k);
     		k++;
@@ -190,7 +191,8 @@ public class RecipeMain {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		RecipeMain rm=new RecipeMain();
-		rm.chefAllData();
+		//rm.chefAllData();
+		rm.recipeAllData();
 	    
 	}
 	
