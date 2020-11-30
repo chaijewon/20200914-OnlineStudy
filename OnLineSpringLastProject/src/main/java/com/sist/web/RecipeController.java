@@ -57,6 +57,31 @@ public class RecipeController {
     	model.addAttribute("list", list);
     	return "recipe/chef_list";
     }
+    
+    @RequestMapping("recipe/chef_product.do")
+    public String recipe_chef_product(String chef,String page,String fd,Model model)
+    {
+    	/*
+    	 *   화면 변경 : forward (JSP 파일명)
+    	 *   내용 변경 : redirect (.do 내용 변경)
+    	 */
+    	if(page==null)
+    		page="1";
+    	int curpage=Integer.parseInt(page);
+    	List<RecipeVO> list=new ArrayList<RecipeVO>();
+    	if(fd==null)
+    	{
+    	   list=dao.chefProductData(chef, curpage);
+    	}
+    	else
+    	{
+    		list=dao.chefProductFindData(chef, fd);
+    	}
+    	// JSP로 전송 
+    	model.addAttribute("list", list);
+    	model.addAttribute("chef", chef);
+    	return "recipe/chef_product";
+    }
 }
 
 

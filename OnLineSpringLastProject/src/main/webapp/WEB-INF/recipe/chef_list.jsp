@@ -16,9 +16,9 @@
            <table class="table">
              <tr>
                <td width=35% class="text-center" rowspan="2">
-                 <img src="${vo.poster }" width=180 height=80>
+                 <a href="../recipe/chef_product.do?chef=${vo.chef }"><img src="${vo.poster }" width=180 height=80></a>
                </td>
-               <td colspan="4"><font color="orange">${vo.chef }</font></td>
+               <td colspan="4"><font color="orange"><a href="../recipe/chef_product.do?chef=${vo.chef }">${vo.chef }</a></font></td>
              </tr>
              <tr>
                <td class="text-center">${vo.mc1 }</td>

@@ -46,6 +46,25 @@ public class RecipeDAO {
 	   query.with(new Sort(Sort.Direction.ASC,"no"));
 	   return mt.find(query, ChefVO.class,"chef");
    }
+   public List<RecipeVO> chefProductData(String chef,int page)
+   {
+	   List<RecipeVO> list=new ArrayList<RecipeVO>();
+	   BasicQuery query=new BasicQuery("{chef:'"+chef+"'}");// WHERE , SORT , SKIP , LIMIT
+	   // WHERE chef='aaa'
+	   int rowSize=20;
+	   int skip=(page*rowSize)-rowSize;
+	   query.skip(skip).limit(rowSize);
+	   list=mt.find(query, RecipeVO.class,"recipe");
+	   return list;
+   }
+   public List<RecipeVO> chefProductFindData(String chef,String fd)
+   {
+	   List<RecipeVO> list=new ArrayList<RecipeVO>();
+	   BasicQuery query=new BasicQuery("{$and:[{chef:'"+chef+"'},{title:{$regex:'.*"+fd+"'}}]}");
+	   // WHERE chef='aaa' AND title LIKE '%aaa%'
+	   list=mt.find(query, RecipeVO.class,"recipe");
+	   return list;
+   }
 }
 
 

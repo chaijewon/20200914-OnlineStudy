@@ -20,10 +20,11 @@
           <div class="col-md-6">
             <div class="left-content">
               <h4>${vo.title}</h4>
-              <p>${vo.content }</p>
+              <p><i>"${vo.content }"</i></p>
+              <span>요리법</span>
               <ul class="featured-list">
                 <c:forEach var="s" items="${vo.mList }">
-                  <li>${s }</li>
+                  <li style="font-size:8pt">${s }</li>
                 </c:forEach>
                 
               </ul>
