@@ -43,6 +43,14 @@ public interface FoodMapper {
   
   public List<RecipeVO> recipeTop10();
   
+  @Select("SELECT DISTINCT title FROM food_detail")
+  public List<String> recipeTitleData();
+  
+  @Select("SELECT no,title,poster "
+		 +"FROM food_detail "
+		 +"WHERE title=#{title}")
+  public List<FoodVO> recommandFindData(String title);
+  
 }
 
 

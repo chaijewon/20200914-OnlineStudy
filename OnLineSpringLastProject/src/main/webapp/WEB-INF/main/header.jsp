@@ -44,7 +44,7 @@
                 <a class="nav-link" href="../news/list.do">뉴스</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../news/list.do">챗봇</a>
+                <a class="nav-link" href="../chat/chat.do">챗봇</a>
               </li>
             </ul>
           </div>

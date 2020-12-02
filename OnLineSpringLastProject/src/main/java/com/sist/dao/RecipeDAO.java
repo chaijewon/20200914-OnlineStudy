@@ -65,6 +65,14 @@ public class RecipeDAO {
 	   list=mt.find(query, RecipeVO.class,"recipe");
 	   return list;
    }
+   public int chefTotalPage()
+   {
+	   BasicQuery query=new BasicQuery("{}");
+	   List<ChefVO> list=mt.find(query,ChefVO.class,"chef");
+	   int count=list.size();
+	   int total=(int)(Math.ceil(count/20.0));
+	   return total;
+   }
 }
 
 

@@ -39,4 +39,12 @@ public class FoodDAO {
      {
     	 return mapper.recipeTop10();
      }
+     public List<String> recipeTitleData()
+     {
+    	 return mapper.recipeTitleData();
+     }
+     public List<FoodVO> recommandFindData(String title)
+     {
+    	 return mapper.recommandFindData(title);
+     }
 }

@@ -22,7 +22,7 @@ $(function(){
 			data:{"no":no},
 			success:function(res)
 			{
-				$('#print').html(res);
+				$('#print1').html(res);
 			}
 		});
 	});
@@ -42,7 +42,7 @@ $(function(){
            </div>
          </div>
          <div style="height:10px"></div>
-         <div class="row" id="print">
+         <div class="row" id="print1">
          
          </div>
         </div>

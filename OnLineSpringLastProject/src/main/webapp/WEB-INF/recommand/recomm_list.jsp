@@ -6,10 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.recomm').click(function(){
+		let fd=$(this).text();
+		$.ajax({
+			type:'post',
+			url:'../recommand/find.do',
+			data:{"fd":fd},
+			success:function(result)
+			{
+				$('#print').html(result);
+			}
+		});
+	})
+});
+</script>
 </head>
 <body>
-    <c:forEach var="s" items="${ss }">
-      <span class="btn btn-xs btn-warning">${s }</span>&nbsp;
-    </c:forEach>
+<div class="latest-products">
+      <div style="height: 130px"></div>
+      <div class="container">
+        <div class="row">
+		    <c:forEach var="s" items="${ss }">
+		      <span class="btn btn-xs btn-warning recomm">${s }</a></span>&nbsp;
+		    </c:forEach>
+		</div>
+		<div style="height: 15px"></div>
+		<div class="row" id="print">
+		</div>
+      </div>
+</div>
+    
 </body>
 </html>
+
+
