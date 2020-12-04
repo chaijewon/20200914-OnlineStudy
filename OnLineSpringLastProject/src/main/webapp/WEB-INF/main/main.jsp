@@ -182,20 +182,31 @@ https://templatemo.com/tm-546-sixteen-clothing
   <div id="chat_root"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.1/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   <script src="https://unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/babel">
+    const socket=io.connect('http://211.238.142.187:3355')
     class App extends React.Component{
        constructor(props)
        {
            super(props);
            // 채팅문자를 저장하는 변수 
+           this.state={
+              logs:[]
+           }
        }
        componentDidMount() //$(function(){
        {
+           // 서버에 전송된 채팅문자열을 저장 (logs) => render에서 출력 
+           socket.on('chat-msg',(obj)=>{
+              const log2=this.state.logs;
+              log2.push(obj)
+              this.setState({logs:log2})
+           })
            $('div#chat').toggleClass('active');
            var $win = $(window);
            var top = $(window).scrollTop(); // 현재 스크롤바의위치값을 반환합니다.
@@ -227,19 +238,24 @@ https://templatemo.com/tm-546-sixteen-clothing
         }
         render(){
            return (
-              <ChatMain/>
+              <ChatMain logs={this.state.logs}/>
            )
         }
     }
     class ChatMain extends React.Component{
         render(){
+          const html=this.props.logs.map((m)=>
+              <div className="message-right">
+               <div className="message-text">{m.message}</div>
+              </div>
+          )
           return(
-           <div id="chat-container">
+           <div id="chat_container">
              <div id="chat" className="active">
-              <div id="chat_title"><h1 id="chat_font">실시간 채팅</h1></div>
+              <div id="chat_title"><header><h1 id="chat_font">Chat</h1></header></div>
               <section className="content">
-               <div className="message-right">
-                 <div className="message-text"></div>
+               <div className="message_content">
+                 {html}
                </div>
               </section>
               <ChatForm/>
@@ -249,10 +265,36 @@ https://templatemo.com/tm-546-sixteen-clothing
         }
     }
     class ChatForm extends React.Component{
+        constructor(props)
+        {
+           super(props)
+           this.state={
+              message:''
+           }
+        }
+        messageChange(e)
+        {
+           this.setState({message:e.target.value})
+        }
+        send(e)
+        {
+           if(e.key=='Enter')
+           {
+              e.preventDefault();
+              socket.emit('chat-msg',{
+                 message:this.state.message
+              })
+              this.setState({message:''})
+           }
+        }
         render(){
             return (
                <form>
-                <input id="input_chat" type="text"/>
+                <input id="input_chat" type="text"
+                  onChange={this.messageChange.bind(this)}
+                  onKeyPress={this.send.bind(this)}
+                  value={this.state.message}
+                />
                </form>
             )
         }
