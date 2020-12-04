@@ -10,8 +10,8 @@
 <body>
 <div class="latest-products">
       <div style="height:130px"></div>
-      <div class="container">
-        <div class="row">
+      <div class="container" id="root"></div>
+        <%-- <div class="row">
           <c:forEach var="vo" items="${list }">
            <table class="table">
              <tr>
@@ -28,8 +28,9 @@
              </tr>
            </table>
           </c:forEach>
-        </div>
-      </div>
+        </div> --%>
+      
+      <script src="../recipe/bundle.js"></script>
 </div>
 </body>
 </html>

@@ -10,8 +10,8 @@
 <body>
  <div class="latest-products">
       <div style="height: 130px"></div>
-        <div class="container">
-         <div class="row">
+        <div class="container" id="root">
+         <%-- <div class="row">
            <h3 class="text-center">뉴스 검색</h3>
            <table class="table">
             <tr>
@@ -42,8 +42,9 @@
                </td>
              </tr>
            </table>
-         </div>
+         </div> --%>
         </div>
+        <script src="../recipe/news.js"></script>
  </div>
 </body>
 </html>
